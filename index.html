@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeXachat - Social Dating Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        :root {
+            --electric: #00F0FF;
+            --electric-dark: #00B8CC;
+            --neon-pink: #FF00C8;
+            --neon-violet: #B500FF;
+            --neon-cyan: #00F0FF;
+            --neon-green: #00FF9F;
+            --dark-950: #0A0A0A;
+            --dark-900: #151515;
+            --dark-800: #202020;
+            --text-light: #EAEAEA;
+            --text-gray: #9AA0A6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--dark-950);
+            color: var(--text-light);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 200, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        /* ============================================
+           ANIMATED BACKGROUND & PARTICLES
+           ============================================ */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 0, 200, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(181, 0, 255, 0.1) 0%, transparent 50%);
+            animation: backgroundPulse 10s ease-in-out infinite;
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink), var(--neon-violet));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.8),
+                        0 0 20px rgba(0, 240, 255, 0.6),
+                        0 0 30px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            color: var(--dark-950);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5), 0 0 60px rgba(255, 0, 200, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.7), 0 0 80px rgba(255, 0, 200, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            color: var(--electric);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--electric);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           COMING SOON BANNER
+           ============================================ */
+        .coming-soon-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            color: var(--dark-950);
+            text-align: center;
+            padding: 12px;
+            font-weight: 700;
+            z-index: 1001;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        /* ============================================
+           HEADER & NAVIGATION
+           ============================================ */
+        header {
+            position: fixed;
+            top: 50px;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--electric);
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        nav a.active {
+            color: var(--electric);
+            background: rgba(0, 240, 255, 0.15);
+        }
+
+        /* ============================================
+           PAGES CONTAINER
+           ============================================ */
+        .pages-container {
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+
+        .page {
+            display: none;
+            padding: 40px 20px;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================
+           HOME PAGE
+           ============================================ */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--electric) 0%, var(--neon-pink) 50%, var(--neon-violet) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientShift 8s ease infinite;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 20px;
+            background: rgba(0, 240, 255, 0.02);
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 70px;
+            background: linear-gradient(135deg, var(--electric), var(--neon-violet));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 40px;
+            border-radius: 20px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--electric);
+            box-shadow: 0 20px 60px rgba(0, 240, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--electric);
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           LOGIN PAGE
+           ============================================ */
+        .auth-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--electric);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        }
+
+        .form-link {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--text-gray);
+        }
+
+        .form-link a {
+            color: var(--electric);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           DISCOVER PAGE
+           ============================================ */
+        .discover-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .discover-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 18px 20px 18px 50px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .user-card {
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .user-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 240, 255, 0.2);
+        }
+
+        .user-avatar {
+            height: 200px;
+            background: linear-gradient(135deg, var(--dark-800), var(--dark-900));
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar-initial {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--dark-950);
+        }
+
+        .user-info {
+            padding: 30px;
+        }
+
+        .user-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .user-age {
+            color: var(--electric);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .user-bio {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .user-interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .interest-tag {
+            padding: 5px 15px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 20px;
+            color: var(--electric);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* ============================================
+           PROFILE PAGE
+           ============================================ */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--dark-950);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .profile-name {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .profile-age {
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .profile-section {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .section-title-sm {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--electric);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            padding: 60px 20px 30px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
+            background: rgba(10, 10, 10, 0.8);
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--electric);
+        }
+
+        .copyright {
+            color: var(--text-gray);
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .auth-container {
+                padding: 30px;
+                margin: 30px auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 60px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .users-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <!-- Coming Soon Banner -->
+    <div class="coming-soon-banner">
+        🚀 VeXachat Platform - Coming Soon! Launching in 2025
+    </div>
+
+    <!-- Header -->
+    <header class="glass">
+        <div class="header-content container">
+            <div class="logo">VeXachat</div>
+            <nav>
+                <a href="#" class="active" onclick="showPage('home')">Home</a>
+                <a href="#" onclick="showPage('login')">Login</a>
+                <a href="#" onclick="showPage('signup')">Sign Up</a>
+                <a href="#" onclick="showPage('discover')">Discover</a>
+                <a href="#" onclick="showPage('profile')">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Pages Container -->
+    <div class="pages-container container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <h1>Connect Beyond Limits</h1>
+                <p>Experience the future of social dating with immersive chat experiences and unlimited possibilities. Join our global community today.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="showPage('signup')">Get Started Free</button>
+                    <button class="btn btn-secondary" onclick="showPage('discover')">Discover People</button>
+                </div>
+            </section>
+
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>50K+</h3>
+                        <p>Active Users</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1M+</h3>
+                        <p>Messages Sent</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>15K+</h3>
+                        <p>Matches Made</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>4.9/5</h3>
+                        <p>User Rating</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features-section">
+                <h2 class="section-title">Powerful Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card glass">
+                        <div class="feature-icon">🤖</div>
+                        <h3>Smart Matching</h3>
+                        <p>Our advanced system connects you with compatible people who share your interests and values.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">💬</div>
+                        <h3>Unlimited Chat</h3>
+                        <p>Free text, voice, and video messaging with rich media support and real-time translation.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">🎥</div>
+                        <h3>Video Rooms</h3>
+                        <p>Join group video sessions or private rooms for immersive conversations and virtual dates.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Complete Privacy</h3>
+                        <p>End-to-end encryption and complete control over your data and privacy settings.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Global Community</h3>
+                        <p>Connect with people from around the world with built-in language translation.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">⭐</div>
+                        <h3>Premium Support</h3>
+                        <p>Access to certified relationship consultants and 24/7 customer support.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login" class="page">
+            <div class="auth-container glass">
+                <h2 class="auth-title">Welcome Back</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control glass" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control glass" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                </form>
+                <div class="form-link">
+                    <p>Don't have an account? <a href="#" onclick="showPage('signup')">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Page -->
+        <div id="signup" class="page">
+            <div class="auth-container glass">
+                <h2 class="auth-title">Create Account</h2>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" class="form-control glass" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" class="form-control glass" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" class="form-control glass" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-control glass" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                </form>
+                <div class="form-link">
+                    <p>Already have an account? <a href="#" onclick="showPage('login')">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Discover Page -->
+        <div id="discover" class="page">
+            <div class="discover-header">
+                <h1 class="gradient-text">Discover Amazing People</h1>
+                <p>Find and connect with interesting people from around the world</p>
+            </div>
+            
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" class="form-control glass" placeholder="Search by name, interests, or location...">
+            </div>
+            
+            <div class="users-grid" id="usersGrid">
+                <!-- Users will be generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile" class="page">
+            <div class="profile-header">
+                <div class="profile-avatar">U</div>
+                <h1 class="profile-name gradient-text">User Profile</h1>
+                <p class="profile-age">28 years old</p>
+                <button class="btn btn-secondary" onclick="showPage('discover')">
+                    <i class="fas fa-globe"></i> Discover People
+                </button>
+            </div>
+            
+            <div class="profile-section glass">
+                <h3 class="section-title-sm">About Me</h3>
+                <p>Digital enthusiast, travel lover, and coffee addict. Always looking for new adventures and meaningful connections.</p>
+            </div>
+            
+            <div class="profile-section glass">
+                <h3 class="section-title-sm">Interests</h3>
+                <div class="user-interests">
+                    <span class="interest-tag">Travel</span>
+                    <span class="interest-tag">Photography</span>
+                    <span class="interest-tag">Technology</span>
+                    <span class="interest-tag">Music</span>
+                    <span class="interest-tag">Fitness</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo gradient-text">VeXachat</div>
+            <div class="footer-links">
+                <a href="#" onclick="showPage('home')">Home</a>
+                <a href="#" onclick="showPage('discover')">Discover</a>
+                <a href="#" onclick="showPage('profile')">Profile</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <p class="copyright">© 2025 VeXachat. All rights reserved. | Platform launching soon!</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // GENERATE PARTICLES
+        // ============================================
+        function generateParticles() {
+            const container = document.getElementById('particlesContainer');
+            const colors = [
+                'rgba(0, 240, 255, 0.6)',
+                'rgba(255, 0, 200, 0.6)',
+                'rgba(181, 0, 255, 0.6)',
+                'rgba(0, 255, 159, 0.6)'
+            ];
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animation = `floatParticle ${Math.random() * 10 + 15}s linear infinite`;
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(particle);
+            }
+        }
+
+        // ============================================
+        // PAGE NAVIGATION
+        // ============================================
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate corresponding nav link
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.textContent.toLowerCase().includes(pageId.toLowerCase()) || 
+                    (pageId === 'home' && link.textContent === 'Home')) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================
+        // GENERATE SAMPLE USERS
+        // ============================================
+        function generateUsers() {
+            const usersGrid = document.getElementById('usersGrid');
+            if (!usersGrid) return;
+            
+            const users = [
+                { name: 'Alex Johnson', age: 28, bio: 'Travel enthusiast and photographer', interests: ['Travel', 'Photography', 'Coffee'], initial: 'A' },
+                { name: 'Sam Smith', age: 25, bio: 'Software developer and gamer', interests: ['Technology', 'Gaming', 'Music'], initial: 'S' },
+                { name: 'Jordan Lee', age: 30, bio: 'Fitness coach and nutritionist', interests: ['Fitness', 'Nutrition', 'Health'], initial: 'J' },
+                { name: 'Taylor Swift', age: 26, bio: 'Musician and songwriter', interests: ['Music', 'Art', 'Writing'], initial: 'T' },
+                { name: 'Casey Brown', age: 32, bio: 'Digital nomad and entrepreneur', interests: ['Business', 'Travel', 'Technology'], initial: 'C' },
+                { name: 'Riley Davis', age: 24, bio: 'Student and environmental activist', interests: ['Environment', 'Activism', 'Reading'], initial: 'R' }
+            ];
+            
+            usersGrid.innerHTML = '';
+            
+            users.forEach(user => {
+                const userCard = document.createElement('div');
+                userCard.className = 'user-card glass';
+                userCard.innerHTML = `
+                    <div class="user-avatar">
+                        <div class="user-avatar-initial">${user.initial}</div>
+                    </div>
+                    <div class="user-info">
+                        <h3 class="user-name">${user.name}</h3>
+                        <p class="user-age">${user.age} years old</p>
+                        <p class="user-bio">${user.bio}</p>
+                        <div class="user-interests">
+                            ${user.interests.map(interest => 
+                                `<span class="interest-tag">${interest}</span>`
+                            ).join('')}
+                        </div>
+                        <div class="user-actions">
+                            <button class="btn btn-primary" style="flex: 1;" onclick="showPage('profile')">View Profile</button>
+                            <button class="btn btn-secondary" onclick="alert('Feature coming soon!')">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                usersGrid.appendChild(userCard);
+            });
+        }
+
+        // ============================================
+        // FORM HANDLING
+        // ============================================
+        document.getElementById('loginForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Login feature is coming soon! For now, please use the Sign Up page.');
+            showPage('signup');
+        });
+
+        document.getElementById('signupForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            alert('Account creation is coming soon! For now, please explore the Discover page.');
+            showPage('discover');
+        });
+
+        // ============================================
+        // SEARCH FUNCTIONALITY
+        // ============================================
+        document.querySelector('.search-bar input')?.addEventListener('input', function(e) {
+            // Simple search simulation
+            const searchTerm = e.target.value.toLowerCase();
+            if (searchTerm.length > 2) {
+                alert(`Searching for: ${searchTerm}\n\nSearch feature will be available in the full version!`);
+            }
+        });
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            generateParticles();
+            generateUsers();
+            
+            // Set active page based on URL hash
+            const hash = window.location.hash.substring(1) || 'home';
+            showPage(hash);
+            
+            // Update hash when page changes
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const page = this.textContent.toLowerCase();
+                    window.location.hash = page === 'home' ? '' : page;
+                });
+            });
+            
+            // Handle browser back/forward
+            window.addEventListener('hashchange', function() {
+                const hash = window.location.hash.substring(1) || 'home';
+                showPage(hash);
+            });
+        });
+
+        // ============================================
+        // LANGUAGE DETECTION (Browser Translation)
+        // ============================================
+        function detectLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            console.log('Browser language detected:', userLang);
+            
+            // You could add language-specific adjustments here
+            if (userLang.startsWith('ar')) {
+                document.body.style.direction = 'rtl';
+                document.body.style.fontFamily = "'Segoe UI', 'Arial', sans-serif";
+            }
+        }
+
+        // Call language detection
+        detectLanguage();
+    </script>
+</body>
+</html>
