@@ -1,9 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VeXachat - Social Dating Platform</title>
+    <title>VeXachat - منصة التعارف الاجتماعي</title>
+    
+    <!-- ============================================
+         FAVICON FOR ALL DEVICES
+         ============================================ -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#00f0ff">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#0a0a0a">
+    <meta name="theme-color" content="#0a0a0a">
+    
+    <!-- ============================================
+         INLINE FAVICON AS FALLBACK (SVG Data URL)
+         ============================================ -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2300F0FF'/><stop offset='50%' stop-color='%23FF00C8'/><stop offset='100%' stop-color='%23B500FF'/></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23g)'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>💬</text></svg>">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ============================================
@@ -13,7 +31,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Segoe UI', 'Inter', 'Tahoma', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         :root {
@@ -679,6 +697,50 @@
         }
 
         /* ============================================
+           BROWSER SCRIPT NOTIFICATION
+           ============================================ */
+        .browser-script-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--electric);
+            border-radius: 10px;
+            padding: 15px 25px;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 30px rgba(0, 240, 255, 0.3);
+        }
+
+        .browser-script-notification.show {
+            display: flex;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { bottom: -100px; opacity: 0; }
+            to { bottom: 20px; opacity: 1; }
+        }
+
+        .browser-script-notification i {
+            color: var(--electric);
+            font-size: 1.5rem;
+        }
+
+        .browser-script-notification button {
+            background: var(--electric);
+            color: var(--dark-950);
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* ============================================
            RESPONSIVE DESIGN
            ============================================ */
         @media (max-width: 1024px) {
@@ -756,7 +818,14 @@
 
     <!-- Coming Soon Banner -->
     <div class="coming-soon-banner">
-        🚀 VeXachat Platform - Coming Soon! Launching in 2025
+        🚀 منصة VeXachat - قريباً! الإنطلاق في 2025
+    </div>
+
+    <!-- Browser Script Notification -->
+    <div class="browser-script-notification" id="browserScriptNotification">
+        <i class="fas fa-code"></i>
+        <span>جافاسكربت المتصفح يعمل! (تحقق من وحدة التحكم للمزيد)</span>
+        <button onclick="hideNotification()">✕</button>
     </div>
 
     <!-- Header -->
@@ -764,11 +833,11 @@
         <div class="header-content container">
             <div class="logo">VeXachat</div>
             <nav>
-                <a href="#" class="active" onclick="showPage('home')">Home</a>
-                <a href="#" onclick="showPage('login')">Login</a>
-                <a href="#" onclick="showPage('signup')">Sign Up</a>
-                <a href="#" onclick="showPage('discover')">Discover</a>
-                <a href="#" onclick="showPage('profile')">Profile</a>
+                <a href="#" class="active" onclick="showPage('home')">الرئيسية</a>
+                <a href="#" onclick="showPage('login')">تسجيل الدخول</a>
+                <a href="#" onclick="showPage('signup')">إنشاء حساب</a>
+                <a href="#" onclick="showPage('discover')">اكتشف الأشخاص</a>
+                <a href="#" onclick="showPage('profile')">الملف الشخصي</a>
             </nav>
         </div>
     </header>
@@ -778,11 +847,11 @@
         <!-- Home Page -->
         <div id="home" class="page active">
             <section class="hero">
-                <h1>Connect Beyond Limits</h1>
-                <p>Experience the future of social dating with immersive chat experiences and unlimited possibilities Join our global community today </p>
+                <h1>تواصل بلا حدود</h1>
+                <p>جرب مستقبل التعارف الاجتماعي مع تجارب دردشة غامرة وإمكانيات غير محدودة انضم إلى مجتمعنا العالمي اليوم</p>
                 <div class="cta-buttons">
-                    <button class="btn btn-primary" onclick="showPage('signup')">Get Started Free</button>
-                    <button class="btn btn-secondary" onclick="showPage('discover')">Discover People</button>
+                    <button class="btn btn-primary" onclick="showPage('signup')">ابدأ مجاناً</button>
+                    <button class="btn btn-secondary" onclick="showPage('discover')">اكتشف الأشخاص</button>
                 </div>
             </section>
 
@@ -790,55 +859,55 @@
                 <div class="stats-grid">
                     <div class="stat-item">
                         <h3>50K+</h3>
-                        <p>Active Users</p>
+                        <p>مستخدم نشط</p>
                     </div>
                     <div class="stat-item">
                         <h3>1M+</h3>
-                        <p>Messages Sent</p>
+                        <p>رسالة مرسلة</p>
                     </div>
                     <div class="stat-item">
                         <h3>15K+</h3>
-                        <p>Matches Made</p>
+                        <p>تطابق تم</p>
                     </div>
                     <div class="stat-item">
                         <h3>4.9/5</h3>
-                        <p>User Rating</p>
+                        <p>تقييم المستخدمين</p>
                     </div>
                 </div>
             </section>
 
             <section class="features-section">
-                <h2 class="section-title">Powerful Features</h2>
+                <h2 class="section-title">ميزات قوية</h2>
                 <div class="features-grid">
                     <div class="feature-card glass">
                         <div class="feature-icon">🤖</div>
-                        <h3>Smart Matching</h3>
-                        <p>Our advanced system connects you with compatible people who share your interests and values.</p>
+                        <h3>تطابق ذكي</h3>
+                        <p>نظامنا المتقدم يربطك بأشخاص متوافقين يشاركونك اهتماماتك وقيمك.</p>
                     </div>
                     <div class="feature-card glass">
                         <div class="feature-icon">💬</div>
-                        <h3>Unlimited Chat</h3>
-                        <p>Free text, voice, and video messaging with rich media support and real-time translation.</p>
+                        <h3>دردشة غير محدودة</h3>
+                        <p>مراسلات نصية وصوتية ومرئية مجانية مع دعم الوسائط الغنية والترجمة الفورية.</p>
                     </div>
                     <div class="feature-card glass">
                         <div class="feature-icon">🎥</div>
-                        <h3>Video Rooms</h3>
-                        <p>Join group video sessions or private rooms for immersive conversations and virtual dates.</p>
+                        <h3>غرف فيديو</h3>
+                        <p>انضم إلى جلسات فيديو جماعية أو غرف خاصة لمحادثات غامرة ومواعيد افتراضية.</p>
                     </div>
                     <div class="feature-card glass">
                         <div class="feature-icon">🔒</div>
-                        <h3>Complete Privacy</h3>
-                        <p>End-to-end encryption and complete control over your data and privacy settings.</p>
+                        <h3>خصوصية كاملة</h3>
+                        <p>تشفير من طرف إلى طرف وسيطرة كاملة على بياناتك وإعدادات الخصوصية.</p>
                     </div>
                     <div class="feature-card glass">
                         <div class="feature-icon">🌍</div>
-                        <h3>Global Community</h3>
-                        <p>Connect with people from around the world with built-in language translation.</p>
+                        <h3>مجتمع عالمي</h3>
+                        <p>تواصل مع أشخاص من جميع أنحاء العالم مع ترجمة لغة مدمجة.</p>
                     </div>
                     <div class="feature-card glass">
                         <div class="feature-icon">⭐</div>
-                        <h3>Premium Support</h3>
-                        <p>Access to certified relationship consultants and 24/7 customer support.</p>
+                        <h3>دعم مميز</h3>
+                        <p>وصول إلى مستشاري علاقات معتمدين ودعم عملاء على مدار الساعة.</p>
                     </div>
                 </div>
             </section>
@@ -847,20 +916,20 @@
         <!-- Login Page -->
         <div id="login" class="page">
             <div class="auth-container glass">
-                <h2 class="auth-title">Welcome Back</h2>
+                <h2 class="auth-title">مرحباً بعودتك</h2>
                 <form id="loginForm">
                     <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-control glass" placeholder="Enter your email" required>
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" class="form-control glass" placeholder="أدخل بريدك الإلكتروني" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" class="form-control glass" placeholder="Enter your password" required>
+                        <label for="password">كلمة المرور</label>
+                        <input type="password" id="password" class="form-control glass" placeholder="أدخل كلمة المرور" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">تسجيل الدخول</button>
                 </form>
                 <div class="form-link">
-                    <p>Don't have an account? <a href="#" onclick="showPage('signup')">Sign Up</a></p>
+                    <p>ليس لديك حساب؟ <a href="#" onclick="showPage('signup')">إنشاء حساب</a></p>
                 </div>
             </div>
         </div>
@@ -868,28 +937,28 @@
         <!-- Signup Page -->
         <div id="signup" class="page">
             <div class="auth-container glass">
-                <h2 class="auth-title">Create Account</h2>
+                <h2 class="auth-title">إنشاء حساب</h2>
                 <form id="signupForm">
                     <div class="form-group">
-                        <label for="fullName">Full Name</label>
-                        <input type="text" id="fullName" class="form-control glass" placeholder="Enter your full name" required>
+                        <label for="fullName">الاسم الكامل</label>
+                        <input type="text" id="fullName" class="form-control glass" placeholder="أدخل اسمك الكامل" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupEmail">Email Address</label>
-                        <input type="email" id="signupEmail" class="form-control glass" placeholder="Enter your email" required>
+                        <label for="signupEmail">البريد الإلكتروني</label>
+                        <input type="email" id="signupEmail" class="form-control glass" placeholder="أدخل بريدك الإلكتروني" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupPassword">Password</label>
-                        <input type="password" id="signupPassword" class="form-control glass" placeholder="Create a password" required>
+                        <label for="signupPassword">كلمة المرور</label>
+                        <input type="password" id="signupPassword" class="form-control glass" placeholder="أنشئ كلمة مرور" required>
                     </div>
                     <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" class="form-control glass" placeholder="Confirm your password" required>
+                        <label for="confirmPassword">تأكيد كلمة المرور</label>
+                        <input type="password" id="confirmPassword" class="form-control glass" placeholder="أكد كلمة المرور" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">إنشاء حساب</button>
                 </form>
                 <div class="form-link">
-                    <p>Already have an account? <a href="#" onclick="showPage('login')">Sign In</a></p>
+                    <p>لديك حساب بالفعل؟ <a href="#" onclick="showPage('login')">تسجيل الدخول</a></p>
                 </div>
             </div>
         </div>
@@ -897,44 +966,44 @@
         <!-- Discover Page -->
         <div id="discover" class="page">
             <div class="discover-header">
-                <h1 class="gradient-text">Discover Amazing People</h1>
-                <p>Find and connect with interesting people from around the world</p>
+                <h1 class="gradient-text">اكتشف أشخاصاً مذهلين</h1>
+                <p>ابحث عن وتواصل مع أشخاص مثيرين للاهتمام من جميع أنحاء العالم</p>
             </div>
             
             <div class="search-bar">
                 <i class="fas fa-search"></i>
-                <input type="text" class="form-control glass" placeholder="Search by name, interests, or location...">
+                <input type="text" class="form-control glass" placeholder="ابحث بالاسم، الاهتمامات، أو الموقع...">
             </div>
             
             <div class="users-grid" id="usersGrid">
-                <!-- Users will be generated by JavaScript -->
+                <!-- سيتم إنشاء المستخدمين بواسطة جافاسكربت -->
             </div>
         </div>
 
         <!-- Profile Page -->
         <div id="profile" class="page">
             <div class="profile-header">
-                <div class="profile-avatar">U</div>
-                <h1 class="profile-name gradient-text">User Profile</h1>
-                <p class="profile-age">28 years old</p>
+                <div class="profile-avatar">م</div>
+                <h1 class="profile-name gradient-text">الملف الشخصي</h1>
+                <p class="profile-age">28 سنة</p>
                 <button class="btn btn-secondary" onclick="showPage('discover')">
-                    <i class="fas fa-globe"></i> Discover People
+                    <i class="fas fa-globe"></i> اكتشف الأشخاص
                 </button>
             </div>
             
             <div class="profile-section glass">
-                <h3 class="section-title-sm">About Me</h3>
-                <p>Digital enthusiast, travel lover, and coffee addict. Always looking for new adventures and meaningful connections.</p>
+                <h3 class="section-title-sm">عني</h3>
+                <p>مهتم بالتكنولوجيا، أحب السفر، ومدمن على القهوة. أبحث دائماً عن مغامرات جديدة وعلاقات ذات معنى.</p>
             </div>
             
             <div class="profile-section glass">
-                <h3 class="section-title-sm">Interests</h3>
+                <h3 class="section-title-sm">الاهتمامات</h3>
                 <div class="user-interests">
-                    <span class="interest-tag">Travel</span>
-                    <span class="interest-tag">Photography</span>
-                    <span class="interest-tag">Technology</span>
-                    <span class="interest-tag">Music</span>
-                    <span class="interest-tag">Fitness</span>
+                    <span class="interest-tag">السفر</span>
+                    <span class="interest-tag">التصوير</span>
+                    <span class="interest-tag">التكنولوجيا</span>
+                    <span class="interest-tag">الموسيقى</span>
+                    <span class="interest-tag">اللياقة</span>
                 </div>
             </div>
         </div>
@@ -945,22 +1014,54 @@
         <div class="footer-content">
             <div class="footer-logo gradient-text">VeXachat</div>
             <div class="footer-links">
-                <a href="#" onclick="showPage('home')">Home</a>
-                <a href="#" onclick="showPage('discover')">Discover</a>
-                <a href="#" onclick="showPage('profile')">Profile</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact Us</a>
+                <a href="#" onclick="showPage('home')">الرئيسية</a>
+                <a href="#" onclick="showPage('discover')">اكتشف</a>
+                <a href="#" onclick="showPage('profile')">الملف الشخصي</a>
+                <a href="#" onclick="showPrivacyPolicy()">سياسة الخصوصية</a>
+                <a href="#" onclick="showTerms()">شروط الخدمة</a>
+                <a href="#" onclick="showContact()">اتصل بنا</a>
             </div>
-            <p class="copyright">© 2025 VeXachat. All rights reserved. | Platform launching soon!</p>
+            <p class="copyright">© 2025 VeXachat. جميع الحقوق محفوظة. | المنصة تنطلق قريباً!</p>
         </div>
     </footer>
 
+    <!-- ============================================
+         BROWSER SCRIPT - JavaScript المتصفح
+         ============================================ -->
     <script>
         // ============================================
-        // GENERATE PARTICLES
+        // متغيرات التطبيق
+        // ============================================
+        const AppConfig = {
+            name: 'VeXachat',
+            version: '1.0.0',
+            author: 'VeXachat Team',
+            debugMode: true,
+            features: {
+                particles: true,
+                notifications: true,
+                animations: true
+            }
+        };
+
+        // ============================================
+        // تسجيل معلومات التطبيق في وحدة التحكم
+        // ============================================
+        console.log(`%c${AppConfig.name} %cv${AppConfig.version}`, 
+            'color: #00F0FF; font-size: 20px; font-weight: bold;', 
+            'color: #FF00C8; font-size: 16px;');
+        
+        console.log(`%c✨ تطبيق VeXachat يعمل بنجاح!`, 
+            'color: #00FF9F; font-size: 14px;');
+        
+        console.log('معلومات التطبيق:', AppConfig);
+
+        // ============================================
+        // توليد الجسيمات المتحركة
         // ============================================
         function generateParticles() {
+            if (!AppConfig.features.particles) return;
+            
             const container = document.getElementById('particlesContainer');
             const colors = [
                 'rgba(0, 240, 255, 0.6)',
@@ -978,57 +1079,67 @@
                 particle.style.background = colors[Math.floor(Math.random() * colors.length)];
                 container.appendChild(particle);
             }
+            
+            console.log('✅ تم توليد الجسيمات المتحركة');
         }
 
         // ============================================
-        // PAGE NAVIGATION
+        // التنقل بين الصفحات
         // ============================================
         function showPage(pageId) {
-            // Hide all pages
+            // إخفاء جميع الصفحات
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
             
-            // Show selected page
+            // إظهار الصفحة المحددة
             document.getElementById(pageId).classList.add('active');
             
-            // Update active nav link
+            // تحديث رابط التنقل النشط
             document.querySelectorAll('nav a').forEach(link => {
                 link.classList.remove('active');
             });
             
-            // Find and activate corresponding nav link
+            // العثور على رابط التنقل المنشط
             const navLinks = document.querySelectorAll('nav a');
             navLinks.forEach(link => {
-                if (link.textContent.toLowerCase().includes(pageId.toLowerCase()) || 
-                    (pageId === 'home' && link.textContent === 'Home')) {
+                if (link.textContent.includes(pageId) || 
+                    (pageId === 'home' && link.textContent === 'الرئيسية')) {
                     link.classList.add('active');
                 }
             });
             
-            // Scroll to top
+            // التمرير للأعلى
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // تسجيل في وحدة التحكم
+            console.log(`📄 تم التبديل إلى صفحة: ${pageId}`);
+            
+            // إظهار إشعار إذا كان متاحاً
+            if (AppConfig.features.notifications && pageId !== 'home') {
+                showNotification(`تم فتح صفحة ${pageId}`);
+            }
         }
 
         // ============================================
-        // GENERATE SAMPLE USERS
+        // توليد مستخدمين عشوائيين
         // ============================================
         function generateUsers() {
             const usersGrid = document.getElementById('usersGrid');
             if (!usersGrid) return;
             
-            const users = [
-                { name: 'Alex Johnson', age: 28, bio: 'Travel enthusiast and photographer', interests: ['Travel', 'Photography', 'Coffee'], initial: 'A' },
-                { name: 'Sam Smith', age: 25, bio: 'Software developer and gamer', interests: ['Technology', 'Gaming', 'Music'], initial: 'S' },
-                { name: 'Jordan Lee', age: 30, bio: 'Fitness coach and nutritionist', interests: ['Fitness', 'Nutrition', 'Health'], initial: 'J' },
-                { name: 'Taylor Swift', age: 26, bio: 'Musician and songwriter', interests: ['Music', 'Art', 'Writing'], initial: 'T' },
-                { name: 'Casey Brown', age: 32, bio: 'Digital nomad and entrepreneur', interests: ['Business', 'Travel', 'Technology'], initial: 'C' },
-                { name: 'Riley Davis', age: 24, bio: 'Student and environmental activist', interests: ['Environment', 'Activism', 'Reading'], initial: 'R' }
+            const arabicNames = [
+                { name: 'أحمد محمد', age: 28, bio: 'مهندس برمجيات ومطور ويب', interests: ['تكنولوجيا', 'برمجة', 'سفر'], initial: 'أ' },
+                { name: 'سارة خالد', age: 25, bio: 'مصممة جرافيك وفنانة رقمية', interests: ['تصميم', 'فن', 'موسيقى'], initial: 'س' },
+                { name: 'محمد علي', age: 30, bio: 'مدرب لياقة بدنية ومدون صحي', interests: ['لياقة', 'صحة', 'رياضة'], initial: 'م' },
+                { name: 'فاطمة حسن', age: 26, bio: 'موسيقية وملحنة', interests: ['موسيقى', 'فن', 'كتابة'], initial: 'ف' },
+                { name: 'خالد ناصر', age: 32, bio: 'رائد أعمال ومسافر رقمي', interests: ['أعمال', 'سفر', 'تكنولوجيا'], initial: 'خ' },
+                { name: 'نورا سعيد', age: 24, bio: 'طالبة وناشطة بيئية', interests: ['بيئة', 'نشاط', 'قراءة'], initial: 'ن' }
             ];
             
             usersGrid.innerHTML = '';
             
-            users.forEach(user => {
+            arabicNames.forEach(user => {
                 const userCard = document.createElement('div');
                 userCard.className = 'user-card glass';
                 userCard.innerHTML = `
@@ -1037,7 +1148,7 @@
                     </div>
                     <div class="user-info">
                         <h3 class="user-name">${user.name}</h3>
-                        <p class="user-age">${user.age} years old</p>
+                        <p class="user-age">${user.age} سنة</p>
                         <p class="user-bio">${user.bio}</p>
                         <div class="user-interests">
                             ${user.interests.map(interest => 
@@ -1045,8 +1156,8 @@
                             ).join('')}
                         </div>
                         <div class="user-actions">
-                            <button class="btn btn-primary" style="flex: 1;" onclick="showPage('profile')">View Profile</button>
-                            <button class="btn btn-secondary" onclick="alert('Feature coming soon!')">
+                            <button class="btn btn-primary" style="flex: 1;" onclick="showPage('profile')">عرض الملف</button>
+                            <button class="btn btn-secondary" onclick="sendLike('${user.name}')">
                                 <i class="fas fa-heart"></i>
                             </button>
                         </div>
@@ -1054,84 +1165,252 @@
                 `;
                 usersGrid.appendChild(userCard);
             });
+            
+            console.log(`👥 تم توليد ${arabicNames.length} مستخدمين`);
         }
 
         // ============================================
-        // FORM HANDLING
+        // معالجة النماذج
         // ============================================
         document.getElementById('loginForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Login feature is coming soon! For now, please use the Sign Up page.');
-            showPage('signup');
+            const email = document.getElementById('email').value;
+            
+            showNotification(`تسجيل دخول: ${email} (ميزة قيد التطوير)`);
+            console.log(`🔐 محاولة تسجيل دخول: ${email}`);
+            
+            // محاكاة تأخير
+            setTimeout(() => {
+                showPage('discover');
+            }, 1000);
         });
 
         document.getElementById('signupForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             
             if (password !== confirmPassword) {
-                alert('Passwords do not match!');
+                showNotification('كلمات المرور غير متطابقة!', 'error');
+                console.error('❌ خطأ: كلمات المرور غير متطابقة');
                 return;
             }
             
-            alert('Account creation is coming soon! For now, please explore the Discover page.');
-            showPage('discover');
+            showNotification(`مرحباً ${fullName}! تم إنشاء حسابك بنجاح`);
+            console.log(`✅ حساب جديد: ${fullName} (${email})`);
+            
+            // محاكاة تأخير
+            setTimeout(() => {
+                showPage('discover');
+            }, 1500);
         });
 
         // ============================================
-        // SEARCH FUNCTIONALITY
+        // وظائف الإعجاب والإشعارات
+        // ============================================
+        function sendLike(userName) {
+            showNotification(`❤️ أرسلت إعجاباً إلى ${userName}`);
+            console.log(`❤️ إعجاب مرسل إلى: ${userName}`);
+            
+            // تأثير بسيط
+            document.querySelectorAll('.fa-heart').forEach(icon => {
+                icon.style.color = '#FF00C8';
+                setTimeout(() => {
+                    icon.style.color = '';
+                }, 1000);
+            });
+        }
+
+        function showNotification(message, type = 'info') {
+            if (!AppConfig.features.notifications) return;
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            // إضافة الأنماط
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${type === 'error' ? 'rgba(255, 50, 50, 0.9)' : 'rgba(0, 240, 255, 0.9)'};
+                color: #0A0A0A;
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: bold;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // إزالة الإشعار بعد 3 ثوانٍ
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // ============================================
+        // إشعار برنامج المتصفح
+        // ============================================
+        function showBrowserScriptNotification() {
+            const notification = document.getElementById('browserScriptNotification');
+            notification.classList.add('show');
+            
+            // إخفاء تلقائي بعد 10 ثوانٍ
+            setTimeout(() => {
+                hideNotification();
+            }, 10000);
+        }
+
+        function hideNotification() {
+            const notification = document.getElementById('browserScriptNotification');
+            notification.classList.remove('show');
+        }
+
+        // ============================================
+        // وظائف الصفحة الرئيسية
+        // ============================================
+        function showPrivacyPolicy() {
+            alert('سياسة الخصوصية:\n\nنحن نحترم خصوصيتك. جميع بياناتك مشفرة ولا نشاركها مع طرف ثالث. هذه النسخة تجريبية لأغراض العرض فقط.');
+            console.log('📄 فتح سياسة الخصوصية');
+        }
+
+        function showTerms() {
+            alert('شروط الخدمة:\n\n1. يجب أن يكون عمرك 18 عاماً أو أكثر\n2. كن محترماً في تعاملاتك\n3. لا تشارك محتوى غير قانوني\n\nهذه نسخة تجريبية.');
+            console.log('📄 فتح شروط الخدمة');
+        }
+
+        function showContact() {
+            alert('اتصل بنا:\n\nالبريد الإلكتروني: contact@vexachat.com\nالهاتف: +966 50 123 4567\n\nنحن هنا لمساعدتك!');
+            console.log('📞 فتح معلومات الاتصال');
+        }
+
+        // ============================================
+        // وظائف البحث
         // ============================================
         document.querySelector('.search-bar input')?.addEventListener('input', function(e) {
-            // Simple search simulation
-            const searchTerm = e.target.value.toLowerCase();
+            const searchTerm = e.target.value.trim().toLowerCase();
             if (searchTerm.length > 2) {
-                alert(`Searching for: ${searchTerm}\n\nSearch feature will be available in the full version!`);
+                console.log(`🔍 البحث عن: ${searchTerm}`);
+                
+                // تأثير بسيط
+                const searchIcon = document.querySelector('.search-bar i');
+                searchIcon.style.color = '#00F0FF';
+                searchIcon.style.transform = 'translateY(-50%) scale(1.2)';
+                
+                setTimeout(() => {
+                    searchIcon.style.color = '';
+                    searchIcon.style.transform = 'translateY(-50%) scale(1)';
+                }, 500);
             }
         });
 
         // ============================================
-        // INITIALIZATION
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            generateParticles();
-            generateUsers();
-            
-            // Set active page based on URL hash
-            const hash = window.location.hash.substring(1) || 'home';
-            showPage(hash);
-            
-            // Update hash when page changes
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const page = this.textContent.toLowerCase();
-                    window.location.hash = page === 'home' ? '' : page;
-                });
-            });
-            
-            // Handle browser back/forward
-            window.addEventListener('hashchange', function() {
-                const hash = window.location.hash.substring(1) || 'home';
-                showPage(hash);
-            });
-        });
-
-        // ============================================
-        // LANGUAGE DETECTION (Browser Translation)
+        // كشف اللغة
         // ============================================
         function detectLanguage() {
             const userLang = navigator.language || navigator.userLanguage;
-            console.log('Browser language detected:', userLang);
+            console.log(`🌍 لغة المتصفح: ${userLang}`);
             
-            // You could add language-specific adjustments here
+            // ضبطات خاصة باللغة العربية
             if (userLang.startsWith('ar')) {
                 document.body.style.direction = 'rtl';
-                document.body.style.fontFamily = "'Segoe UI', 'Arial', sans-serif";
+                document.body.style.fontFamily = "'Segoe UI', 'Tahoma', 'Arial', sans-serif";
+                console.log('🌍 تم تفعيل الوضع العربي');
             }
         }
 
-        // Call language detection
-        detectLanguage();
+        // ============================================
+        // الأدوات المساعدة للمطورين
+        // ============================================
+        function debugInfo() {
+            console.group('🔧 معلومات تصحيح VeXachat');
+            console.log('URL:', window.location.href);
+            console.log('الشاشة:', `${window.innerWidth}x${window.innerHeight}`);
+            console.log('نظام التشغيل:', navigator.platform);
+            console.log('المتصفح:', navigator.userAgent);
+            console.groupEnd();
+        }
+
+        // ============================================
+        // التهيئة
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 بدء تحميل تطبيق VeXachat...');
+            
+            // تهيئة المكونات
+            generateParticles();
+            generateUsers();
+            detectLanguage();
+            
+            // إظهار إشعار برنامج المتصفح
+            setTimeout(() => {
+                showBrowserScriptNotification();
+            }, 2000);
+            
+            // ضبط الصفحة النشطة
+            const hash = window.location.hash.substring(1) || 'home';
+            showPage(hash);
+            
+            // معلومات التصحيح
+            if (AppConfig.debugMode) {
+                debugInfo();
+            }
+            
+            console.log('✅ تطبيق VeXachat جاهز!');
+            
+            // إضافة حدث للتتبع
+            document.addEventListener('click', function(e) {
+                if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
+                    console.log(`🖱️ نقر على: ${e.target.textContent || e.target.innerText}`);
+                }
+            });
+        });
+
+        // ============================================
+        // أحداث المتصفح
+        // ============================================
+        window.addEventListener('resize', function() {
+            console.log(`📱 حجم النافذة: ${window.innerWidth}x${window.innerHeight}`);
+        });
+
+        window.addEventListener('beforeunload', function() {
+            console.log('👋 إغلاق تطبيق VeXachat...');
+        });
+
+        // ============================================
+        // واجهة برمجة التطبيقات التجريبية
+        // ============================================
+        window.VeXachatAPI = {
+            version: AppConfig.version,
+            showPage: showPage,
+            showNotification: showNotification,
+            debugInfo: debugInfo,
+            getStats: function() {
+                return {
+                    users: 50000,
+                    messages: 1000000,
+                    matches: 15000,
+                    rating: 4.9
+                };
+            }
+        };
+
+        // إعلام المطورين
+        console.log('🔌 VeXachatAPI متاحة للاستخدام:', window.VeXachatAPI);
     </script>
 </body>
 </html>
