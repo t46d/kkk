@@ -6,46 +6,37 @@
     <title>VeXachat - منصة التعارف الاجتماعي</title>
     
     <!-- ============================================
-         FAVICON FOR ALL DEVICES
+         الأيقونات المدمجة في ملف واحد
          ============================================ -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#00f0ff">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="msapplication-TileColor" content="#0a0a0a">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2300F0FF'/><stop offset='50%' stop-color='%23FF00C8'/><stop offset='100%' stop-color='%23B500FF'/></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23g)'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>💬</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2300F0FF'/><stop offset='50%' stop-color='%23FF00C8'/><stop offset='100%' stop-color='%23B500FF'/></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23g)'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>💬</text></svg>">
     <meta name="theme-color" content="#0a0a0a">
     
-    <!-- ============================================
-         INLINE FAVICON AS FALLBACK (SVG Data URL)
-         ============================================ -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2300F0FF'/><stop offset='50%' stop-color='%23FF00C8'/><stop offset='100%' stop-color='%23B500FF'/></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23g)'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>💬</text></svg>">
-    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         /* ============================================
-           BASE STYLES
+           كل الأنماط CSS مدمجة هنا
            ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Inter', 'Tahoma', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Segoe UI', 'Tahoma', -apple-system, sans-serif;
         }
 
         :root {
             --electric: #00F0FF;
-            --electric-dark: #00B8CC;
             --neon-pink: #FF00C8;
             --neon-violet: #B500FF;
-            --neon-cyan: #00F0FF;
-            --neon-green: #00FF9F;
             --dark-950: #0A0A0A;
             --dark-900: #151515;
             --dark-800: #202020;
             --text-light: #EAEAEA;
             --text-gray: #9AA0A6;
+            --success: #00FF9F;
+            --error: #FF4757;
         }
 
         html {
@@ -59,9 +50,7 @@
             min-height: 100vh;
         }
 
-        /* ============================================
-           ANIMATIONS
-           ============================================ */
+        /* أنميشنات */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -78,128 +67,51 @@
             50% { background-position: 100% 50%; }
         }
 
-        @keyframes backgroundPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
-        }
-
-        @keyframes floatParticle {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-        }
-
         /* ============================================
-           ANIMATED BACKGROUND & PARTICLES
+           إشعارات المستخدم
            ============================================ */
-        .animated-bg {
+        .notification {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: 
-                radial-gradient(ellipse at 20% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(255, 0, 200, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(181, 0, 255, 0.1) 0%, transparent 50%);
-            animation: backgroundPulse 10s ease-in-out infinite;
-        }
-
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            border-radius: 50%;
-        }
-
-        /* ============================================
-           UTILITY CLASSES
-           ============================================ */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .glass-strong {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink), var(--neon-violet));
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: gradientShift 8s ease infinite;
-        }
-
-        .neon-text {
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.8),
-                        0 0 20px rgba(0, 240, 255, 0.6),
-                        0 0 30px rgba(0, 240, 255, 0.4);
-        }
-
-        .btn {
-            padding: 12px 32px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            border-radius: 10px;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            animation: slideDown 0.3s ease;
+            max-width: 90%;
             text-align: center;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+        @keyframes slideDown {
+            from { top: -100px; opacity: 0; }
+            to { top: 100px; opacity: 1; }
+        }
+
+        .notification.success {
+            background: var(--success);
             color: var(--dark-950);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5), 0 0 60px rgba(255, 0, 200, 0.3);
+            border: 1px solid rgba(0, 255, 159, 0.5);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 40px rgba(0, 240, 255, 0.7), 0 0 80px rgba(255, 0, 200, 0.5);
+        .notification.error {
+            background: var(--error);
+            color: white;
+            border: 1px solid rgba(255, 71, 87, 0.5);
         }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(0, 240, 255, 0.3);
-            color: var(--electric);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0, 240, 255, 0.1);
-            border-color: var(--electric);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .notification.info {
+            background: var(--electric);
+            color: var(--dark-950);
+            border: 1px solid rgba(0, 240, 255, 0.5);
         }
 
         /* ============================================
-           COMING SOON BANNER
+           نمط الهيدر والتنقل
            ============================================ */
         .coming-soon-banner {
             position: fixed;
@@ -215,15 +127,16 @@
             animation: glow 2s ease-in-out infinite;
         }
 
-        /* ============================================
-           HEADER & NAVIGATION
-           ============================================ */
         header {
             position: fixed;
             top: 50px;
             width: 100%;
             z-index: 1000;
             padding: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header-content {
@@ -231,6 +144,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 30px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .logo {
@@ -241,12 +156,30 @@
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
-            letter-spacing: 1px;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-avatar-small {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark-950);
+            cursor: pointer;
         }
 
         nav {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             align-items: center;
         }
 
@@ -257,7 +190,6 @@
             padding: 8px 16px;
             border-radius: 8px;
             transition: all 0.3s;
-            position: relative;
         }
 
         nav a:hover {
@@ -270,22 +202,39 @@
             background: rgba(0, 240, 255, 0.15);
         }
 
+        .btn-logout {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 71, 87, 0.2);
+        }
+
         /* ============================================
-           PAGES CONTAINER
+           المحتوى الرئيسي
            ============================================ */
         .pages-container {
             padding-top: 120px;
             min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 20px 40px;
         }
 
         .page {
             display: none;
-            padding: 40px 20px;
+            animation: fadeIn 0.5s ease;
         }
 
         .page.active {
             display: block;
-            animation: fadeIn 0.5s ease;
         }
 
         @keyframes fadeIn {
@@ -294,34 +243,30 @@
         }
 
         /* ============================================
-           HOME PAGE
+           الصفحة الرئيسية
            ============================================ */
         .hero {
             text-align: center;
-            padding: 100px 20px;
+            padding: 60px 20px;
             max-width: 1000px;
             margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: 5rem;
+            font-size: 4rem;
             font-weight: 900;
             margin-bottom: 30px;
-            background: linear-gradient(135deg, var(--electric) 0%, var(--neon-pink) 50%, var(--neon-violet) 100%);
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink), var(--neon-violet));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             animation: gradientShift 8s ease infinite;
-            line-height: 1.1;
         }
 
         .hero p {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--text-gray);
             margin-bottom: 50px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
             line-height: 1.6;
         }
 
@@ -332,105 +277,55 @@
             flex-wrap: wrap;
         }
 
-        /* Stats Section */
-        .stats-section {
-            padding: 80px 20px;
-            background: rgba(0, 240, 255, 0.02);
-            border-top: 1px solid rgba(0, 240, 255, 0.1);
-            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+        .btn {
+            padding: 14px 36px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 3.5rem;
+        .btn-primary {
             background: linear-gradient(135deg, var(--electric), var(--neon-pink));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 10px;
+            color: var(--dark-950);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
         }
 
-        .stat-item p {
-            color: var(--text-gray);
-            font-size: 1.1rem;
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(0, 240, 255, 0.7);
         }
 
-        /* Features Section */
-        .features-section {
-            padding: 100px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3.5rem;
-            margin-bottom: 70px;
-            background: linear-gradient(135deg, var(--electric), var(--neon-violet));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            padding: 40px;
-            border-radius: 20px;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--electric);
-            box-shadow: 0 20px 60px rgba(0, 240, 255, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(0, 240, 255, 0.3);
             color: var(--electric);
         }
 
-        .feature-card p {
-            color: var(--text-gray);
-            line-height: 1.6;
+        .btn-secondary:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--electric);
         }
 
         /* ============================================
-           LOGIN PAGE
+           نماذج التسجيل/الدخول
            ============================================ */
         .auth-container {
             max-width: 500px;
-            margin: 50px auto;
-            padding: 50px;
+            margin: 0 auto;
+            padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .auth-title {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
             background: linear-gradient(135deg, var(--electric), var(--neon-pink));
             -webkit-background-clip: text;
             background-clip: text;
@@ -438,7 +333,7 @@
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
@@ -450,7 +345,7 @@
 
         .form-control {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
@@ -482,135 +377,14 @@
         }
 
         /* ============================================
-           DISCOVER PAGE
-           ============================================ */
-        .discover-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .discover-header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
-
-        .search-bar {
-            max-width: 600px;
-            margin: 0 auto 50px;
-            position: relative;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 18px 20px 18px 50px;
-            border-radius: 15px;
-            font-size: 1.1rem;
-        }
-
-        .search-bar i {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-gray);
-        }
-
-        .users-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .user-card {
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .user-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 80px rgba(0, 240, 255, 0.2);
-        }
-
-        .user-avatar {
-            height: 200px;
-            background: linear-gradient(135deg, var(--dark-800), var(--dark-900));
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .user-avatar-initial {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--dark-950);
-        }
-
-        .user-info {
-            padding: 30px;
-        }
-
-        .user-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-light);
-        }
-
-        .user-age {
-            color: var(--electric);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .user-bio {
-            color: var(--text-gray);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .user-interests {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .interest-tag {
-            padding: 5px 15px;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 20px;
-            color: var(--electric);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .user-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        /* ============================================
-           PROFILE PAGE
+           صفحة الملف الشخصي
            ============================================ */
         .profile-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
-        .profile-avatar {
+        .profile-avatar-large {
             width: 150px;
             height: 150px;
             border-radius: 50%;
@@ -626,38 +400,200 @@
         }
 
         .profile-name {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        .profile-age {
+        .profile-email {
             color: var(--text-gray);
-            font-size: 1.2rem;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--electric);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
         }
 
         .profile-section {
-            max-width: 800px;
-            margin: 0 auto 50px;
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
             border-radius: 20px;
+            margin-bottom: 30px;
         }
 
-        .section-title-sm {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
             color: var(--electric);
         }
 
         /* ============================================
-           FOOTER
+           صفحة اكتشاف الأشخاص
+           ============================================ */
+        .discover-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .discover-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .user-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .user-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 240, 255, 0.2);
+        }
+
+        .user-avatar {
+            height: 180px;
+            background: linear-gradient(135deg, var(--dark-800), var(--dark-900));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar-initial {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--dark-950);
+        }
+
+        .user-info {
+            padding: 25px;
+        }
+
+        .user-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .user-age {
+            color: var(--electric);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .user-bio {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .user-interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .interest-tag {
+            padding: 6px 14px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 20px;
+            color: var(--electric);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .user-actions .btn {
+            flex: 1;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           الفوتر
            ============================================ */
         footer {
-            padding: 60px 20px 30px;
+            padding: 50px 20px 30px;
             text-align: center;
             border-top: 1px solid rgba(0, 240, 255, 0.1);
-            background: rgba(10, 10, 10, 0.8);
-            margin-top: 100px;
+            background: rgba(10, 10, 10, 0.9);
+            margin-top: 80px;
         }
 
         .footer-content {
@@ -666,17 +602,21 @@
         }
 
         .footer-logo {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 900;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             display: inline-block;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 30px;
+            margin-bottom: 35px;
             flex-wrap: wrap;
         }
 
@@ -684,6 +624,7 @@
             color: var(--text-gray);
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
@@ -692,71 +633,22 @@
 
         .copyright {
             color: var(--text-gray);
-            margin-top: 30px;
+            margin-top: 25px;
             font-size: 0.9rem;
         }
 
         /* ============================================
-           BROWSER SCRIPT NOTIFICATION
+           تصميم متجاوب
            ============================================ */
-        .browser-script-notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
-            border: 1px solid var(--electric);
-            border-radius: 10px;
-            padding: 15px 25px;
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 5px 30px rgba(0, 240, 255, 0.3);
-        }
-
-        .browser-script-notification.show {
-            display: flex;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from { bottom: -100px; opacity: 0; }
-            to { bottom: 20px; opacity: 1; }
-        }
-
-        .browser-script-notification i {
-            color: var(--electric);
-            font-size: 1.5rem;
-        }
-
-        .browser-script-notification button {
-            background: var(--electric);
-            color: var(--dark-950);
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* ============================================
-           RESPONSIVE DESIGN
-           ============================================ */
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .hero h1 {
-                font-size: 4rem;
+                font-size: 2.8rem;
             }
             
-            .features-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: 20px;
+                gap: 15px;
+                padding: 0 15px;
             }
             
             nav {
@@ -764,167 +656,107 @@
                 justify-content: center;
             }
             
+            .profile-stats {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .users-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-container {
+                padding: 25px;
+                margin: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
             .hero h1 {
-                font-size: 3rem;
+                font-size: 2.2rem;
             }
             
             .hero p {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                width: 100%;
+                max-width: 300px;
             }
             
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .auth-container {
-                padding: 30px;
-                margin: 30px auto;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                padding: 60px 20px;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .users-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg"></div>
-    <div class="particles-container" id="particlesContainer"></div>
-
-    <!-- Coming Soon Banner -->
+    <!-- ============================================
+         المحتوى الرئيسي - كل شيء مدمج
+         ============================================ -->
+    
+    <!-- Banner -->
     <div class="coming-soon-banner">
         🚀 منصة VeXachat - قريباً! الإنطلاق في 2025
     </div>
 
-    <!-- Browser Script Notification -->
-    <div class="browser-script-notification" id="browserScriptNotification">
-        <i class="fas fa-code"></i>
-        <span>جافاسكربت المتصفح يعمل! (تحقق من وحدة التحكم للمزيد)</span>
-        <button onclick="hideNotification()">✕</button>
-    </div>
-
-    <!-- Header -->
-    <header class="glass">
-        <div class="header-content container">
+    <!-- Header مع قائمة المستخدم -->
+    <header>
+        <div class="header-content">
             <div class="logo">VeXachat</div>
-            <nav>
-                <a href="#" class="active" onclick="showPage('home')">الرئيسية</a>
-                <a href="#" onclick="showPage('login')">تسجيل الدخول</a>
-                <a href="#" onclick="showPage('signup')">إنشاء حساب</a>
-                <a href="#" onclick="showPage('discover')">اكتشف الأشخاص</a>
-                <a href="#" onclick="showPage('profile')">الملف الشخصي</a>
-            </nav>
+            <div class="user-menu" id="userMenu">
+                <!-- سيتم تعبئته بواسطة JavaScript -->
+            </div>
         </div>
     </header>
 
-    <!-- Pages Container -->
-    <div class="pages-container container">
-        <!-- Home Page -->
+    <!-- إشعارات -->
+    <div id="notificationContainer"></div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="pages-container">
+        <!-- الصفحة الرئيسية -->
         <div id="home" class="page active">
             <section class="hero">
                 <h1>تواصل بلا حدود</h1>
-                <p>جرب مستقبل التعارف الاجتماعي مع تجارب دردشة غامرة وإمكانيات غير محدودة انضم إلى مجتمعنا العالمي اليوم</p>
+                <p>جرب مستقبل التعارف الاجتماعي مع تجارب دردشة غامرة وإمكانيات غير محدودة. انضم إلى مجتمعنا العالمي اليوم.</p>
                 <div class="cta-buttons">
                     <button class="btn btn-primary" onclick="showPage('signup')">ابدأ مجاناً</button>
                     <button class="btn btn-secondary" onclick="showPage('discover')">اكتشف الأشخاص</button>
                 </div>
             </section>
 
-            <section class="stats-section">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <h3>50K+</h3>
-                        <p>مستخدم نشط</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>1M+</h3>
-                        <p>رسالة مرسلة</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>15K+</h3>
-                        <p>تطابق تم</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>4.9/5</h3>
-                        <p>تقييم المستخدمين</p>
-                    </div>
+            <div class="profile-stats">
+                <div class="stat-box">
+                    <div class="stat-number" id="totalUsers">0</div>
+                    <div class="stat-label">مستخدم مسجل</div>
                 </div>
-            </section>
-
-            <section class="features-section">
-                <h2 class="section-title">ميزات قوية</h2>
-                <div class="features-grid">
-                    <div class="feature-card glass">
-                        <div class="feature-icon">🤖</div>
-                        <h3>تطابق ذكي</h3>
-                        <p>نظامنا المتقدم يربطك بأشخاص متوافقين يشاركونك اهتماماتك وقيمك.</p>
-                    </div>
-                    <div class="feature-card glass">
-                        <div class="feature-icon">💬</div>
-                        <h3>دردشة غير محدودة</h3>
-                        <p>مراسلات نصية وصوتية ومرئية مجانية مع دعم الوسائط الغنية والترجمة الفورية.</p>
-                    </div>
-                    <div class="feature-card glass">
-                        <div class="feature-icon">🎥</div>
-                        <h3>غرف فيديو</h3>
-                        <p>انضم إلى جلسات فيديو جماعية أو غرف خاصة لمحادثات غامرة ومواعيد افتراضية.</p>
-                    </div>
-                    <div class="feature-card glass">
-                        <div class="feature-icon">🔒</div>
-                        <h3>خصوصية كاملة</h3>
-                        <p>تشفير من طرف إلى طرف وسيطرة كاملة على بياناتك وإعدادات الخصوصية.</p>
-                    </div>
-                    <div class="feature-card glass">
-                        <div class="feature-icon">🌍</div>
-                        <h3>مجتمع عالمي</h3>
-                        <p>تواصل مع أشخاص من جميع أنحاء العالم مع ترجمة لغة مدمجة.</p>
-                    </div>
-                    <div class="feature-card glass">
-                        <div class="feature-icon">⭐</div>
-                        <h3>دعم مميز</h3>
-                        <p>وصول إلى مستشاري علاقات معتمدين ودعم عملاء على مدار الساعة.</p>
-                    </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="onlineUsers">0</div>
+                    <div class="stat-label">مستخدم نشط</div>
                 </div>
-            </section>
+                <div class="stat-box">
+                    <div class="stat-number" id="matchesMade">0</div>
+                    <div class="stat-label">تطابق تم</div>
+                </div>
+            </div>
         </div>
 
-        <!-- Login Page -->
+        <!-- صفحة تسجيل الدخول -->
         <div id="login" class="page">
-            <div class="auth-container glass">
+            <div class="auth-container">
                 <h2 class="auth-title">مرحباً بعودتك</h2>
                 <form id="loginForm">
                     <div class="form-group">
-                        <label for="email">البريد الإلكتروني</label>
-                        <input type="email" id="email" class="form-control glass" placeholder="أدخل بريدك الإلكتروني" required>
+                        <label for="loginEmail">البريد الإلكتروني</label>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">كلمة المرور</label>
-                        <input type="password" id="password" class="form-control glass" placeholder="أدخل كلمة المرور" required>
+                        <label for="loginPassword">كلمة المرور</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="أدخل كلمة المرور" required>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">تسجيل الدخول</button>
                 </form>
@@ -934,26 +766,43 @@
             </div>
         </div>
 
-        <!-- Signup Page -->
+        <!-- صفحة إنشاء حساب -->
         <div id="signup" class="page">
-            <div class="auth-container glass">
-                <h2 class="auth-title">إنشاء حساب</h2>
+            <div class="auth-container">
+                <h2 class="auth-title">إنشاء حساب جديد</h2>
                 <form id="signupForm">
                     <div class="form-group">
                         <label for="fullName">الاسم الكامل</label>
-                        <input type="text" id="fullName" class="form-control glass" placeholder="أدخل اسمك الكامل" required>
+                        <input type="text" id="fullName" class="form-control" placeholder="أدخل اسمك الكامل" required>
                     </div>
                     <div class="form-group">
                         <label for="signupEmail">البريد الإلكتروني</label>
-                        <input type="email" id="signupEmail" class="form-control glass" placeholder="أدخل بريدك الإلكتروني" required>
+                        <input type="email" id="signupEmail" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupAge">العمر</label>
+                        <input type="number" id="signupAge" class="form-control" placeholder="أدخل عمرك" min="18" max="100" required>
                     </div>
                     <div class="form-group">
                         <label for="signupPassword">كلمة المرور</label>
-                        <input type="password" id="signupPassword" class="form-control glass" placeholder="أنشئ كلمة مرور" required>
+                        <input type="password" id="signupPassword" class="form-control" placeholder="أنشئ كلمة مرور قوية" required minlength="6">
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">تأكيد كلمة المرور</label>
-                        <input type="password" id="confirmPassword" class="form-control glass" placeholder="أكد كلمة المرور" required>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="أكد كلمة المرور" required>
+                    </div>
+                    <div class="form-group">
+                        <label>الاهتمامات (اختر 3 على الأقل)</label>
+                        <div class="user-interests" id="interestSelection">
+                            <span class="interest-tag selectable" data-interest="سفر">سفر</span>
+                            <span class="interest-tag selectable" data-interest="موسيقى">موسيقى</span>
+                            <span class="interest-tag selectable" data-interest="رياضة">رياضة</span>
+                            <span class="interest-tag selectable" data-interest="تكنولوجيا">تكنولوجيا</span>
+                            <span class="interest-tag selectable" data-interest="قراءة">قراءة</span>
+                            <span class="interest-tag selectable" data-interest="طبخ">طبخ</span>
+                            <span class="interest-tag selectable" data-interest="فن">فن</span>
+                            <span class="interest-tag selectable" data-interest="تصوير">تصوير</span>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">إنشاء حساب</button>
                 </form>
@@ -963,47 +812,66 @@
             </div>
         </div>
 
-        <!-- Discover Page -->
+        <!-- صفحة اكتشاف الأشخاص -->
         <div id="discover" class="page">
             <div class="discover-header">
-                <h1 class="gradient-text">اكتشف أشخاصاً مذهلين</h1>
+                <h1>اكتشف أشخاصاً مذهلين</h1>
                 <p>ابحث عن وتواصل مع أشخاص مثيرين للاهتمام من جميع أنحاء العالم</p>
             </div>
             
             <div class="search-bar">
                 <i class="fas fa-search"></i>
-                <input type="text" class="form-control glass" placeholder="ابحث بالاسم، الاهتمامات، أو الموقع...">
+                <input type="text" class="form-control" placeholder="ابحث بالاسم، الاهتمامات، أو الموقع..." id="searchInput">
             </div>
             
             <div class="users-grid" id="usersGrid">
-                <!-- سيتم إنشاء المستخدمين بواسطة جافاسكربت -->
+                <!-- سيتم تعبئته بواسطة JavaScript -->
             </div>
         </div>
 
-        <!-- Profile Page -->
+        <!-- صفحة الملف الشخصي -->
         <div id="profile" class="page">
             <div class="profile-header">
-                <div class="profile-avatar">م</div>
-                <h1 class="profile-name gradient-text">الملف الشخصي</h1>
-                <p class="profile-age">28 سنة</p>
+                <div class="profile-avatar-large" id="profileAvatar">?</div>
+                <h1 class="profile-name" id="profileName">المستخدم</h1>
+                <p class="profile-email" id="profileEmail">user@example.com</p>
+                <p class="profile-age" id="profileAge">-- سنة</p>
                 <button class="btn btn-secondary" onclick="showPage('discover')">
-                    <i class="fas fa-globe"></i> اكتشف الأشخاص
+                    <i class="fas fa-globe"></i> اكتشف المزيد
                 </button>
             </div>
             
-            <div class="profile-section glass">
-                <h3 class="section-title-sm">عني</h3>
-                <p>مهتم بالتكنولوجيا، أحب السفر، ومدمن على القهوة. أبحث دائماً عن مغامرات جديدة وعلاقات ذات معنى.</p>
+            <div class="profile-stats">
+                <div class="stat-box">
+                    <div class="stat-number" id="profileViews">0</div>
+                    <div class="stat-label">مشاهدة للملف</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="profileLikes">0</div>
+                    <div class="stat-label">إعجاب تلقيت</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="profileMatches">0</div>
+                    <div class="stat-label">تطابق</div>
+                </div>
             </div>
             
-            <div class="profile-section glass">
-                <h3 class="section-title-sm">الاهتمامات</h3>
-                <div class="user-interests">
-                    <span class="interest-tag">السفر</span>
-                    <span class="interest-tag">التصوير</span>
-                    <span class="interest-tag">التكنولوجيا</span>
-                    <span class="interest-tag">الموسيقى</span>
-                    <span class="interest-tag">اللياقة</span>
+            <div class="profile-section">
+                <h3 class="section-title">عني</h3>
+                <p id="profileBio">لم يتم إضافة نبذة عن المستخدم بعد.</p>
+            </div>
+            
+            <div class="profile-section">
+                <h3 class="section-title">اهتماماتي</h3>
+                <div class="user-interests" id="profileInterests">
+                    <!-- سيتم تعبئته بواسطة JavaScript -->
+                </div>
+            </div>
+            
+            <div class="profile-section">
+                <h3 class="section-title">النشاط الأخير</h3>
+                <div id="recentActivity">
+                    <p>● سجلت الدخول اليوم</p>
                 </div>
             </div>
         </div>
@@ -1012,80 +880,370 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo gradient-text">VeXachat</div>
+            <div class="footer-logo">VeXachat</div>
             <div class="footer-links">
                 <a href="#" onclick="showPage('home')">الرئيسية</a>
                 <a href="#" onclick="showPage('discover')">اكتشف</a>
-                <a href="#" onclick="showPage('profile')">الملف الشخصي</a>
-                <a href="#" onclick="showPrivacyPolicy()">سياسة الخصوصية</a>
-                <a href="#" onclick="showTerms()">شروط الخدمة</a>
-                <a href="#" onclick="showContact()">اتصل بنا</a>
+                <a href="#" onclick="showPage('profile')">الملف</a>
+                <a href="#" onclick="showNotification('سياسة الخصوصية قيد التطوير', 'info')">الخصوصية</a>
+                <a href="#" onclick="showNotification('شروط الخدمة قيد التطوير', 'info')">الشروط</a>
+                <a href="#" onclick="showNotification('contact@vexachat.com', 'info')">اتصل بنا</a>
             </div>
-            <p class="copyright">© 2025 VeXachat. جميع الحقوق محفوظة. | المنصة تنطلق قريباً!</p>
+            <p class="copyright">© 2025 VeXachat. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
     <!-- ============================================
-         BROWSER SCRIPT - JavaScript المتصفح
+         نظام إدارة المستخدمين - كامل في JavaScript
          ============================================ -->
     <script>
         // ============================================
-        // متغيرات التطبيق
+        // نظام قاعدة البيانات المحلية (LocalStorage)
         // ============================================
-        const AppConfig = {
-            name: 'VeXachat',
-            version: '1.0.0',
-            author: 'VeXachat Team',
-            debugMode: true,
-            features: {
-                particles: true,
-                notifications: true,
-                animations: true
-            }
-        };
-
-        // ============================================
-        // تسجيل معلومات التطبيق في وحدة التحكم
-        // ============================================
-        console.log(`%c${AppConfig.name} %cv${AppConfig.version}`, 
-            'color: #00F0FF; font-size: 20px; font-weight: bold;', 
-            'color: #FF00C8; font-size: 16px;');
-        
-        console.log(`%c✨ تطبيق VeXachat يعمل بنجاح!`, 
-            'color: #00FF9F; font-size: 14px;');
-        
-        console.log('معلومات التطبيق:', AppConfig);
-
-        // ============================================
-        // توليد الجسيمات المتحركة
-        // ============================================
-        function generateParticles() {
-            if (!AppConfig.features.particles) return;
-            
-            const container = document.getElementById('particlesContainer');
-            const colors = [
-                'rgba(0, 240, 255, 0.6)',
-                'rgba(255, 0, 200, 0.6)',
-                'rgba(181, 0, 255, 0.6)',
-                'rgba(0, 255, 159, 0.6)'
-            ];
-            
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animation = `floatParticle ${Math.random() * 10 + 15}s linear infinite`;
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                container.appendChild(particle);
+        class UserSystem {
+            constructor() {
+                this.initDatabase();
             }
             
-            console.log('✅ تم توليد الجسيمات المتحركة');
+            initDatabase() {
+                // تهيئة قاعدة البيانات إذا لم تكن موجودة
+                if (!localStorage.getItem('vexachat_users')) {
+                    localStorage.setItem('vexachat_users', JSON.stringify([]));
+                }
+                
+                if (!localStorage.getItem('vexachat_current_user')) {
+                    localStorage.setItem('vexachat_current_user', JSON.stringify(null));
+                }
+                
+                if (!localStorage.getItem('vexachat_matches')) {
+                    localStorage.setItem('vexachat_matches', JSON.stringify([]));
+                }
+                
+                if (!localStorage.getItem('vexachat_likes')) {
+                    localStorage.setItem('vexachat_likes', JSON.stringify([]));
+                }
+                
+                // توليد مستخدمين تجريبيين إذا لم يكن هناك مستخدمين
+                this.generateDemoUsers();
+            }
+            
+            generateDemoUsers() {
+                const users = this.getAllUsers();
+                if (users.length === 0) {
+                    const demoUsers = [
+                        {
+                            id: 'demo1',
+                            fullName: 'أحمد محمد',
+                            email: 'ahmed@demo.com',
+                            age: 28,
+                            password: 'demo123',
+                            interests: ['سفر', 'تكنولوجيا', 'رياضة'],
+                            bio: 'مهندس برمجيات أحب السفر والتكنولوجيا',
+                            avatarInitial: 'أ',
+                            joinDate: new Date().toISOString(),
+                            profileViews: 45,
+                            likesReceived: 12,
+                            matches: 3,
+                            isDemo: true
+                        },
+                        {
+                            id: 'demo2',
+                            fullName: 'سارة خالد',
+                            email: 'sara@demo.com',
+                            age: 25,
+                            password: 'demo123',
+                            interests: ['موسيقى', 'قراءة', 'فن'],
+                            bio: 'مصممة جرافيك وموسيقية هاوية',
+                            avatarInitial: 'س',
+                            joinDate: new Date().toISOString(),
+                            profileViews: 67,
+                            likesReceived: 18,
+                            matches: 5,
+                            isDemo: true
+                        },
+                        {
+                            id: 'demo3',
+                            fullName: 'محمد علي',
+                            email: 'mohammed@demo.com',
+                            age: 30,
+                            password: 'demo123',
+                            interests: ['رياضة', 'طبخ', 'سفر'],
+                            bio: 'مدرب لياقة وأحب الطبخ',
+                            avatarInitial: 'م',
+                            joinDate: new Date().toISOString(),
+                            profileViews: 32,
+                            likesReceived: 8,
+                            matches: 2,
+                            isDemo: true
+                        }
+                    ];
+                    
+                    demoUsers.forEach(user => {
+                        users.push(user);
+                    });
+                    
+                    this.saveAllUsers(users);
+                }
+            }
+            
+            // ============================================
+            // عمليات المستخدمين
+            // ============================================
+            registerUser(userData) {
+                const users = this.getAllUsers();
+                
+                // التحقق من عدم وجود مستخدم بنفس البريد
+                if (users.some(u => u.email === userData.email)) {
+                    return { success: false, message: 'البريد الإلكتروني مسجل مسبقاً' };
+                }
+                
+                // إنشاء ID فريد
+                userData.id = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                userData.joinDate = new Date().toISOString();
+                userData.profileViews = 0;
+                userData.likesReceived = 0;
+                userData.matches = 0;
+                userData.isDemo = false;
+                
+                users.push(userData);
+                this.saveAllUsers(users);
+                
+                return { success: true, user: userData };
+            }
+            
+            loginUser(email, password) {
+                const users = this.getAllUsers();
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    this.setCurrentUser(user);
+                    return { success: true, user };
+                }
+                
+                return { success: false, message: 'البريد الإلكتروني أو كلمة المرور غير صحيحة' };
+            }
+            
+            logoutUser() {
+                this.setCurrentUser(null);
+                return { success: true };
+            }
+            
+            getCurrentUser() {
+                return JSON.parse(localStorage.getItem('vexachat_current_user'));
+            }
+            
+            setCurrentUser(user) {
+                localStorage.setItem('vexachat_current_user', JSON.stringify(user));
+                this.updateUserMenu();
+            }
+            
+            updateUser(userId, updates) {
+                const users = this.getAllUsers();
+                const index = users.findIndex(u => u.id === userId);
+                
+                if (index !== -1) {
+                    users[index] = { ...users[index], ...updates };
+                    this.saveAllUsers(users);
+                    
+                    // تحديث المستخدم الحالي إذا كان هو نفسه
+                    const currentUser = this.getCurrentUser();
+                    if (currentUser && currentUser.id === userId) {
+                        this.setCurrentUser(users[index]);
+                    }
+                    
+                    return { success: true, user: users[index] };
+                }
+                
+                return { success: false, message: 'المستخدم غير موجود' };
+            }
+            
+            getAllUsers() {
+                return JSON.parse(localStorage.getItem('vexachat_users')) || [];
+            }
+            
+            saveAllUsers(users) {
+                localStorage.setItem('vexachat_users', JSON.stringify(users));
+            }
+            
+            // ============================================
+            // نظام الإعجابات والمطابقات
+            // ============================================
+            likeUser(userId, targetUserId) {
+                const likes = JSON.parse(localStorage.getItem('vexachat_likes')) || [];
+                
+                // التحقق إذا كان الإعجاب موجود بالفعل
+                const existingLike = likes.find(like => 
+                    like.userId === userId && like.targetUserId === targetUserId
+                );
+                
+                if (existingLike) {
+                    return { success: false, message: 'لقد أبديت إعجابك بهذا المستخدم من قبل' };
+                }
+                
+                // إضافة الإعجاب الجديد
+                likes.push({
+                    id: 'like_' + Date.now(),
+                    userId,
+                    targetUserId,
+                    timestamp: new Date().toISOString()
+                });
+                
+                localStorage.setItem('vexachat_likes', JSON.stringify(likes));
+                
+                // زيادة عداد الإعجابات للمستخدم المستهدف
+                this.incrementLikes(targetUserId);
+                
+                // التحقق من وجود تطابق متبادل
+                const mutualLike = likes.find(like => 
+                    like.userId === targetUserId && like.targetUserId === userId
+                );
+                
+                if (mutualLike) {
+                    this.createMatch(userId, targetUserId);
+                    return { 
+                        success: true, 
+                        message: 'إعجاب متبادل! تم إنشاء تطابق جديد',
+                        isMatch: true 
+                    };
+                }
+                
+                return { 
+                    success: true, 
+                    message: 'تم إرسال الإعجاب بنجاح',
+                    isMatch: false 
+                };
+            }
+            
+            incrementLikes(userId) {
+                const users = this.getAllUsers();
+                const userIndex = users.findIndex(u => u.id === userId);
+                
+                if (userIndex !== -1) {
+                    users[userIndex].likesReceived = (users[userIndex].likesReceived || 0) + 1;
+                    this.saveAllUsers(users);
+                }
+            }
+            
+            createMatch(userId1, userId2) {
+                const matches = JSON.parse(localStorage.getItem('vexachat_matches')) || [];
+                
+                // التحقق من عدم وجود تطابق مسبق
+                const existingMatch = matches.find(match => 
+                    (match.user1Id === userId1 && match.user2Id === userId2) ||
+                    (match.user1Id === userId2 && match.user2Id === userId1)
+                );
+                
+                if (existingMatch) {
+                    return { success: false, message: 'التطابق موجود بالفعل' };
+                }
+                
+                // إنشاء تطابق جديد
+                const match = {
+                    id: 'match_' + Date.now(),
+                    user1Id: userId1,
+                    user2Id: userId2,
+                    createdAt: new Date().toISOString(),
+                    lastActivity: new Date().toISOString()
+                };
+                
+                matches.push(match);
+                localStorage.setItem('vexachat_matches', JSON.stringify(matches));
+                
+                // زيادة عداد المطابقات لكلا المستخدمين
+                this.incrementMatches(userId1);
+                this.incrementMatches(userId2);
+                
+                return { success: true, match };
+            }
+            
+            incrementMatches(userId) {
+                const users = this.getAllUsers();
+                const userIndex = users.findIndex(u => u.id === userId);
+                
+                if (userIndex !== -1) {
+                    users[userIndex].matches = (users[userIndex].matches || 0) + 1;
+                    this.saveAllUsers(users);
+                }
+            }
+            
+            // ============================================
+            // إحصائيات النظام
+            // ============================================
+            getStats() {
+                const users = this.getAllUsers();
+                const currentUser = this.getCurrentUser();
+                
+                return {
+                    totalUsers: users.length,
+                    onlineUsers: Math.floor(users.length * 0.3), // 30% افتراضياً
+                    totalMatches: (JSON.parse(localStorage.getItem('vexachat_matches')) || []).length,
+                    currentUser: currentUser
+                };
+            }
+            
+            // ============================================
+            // واجهة المستخدم
+            // ============================================
+            updateUserMenu() {
+                const userMenu = document.getElementById('userMenu');
+                const currentUser = this.getCurrentUser();
+                
+                if (currentUser) {
+                    userMenu.innerHTML = `
+                        <nav>
+                            <a href="#" onclick="showPage('home')" ${window.currentPage === 'home' ? 'class="active"' : ''}>الرئيسية</a>
+                            <a href="#" onclick="showPage('discover')" ${window.currentPage === 'discover' ? 'class="active"' : ''}>اكتشف</a>
+                            <a href="#" onclick="showPage('profile')" ${window.currentPage === 'profile' ? 'class="active"' : ''}>ملفي</a>
+                        </nav>
+                        <div class="user-avatar-small" onclick="showPage('profile')">
+                            ${currentUser.avatarInitial || currentUser.fullName.charAt(0)}
+                        </div>
+                        <button class="btn-logout" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> خروج
+                        </button>
+                    `;
+                } else {
+                    userMenu.innerHTML = `
+                        <nav>
+                            <a href="#" onclick="showPage('home')" ${window.currentPage === 'home' ? 'class="active"' : ''}>الرئيسية</a>
+                            <a href="#" onclick="showPage('login')" ${window.currentPage === 'login' ? 'class="active"' : ''}>تسجيل الدخول</a>
+                            <a href="#" onclick="showPage('signup')" ${window.currentPage === 'signup' ? 'class="active"' : ''}>إنشاء حساب</a>
+                        </nav>
+                    `;
+                }
+            }
         }
 
         // ============================================
-        // التنقل بين الصفحات
+        // تهيئة النظام
         // ============================================
+        const userSystem = new UserSystem();
+        window.currentPage = 'home';
+
+        // ============================================
+        // دوال المساعدة
+        // ============================================
+        function showNotification(message, type = 'info') {
+            const container = document.getElementById('notificationContainer');
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(notification);
+            
+            // إزالة الإشعار بعد 5 ثواني
+            setTimeout(() => {
+                notification.style.animation = 'slideDown 0.3s ease reverse';
+                setTimeout(() => {
+                    container.removeChild(notification);
+                }, 300);
+            }, 5000);
+        }
+
         function showPage(pageId) {
             // إخفاء جميع الصفحات
             document.querySelectorAll('.page').forEach(page => {
@@ -1094,323 +1252,333 @@
             
             // إظهار الصفحة المحددة
             document.getElementById(pageId).classList.add('active');
+            window.currentPage = pageId;
             
-            // تحديث رابط التنقل النشط
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-            });
+            // تحديث قائمة المستخدم
+            userSystem.updateUserMenu();
             
-            // العثور على رابط التنقل المنشط
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => {
-                if (link.textContent.includes(pageId) || 
-                    (pageId === 'home' && link.textContent === 'الرئيسية')) {
-                    link.classList.add('active');
-                }
-            });
+            // تحديث محتوى الصفحات حسب الحاجة
+            if (pageId === 'home') {
+                updateHomeStats();
+            } else if (pageId === 'discover') {
+                loadDiscoverUsers();
+            } else if (pageId === 'profile') {
+                loadProfile();
+            }
             
             // التمرير للأعلى
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // تسجيل في وحدة التحكم
-            console.log(`📄 تم التبديل إلى صفحة: ${pageId}`);
-            
-            // إظهار إشعار إذا كان متاحاً
-            if (AppConfig.features.notifications && pageId !== 'home') {
-                showNotification(`تم فتح صفحة ${pageId}`);
-            }
         }
 
-        // ============================================
-        // توليد مستخدمين عشوائيين
-        // ============================================
-        function generateUsers() {
-            const usersGrid = document.getElementById('usersGrid');
-            if (!usersGrid) return;
+        function updateHomeStats() {
+            const stats = userSystem.getStats();
             
-            const arabicNames = [
-                { name: 'أحمد محمد', age: 28, bio: 'مهندس برمجيات ومطور ويب', interests: ['تكنولوجيا', 'برمجة', 'سفر'], initial: 'أ' },
-                { name: 'سارة خالد', age: 25, bio: 'مصممة جرافيك وفنانة رقمية', interests: ['تصميم', 'فن', 'موسيقى'], initial: 'س' },
-                { name: 'محمد علي', age: 30, bio: 'مدرب لياقة بدنية ومدون صحي', interests: ['لياقة', 'صحة', 'رياضة'], initial: 'م' },
-                { name: 'فاطمة حسن', age: 26, bio: 'موسيقية وملحنة', interests: ['موسيقى', 'فن', 'كتابة'], initial: 'ف' },
-                { name: 'خالد ناصر', age: 32, bio: 'رائد أعمال ومسافر رقمي', interests: ['أعمال', 'سفر', 'تكنولوجيا'], initial: 'خ' },
-                { name: 'نورا سعيد', age: 24, bio: 'طالبة وناشطة بيئية', interests: ['بيئة', 'نشاط', 'قراءة'], initial: 'ن' }
-            ];
+            document.getElementById('totalUsers').textContent = stats.totalUsers;
+            document.getElementById('onlineUsers').textContent = stats.onlineUsers;
+            document.getElementById('matchesMade').textContent = stats.totalMatches;
+        }
+
+        function loadDiscoverUsers() {
+            const usersGrid = document.getElementById('usersGrid');
+            const currentUser = userSystem.getCurrentUser();
+            const allUsers = userSystem.getAllUsers();
+            
+            // تصفية المستخدم الحالي من القائمة
+            const otherUsers = allUsers.filter(user => 
+                !currentUser || user.id !== currentUser.id
+            );
             
             usersGrid.innerHTML = '';
             
-            arabicNames.forEach(user => {
+            otherUsers.forEach(user => {
                 const userCard = document.createElement('div');
-                userCard.className = 'user-card glass';
+                userCard.className = 'user-card';
                 userCard.innerHTML = `
                     <div class="user-avatar">
-                        <div class="user-avatar-initial">${user.initial}</div>
+                        <div class="user-avatar-initial">${user.avatarInitial || user.fullName.charAt(0)}</div>
                     </div>
                     <div class="user-info">
-                        <h3 class="user-name">${user.name}</h3>
+                        <h3 class="user-name">${user.fullName}</h3>
                         <p class="user-age">${user.age} سنة</p>
-                        <p class="user-bio">${user.bio}</p>
+                        <p class="user-bio">${user.bio || 'لم يتم إضافة نبذة بعد'}</p>
                         <div class="user-interests">
-                            ${user.interests.map(interest => 
+                            ${(user.interests || []).slice(0, 3).map(interest => 
                                 `<span class="interest-tag">${interest}</span>`
                             ).join('')}
+                            ${(user.interests || []).length > 3 ? 
+                                `<span class="interest-tag">+${(user.interests || []).length - 3}</span>` : ''}
                         </div>
                         <div class="user-actions">
-                            <button class="btn btn-primary" style="flex: 1;" onclick="showPage('profile')">عرض الملف</button>
-                            <button class="btn btn-secondary" onclick="sendLike('${user.name}')">
-                                <i class="fas fa-heart"></i>
+                            <button class="btn btn-primary" onclick="viewUserProfile('${user.id}')">عرض الملف</button>
+                            <button class="btn btn-secondary" onclick="likeUser('${user.id}')">
+                                <i class="fas fa-heart"></i> إعجاب
                             </button>
                         </div>
                     </div>
                 `;
                 usersGrid.appendChild(userCard);
             });
+        }
+
+        function loadProfile() {
+            const currentUser = userSystem.getCurrentUser();
             
-            console.log(`👥 تم توليد ${arabicNames.length} مستخدمين`);
+            if (currentUser) {
+                document.getElementById('profileAvatar').textContent = 
+                    currentUser.avatarInitial || currentUser.fullName.charAt(0);
+                document.getElementById('profileName').textContent = currentUser.fullName;
+                document.getElementById('profileEmail').textContent = currentUser.email;
+                document.getElementById('profileAge').textContent = `${currentUser.age} سنة`;
+                document.getElementById('profileBio').textContent = 
+                    currentUser.bio || 'لم يتم إضافة نبذة عن المستخدم بعد.';
+                
+                document.getElementById('profileViews').textContent = currentUser.profileViews || 0;
+                document.getElementById('profileLikes').textContent = currentUser.likesReceived || 0;
+                document.getElementById('profileMatches').textContent = currentUser.matches || 0;
+                
+                // تحديث الاهتمامات
+                const interestsContainer = document.getElementById('profileInterests');
+                interestsContainer.innerHTML = '';
+                
+                (currentUser.interests || []).forEach(interest => {
+                    const tag = document.createElement('span');
+                    tag.className = 'interest-tag';
+                    tag.textContent = interest;
+                    interestsContainer.appendChild(tag);
+                });
+            } else {
+                // إذا لم يكن المستخدم مسجل الدخول، عرض رسالة
+                document.getElementById('profileName').textContent = 'زائر';
+                document.getElementById('profileEmail').textContent = 'يجب تسجيل الدخول لعرض الملف الشخصي';
+                document.getElementById('profileBio').textContent = 'سجل الدخول لعرض ملفك الشخصي والإعدادات';
+                
+                showNotification('يجب تسجيل الدخول لعرض الملف الشخصي', 'error');
+                setTimeout(() => showPage('login'), 1000);
+            }
+        }
+
+        function viewUserProfile(userId) {
+            const users = userSystem.getAllUsers();
+            const user = users.find(u => u.id === userId);
+            
+            if (user) {
+                showNotification(`عرض ملف ${user.fullName}`, 'info');
+                
+                // زيادة عدد المشاهدات
+                userSystem.updateUser(userId, {
+                    profileViews: (user.profileViews || 0) + 1
+                });
+                
+                // يمكن إضافة صفحة عرض ملفات الآخرين لاحقاً
+                alert(`ملف ${user.fullName}\n\nالعمر: ${user.age}\nالبريد: ${user.email}\n\n${user.bio || 'لا توجد نبذة'}`);
+            }
+        }
+
+        function likeUser(targetUserId) {
+            const currentUser = userSystem.getCurrentUser();
+            
+            if (!currentUser) {
+                showNotification('يجب تسجيل الدخول لإرسال إعجاب', 'error');
+                showPage('login');
+                return;
+            }
+            
+            const result = userSystem.likeUser(currentUser.id, targetUserId);
+            
+            if (result.success) {
+                if (result.isMatch) {
+                    showNotification('🎉 تطابق جديد! إعجاب متبادل!', 'success');
+                } else {
+                    showNotification('تم إرسال الإعجاب بنجاح', 'success');
+                }
+                
+                // تحديث الإحصائيات
+                updateHomeStats();
+            } else {
+                showNotification(result.message, 'error');
+            }
+        }
+
+        function logout() {
+            userSystem.logoutUser();
+            showNotification('تم تسجيل الخروج بنجاح', 'success');
+            showPage('home');
         }
 
         // ============================================
         // معالجة النماذج
         // ============================================
-        document.getElementById('loginForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            
-            showNotification(`تسجيل دخول: ${email} (ميزة قيد التطوير)`);
-            console.log(`🔐 محاولة تسجيل دخول: ${email}`);
-            
-            // محاكاة تأخير
-            setTimeout(() => {
-                showPage('discover');
-            }, 1000);
-        });
-
+        // معالجة نموذج التسجيل
         document.getElementById('signupForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
-            const fullName = document.getElementById('fullName').value;
-            const email = document.getElementById('signupEmail').value;
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const age = parseInt(document.getElementById('signupAge').value);
             const password = document.getElementById('signupPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             
-            if (password !== confirmPassword) {
-                showNotification('كلمات المرور غير متطابقة!', 'error');
-                console.error('❌ خطأ: كلمات المرور غير متطابقة');
+            // التحقق من صحة البيانات
+            if (!fullName || !email || !age || !password) {
+                showNotification('جميع الحقول مطلوبة', 'error');
                 return;
             }
             
-            showNotification(`مرحباً ${fullName}! تم إنشاء حسابك بنجاح`);
-            console.log(`✅ حساب جديد: ${fullName} (${email})`);
+            if (age < 18 || age > 100) {
+                showNotification('يجب أن يكون العمر بين 18 و 100 سنة', 'error');
+                return;
+            }
             
-            // محاكاة تأخير
-            setTimeout(() => {
-                showPage('discover');
-            }, 1500);
-        });
-
-        // ============================================
-        // وظائف الإعجاب والإشعارات
-        // ============================================
-        function sendLike(userName) {
-            showNotification(`❤️ أرسلت إعجاباً إلى ${userName}`);
-            console.log(`❤️ إعجاب مرسل إلى: ${userName}`);
+            if (password.length < 6) {
+                showNotification('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'error');
+                return;
+            }
             
-            // تأثير بسيط
-            document.querySelectorAll('.fa-heart').forEach(icon => {
-                icon.style.color = '#FF00C8';
-                setTimeout(() => {
-                    icon.style.color = '';
-                }, 1000);
-            });
-        }
-
-        function showNotification(message, type = 'info') {
-            if (!AppConfig.features.notifications) return;
+            if (password !== confirmPassword) {
+                showNotification('كلمات المرور غير متطابقة', 'error');
+                return;
+            }
             
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-                <span>${message}</span>
-            `;
+            // جمع الاهتمامات المختارة
+            const selectedInterests = Array.from(
+                document.querySelectorAll('#interestSelection .selectable.selected')
+            ).map(el => el.dataset.interest);
             
-            // إضافة الأنماط
-            notification.style.cssText = `
-                position: fixed;
-                top: 100px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: ${type === 'error' ? 'rgba(255, 50, 50, 0.9)' : 'rgba(0, 240, 255, 0.9)'};
-                color: #0A0A0A;
-                padding: 15px 25px;
-                border-radius: 10px;
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                font-weight: bold;
-                animation: fadeIn 0.3s ease;
-            `;
+            if (selectedInterests.length < 3) {
+                showNotification('اختر 3 اهتمامات على الأقل', 'error');
+                return;
+            }
             
-            document.body.appendChild(notification);
+            // إنشاء بيانات المستخدم
+            const userData = {
+                fullName,
+                email,
+                age,
+                password,
+                interests: selectedInterests,
+                bio: 'مرحباً! أنا عضو جديد في VeXachat.',
+                avatarInitial: fullName.charAt(0)
+            };
             
-            // إزالة الإشعار بعد 3 ثوانٍ
-            setTimeout(() => {
-                notification.style.animation = 'fadeOut 0.3s ease';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 3000);
-        }
-
-        // ============================================
-        // إشعار برنامج المتصفح
-        // ============================================
-        function showBrowserScriptNotification() {
-            const notification = document.getElementById('browserScriptNotification');
-            notification.classList.add('show');
+            // تسجيل المستخدم
+            const result = userSystem.registerUser(userData);
             
-            // إخفاء تلقائي بعد 10 ثوانٍ
-            setTimeout(() => {
-                hideNotification();
-            }, 10000);
-        }
-
-        function hideNotification() {
-            const notification = document.getElementById('browserScriptNotification');
-            notification.classList.remove('show');
-        }
-
-        // ============================================
-        // وظائف الصفحة الرئيسية
-        // ============================================
-        function showPrivacyPolicy() {
-            alert('سياسة الخصوصية:\n\nنحن نحترم خصوصيتك. جميع بياناتك مشفرة ولا نشاركها مع طرف ثالث. هذه النسخة تجريبية لأغراض العرض فقط.');
-            console.log('📄 فتح سياسة الخصوصية');
-        }
-
-        function showTerms() {
-            alert('شروط الخدمة:\n\n1. يجب أن يكون عمرك 18 عاماً أو أكثر\n2. كن محترماً في تعاملاتك\n3. لا تشارك محتوى غير قانوني\n\nهذه نسخة تجريبية.');
-            console.log('📄 فتح شروط الخدمة');
-        }
-
-        function showContact() {
-            alert('اتصل بنا:\n\nالبريد الإلكتروني: contact@vexachat.com\nالهاتف: +966 50 123 4567\n\nنحن هنا لمساعدتك!');
-            console.log('📞 فتح معلومات الاتصال');
-        }
-
-        // ============================================
-        // وظائف البحث
-        // ============================================
-        document.querySelector('.search-bar input')?.addEventListener('input', function(e) {
-            const searchTerm = e.target.value.trim().toLowerCase();
-            if (searchTerm.length > 2) {
-                console.log(`🔍 البحث عن: ${searchTerm}`);
+            if (result.success) {
+                // تسجيل الدخول تلقائياً
+                const loginResult = userSystem.loginUser(email, password);
                 
-                // تأثير بسيط
-                const searchIcon = document.querySelector('.search-bar i');
-                searchIcon.style.color = '#00F0FF';
-                searchIcon.style.transform = 'translateY(-50%) scale(1.2)';
-                
-                setTimeout(() => {
-                    searchIcon.style.color = '';
-                    searchIcon.style.transform = 'translateY(-50%) scale(1)';
-                }, 500);
+                if (loginResult.success) {
+                    showNotification('🎉 تم إنشاء حسابك وتسجيل الدخول بنجاح!', 'success');
+                    setTimeout(() => {
+                        showPage('profile');
+                    }, 1500);
+                }
+            } else {
+                showNotification(result.message, 'error');
             }
         });
 
-        // ============================================
-        // كشف اللغة
-        // ============================================
-        function detectLanguage() {
-            const userLang = navigator.language || navigator.userLanguage;
-            console.log(`🌍 لغة المتصفح: ${userLang}`);
+        // معالجة نموذج تسجيل الدخول
+        document.getElementById('loginForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // ضبطات خاصة باللغة العربية
-            if (userLang.startsWith('ar')) {
-                document.body.style.direction = 'rtl';
-                document.body.style.fontFamily = "'Segoe UI', 'Tahoma', 'Arial', sans-serif";
-                console.log('🌍 تم تفعيل الوضع العربي');
-            }
-        }
-
-        // ============================================
-        // الأدوات المساعدة للمطورين
-        // ============================================
-        function debugInfo() {
-            console.group('🔧 معلومات تصحيح VeXachat');
-            console.log('URL:', window.location.href);
-            console.log('الشاشة:', `${window.innerWidth}x${window.innerHeight}`);
-            console.log('نظام التشغيل:', navigator.platform);
-            console.log('المتصفح:', navigator.userAgent);
-            console.groupEnd();
-        }
-
-        // ============================================
-        // التهيئة
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 بدء تحميل تطبيق VeXachat...');
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
             
-            // تهيئة المكونات
-            generateParticles();
-            generateUsers();
-            detectLanguage();
-            
-            // إظهار إشعار برنامج المتصفح
-            setTimeout(() => {
-                showBrowserScriptNotification();
-            }, 2000);
-            
-            // ضبط الصفحة النشطة
-            const hash = window.location.hash.substring(1) || 'home';
-            showPage(hash);
-            
-            // معلومات التصحيح
-            if (AppConfig.debugMode) {
-                debugInfo();
+            if (!email || !password) {
+                showNotification('جميع الحقول مطلوبة', 'error');
+                return;
             }
             
-            console.log('✅ تطبيق VeXachat جاهز!');
+            const result = userSystem.loginUser(email, password);
             
-            // إضافة حدث للتتبع
-            document.addEventListener('click', function(e) {
-                if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
-                    console.log(`🖱️ نقر على: ${e.target.textContent || e.target.innerText}`);
+            if (result.success) {
+                showNotification(`مرحباً بعودتك ${result.user.fullName}!`, 'success');
+                setTimeout(() => {
+                    showPage('profile');
+                }, 1500);
+            } else {
+                showNotification(result.message, 'error');
+            }
+        });
+
+        // اختيار الاهتمامات
+        document.querySelectorAll('#interestSelection .selectable').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                
+                if (this.classList.contains('selected')) {
+                    this.style.background = 'rgba(0, 240, 255, 0.3)';
+                    this.style.borderColor = 'var(--electric)';
+                } else {
+                    this.style.background = '';
+                    this.style.borderColor = '';
                 }
             });
         });
 
-        // ============================================
-        // أحداث المتصفح
-        // ============================================
-        window.addEventListener('resize', function() {
-            console.log(`📱 حجم النافذة: ${window.innerWidth}x${window.innerHeight}`);
-        });
-
-        window.addEventListener('beforeunload', function() {
-            console.log('👋 إغلاق تطبيق VeXachat...');
-        });
-
-        // ============================================
-        // واجهة برمجة التطبيقات التجريبية
-        // ============================================
-        window.VeXachatAPI = {
-            version: AppConfig.version,
-            showPage: showPage,
-            showNotification: showNotification,
-            debugInfo: debugInfo,
-            getStats: function() {
-                return {
-                    users: 50000,
-                    messages: 1000000,
-                    matches: 15000,
-                    rating: 4.9
-                };
+        // بحث المستخدمين
+        document.getElementById('searchInput')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            if (searchTerm.length > 0) {
+                const userCards = document.querySelectorAll('.user-card');
+                
+                userCards.forEach(card => {
+                    const userName = card.querySelector('.user-name').textContent.toLowerCase();
+                    const userBio = card.querySelector('.user-bio').textContent.toLowerCase();
+                    const userInterests = card.querySelector('.user-interests').textContent.toLowerCase();
+                    
+                    if (userName.includes(searchTerm) || 
+                        userBio.includes(searchTerm) || 
+                        userInterests.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            } else {
+                document.querySelectorAll('.user-card').forEach(card => {
+                    card.style.display = 'block';
+                });
             }
-        };
+        });
 
-        // إعلام المطورين
-        console.log('🔌 VeXachatAPI متاحة للاستخدام:', window.VeXachatAPI);
+        // ============================================
+        // التهيئة عند تحميل الصفحة
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحديث قائمة المستخدم
+            userSystem.updateUserMenu();
+            
+            // تحديث الإحصائيات
+            updateHomeStats();
+            
+            // تعيين الصفحة النشطة حسب وجود المستخدم
+            const currentUser = userSystem.getCurrentUser();
+            if (!currentUser) {
+                showPage('home');
+            } else {
+                showPage('profile');
+            }
+            
+            // تسجيل معلومات التطبيق
+            console.log('🚀 VeXachat - نظام المستخدمين المحلي يعمل بنجاح!');
+            console.log(`👥 عدد المستخدمين: ${userSystem.getAllUsers().length}`);
+        });
+
+        // ============================================
+        // إضافة بعض الأحداث الإضافية
+        // ============================================
+        // تحديث الإحصائيات تلقائياً كل 30 ثانية
+        setInterval(updateHomeStats, 30000);
+        
+        // تحديث قائمة المستخدمين كل دقيقة
+        setInterval(() => {
+            if (window.currentPage === 'discover') {
+                loadDiscoverUsers();
+            }
+        }, 60000);
     </script>
 </body>
 </html>
