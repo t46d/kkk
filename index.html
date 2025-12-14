@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VeXachat - منصة التعارف الاجتماعي</title>
+    <title>VeXachat - Social Dating Platform</title>
     
     <!-- ============================================
-         الأيقونات المدمجة في ملف واحد
+         ALL FAVICONS EMBEDDED IN ONE FILE
          ============================================ -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2300F0FF'/><stop offset='50%' stop-color='%23FF00C8'/><stop offset='100%' stop-color='%23B500FF'/></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23g)'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>💬</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2300F0FF'/><stop offset='50%' stop-color='%23FF00C8'/><stop offset='100%' stop-color='%23B500FF'/></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23g)'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>💬</text></svg>">
@@ -17,13 +17,13 @@
     
     <style>
         /* ============================================
-           كل الأنماط CSS مدمجة هنا
+           ALL CSS STYLES EMBEDDED HERE
            ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Tahoma', -apple-system, sans-serif;
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         :root {
@@ -37,6 +37,7 @@
             --text-gray: #9AA0A6;
             --success: #00FF9F;
             --error: #FF4757;
+            --warning: #FFA500;
         }
 
         html {
@@ -48,9 +49,10 @@
             color: var(--text-light);
             overflow-x: hidden;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
-        /* أنميشنات */
+        /* Animations */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -67,9 +69,31 @@
             50% { background-position: 100% 50%; }
         }
 
-        /* ============================================
-           إشعارات المستخدم
-           ============================================ */
+        @keyframes slideDown {
+            from { top: -100px; opacity: 0; }
+            to { top: 100px; opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 0, 200, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(181, 0, 255, 0.1) 0%, transparent 50%);
+        }
+
+        /* User Notifications */
         .notification {
             position: fixed;
             top: 100px;
@@ -85,34 +109,28 @@
             animation: slideDown 0.3s ease;
             max-width: 90%;
             text-align: center;
-        }
-
-        @keyframes slideDown {
-            from { top: -100px; opacity: 0; }
-            to { top: 100px; opacity: 1; }
+            backdrop-filter: blur(10px);
         }
 
         .notification.success {
-            background: var(--success);
+            background: rgba(0, 255, 159, 0.9);
             color: var(--dark-950);
             border: 1px solid rgba(0, 255, 159, 0.5);
         }
 
         .notification.error {
-            background: var(--error);
+            background: rgba(255, 71, 87, 0.9);
             color: white;
             border: 1px solid rgba(255, 71, 87, 0.5);
         }
 
         .notification.info {
-            background: var(--electric);
+            background: rgba(0, 240, 255, 0.9);
             color: var(--dark-950);
             border: 1px solid rgba(0, 240, 255, 0.5);
         }
 
-        /* ============================================
-           نمط الهيدر والتنقل
-           ============================================ */
+        /* Header & Navigation */
         .coming-soon-banner {
             position: fixed;
             top: 0;
@@ -135,7 +153,6 @@
             padding: 15px 0;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -217,9 +234,7 @@
             background: rgba(255, 71, 87, 0.2);
         }
 
-        /* ============================================
-           المحتوى الرئيسي
-           ============================================ */
+        /* Main Content */
         .pages-container {
             padding-top: 120px;
             min-height: 100vh;
@@ -237,14 +252,7 @@
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ============================================
-           الصفحة الرئيسية
-           ============================================ */
+        /* Home Page */
         .hero {
             text-align: center;
             padding: 60px 20px;
@@ -309,9 +317,87 @@
             border-color: var(--electric);
         }
 
-        /* ============================================
-           نماذج التسجيل/الدخول
-           ============================================ */
+        .stats-section {
+            padding: 80px 20px;
+            background: rgba(0, 240, 255, 0.02);
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            margin-top: 50px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 70px;
+            background: linear-gradient(135deg, var(--electric), var(--neon-violet));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--electric);
+            box-shadow: 0 20px 60px rgba(0, 240, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--electric);
+        }
+
+        /* Auth Forms */
         .auth-container {
             max-width: 500px;
             margin: 0 auto;
@@ -376,9 +462,31 @@
             text-decoration: underline;
         }
 
-        /* ============================================
-           صفحة الملف الشخصي
-           ============================================ */
+        /* Interest Selection */
+        .interest-tag {
+            padding: 6px 14px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 20px;
+            color: var(--electric);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .interest-tag.selectable.selected {
+            background: rgba(0, 240, 255, 0.3);
+            border-color: var(--electric);
+        }
+
+        .interest-tag.selectable:hover {
+            background: rgba(0, 240, 255, 0.2);
+        }
+
+        /* Profile Page */
         .profile-header {
             text-align: center;
             margin-bottom: 50px;
@@ -448,15 +556,7 @@
             margin-bottom: 30px;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--electric);
-        }
-
-        /* ============================================
-           صفحة اكتشاف الأشخاص
-           ============================================ */
+        /* Discover Page */
         .discover-header {
             text-align: center;
             margin-bottom: 40px;
@@ -479,7 +579,7 @@
 
         .search-bar input {
             width: 100%;
-            padding: 16px 50px 16px 20px;
+            padding: 16px 20px 16px 50px;
             border-radius: 15px;
             font-size: 1.1rem;
             background: rgba(255, 255, 255, 0.05);
@@ -564,16 +664,6 @@
             margin-bottom: 20px;
         }
 
-        .interest-tag {
-            padding: 6px 14px;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 20px;
-            color: var(--electric);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
         .user-actions {
             display: flex;
             gap: 12px;
@@ -585,9 +675,7 @@
             font-size: 0.9rem;
         }
 
-        /* ============================================
-           الفوتر
-           ============================================ */
+        /* Footer */
         footer {
             padding: 50px 20px 30px;
             text-align: center;
@@ -637,9 +725,7 @@
             font-size: 0.9rem;
         }
 
-        /* ============================================
-           تصميم متجاوب
-           ============================================ */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.8rem;
@@ -669,6 +755,10 @@
                 padding: 25px;
                 margin: 0 15px;
             }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -690,188 +780,239 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .feature-card {
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- ============================================
-         المحتوى الرئيسي - كل شيء مدمج
+         MAIN CONTENT - EVERYTHING IN ONE FILE
          ============================================ -->
     
-    <!-- Banner -->
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    
+    <!-- Coming Soon Banner -->
     <div class="coming-soon-banner">
-        🚀 منصة VeXachat - قريباً! الإنطلاق في 2025
+        🚀 VeXachat Platform - Launching Soon! Coming in 2025
     </div>
 
-    <!-- Header مع قائمة المستخدم -->
+    <!-- Header with User Menu -->
     <header>
         <div class="header-content">
             <div class="logo">VeXachat</div>
             <div class="user-menu" id="userMenu">
-                <!-- سيتم تعبئته بواسطة JavaScript -->
+                <!-- Will be populated by JavaScript -->
             </div>
         </div>
     </header>
 
-    <!-- إشعارات -->
+    <!-- Notification Container -->
     <div id="notificationContainer"></div>
 
-    <!-- المحتوى الرئيسي -->
+    <!-- Main Content Container -->
     <div class="pages-container">
-        <!-- الصفحة الرئيسية -->
+        <!-- Home Page -->
         <div id="home" class="page active">
             <section class="hero">
-                <h1>تواصل بلا حدود</h1>
-                <p>جرب مستقبل التعارف الاجتماعي مع تجارب دردشة غامرة وإمكانيات غير محدودة. انضم إلى مجتمعنا العالمي اليوم.</p>
+                <h1>Connect Beyond Limits</h1>
+                <p>Experience the future of social dating with immersive chat experiences and unlimited possibilities. Join our global community today.</p>
                 <div class="cta-buttons">
-                    <button class="btn btn-primary" onclick="showPage('signup')">ابدأ مجاناً</button>
-                    <button class="btn btn-secondary" onclick="showPage('discover')">اكتشف الأشخاص</button>
+                    <button class="btn btn-primary" onclick="showPage('signup')">Get Started Free</button>
+                    <button class="btn btn-secondary" onclick="showPage('discover')">Discover People</button>
                 </div>
             </section>
 
-            <div class="profile-stats">
-                <div class="stat-box">
-                    <div class="stat-number" id="totalUsers">0</div>
-                    <div class="stat-label">مستخدم مسجل</div>
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3 id="totalUsers">0</h3>
+                        <p>Registered Users</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="activeUsers">0</h3>
+                        <p>Active Now</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="matchesMade">0</h3>
+                        <p>Matches Made</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>4.9/5</h3>
+                        <p>User Rating</p>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-number" id="onlineUsers">0</div>
-                    <div class="stat-label">مستخدم نشط</div>
+            </section>
+
+            <section class="features-section">
+                <h2 class="section-title">Powerful Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI Matching</h3>
+                        <p>Our intelligent algorithm connects you with compatible people based on interests, personality, and preferences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Unlimited Chat</h3>
+                        <p>Free text, voice, and video messaging with rich media support and real-time translation in 50+ languages.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎥</div>
+                        <h3>Video Rooms</h3>
+                        <p>Join group video sessions or private rooms for immersive conversations and virtual dating experiences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Complete Privacy</h3>
+                        <p>End-to-end encryption and complete control over your data with advanced privacy settings.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Global Community</h3>
+                        <p>Connect with people from around the world. Our platform supports users from 150+ countries.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⭐</div>
+                        <h3>Premium Support</h3>
+                        <p>24/7 customer support and access to certified relationship consultants for premium members.</p>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-number" id="matchesMade">0</div>
-                    <div class="stat-label">تطابق تم</div>
-                </div>
-            </div>
+            </section>
         </div>
 
-        <!-- صفحة تسجيل الدخول -->
+        <!-- Login Page -->
         <div id="login" class="page">
             <div class="auth-container">
-                <h2 class="auth-title">مرحباً بعودتك</h2>
+                <h2 class="auth-title">Welcome Back</h2>
                 <form id="loginForm">
                     <div class="form-group">
-                        <label for="loginEmail">البريد الإلكتروني</label>
-                        <input type="email" id="loginEmail" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
                     </div>
                     <div class="form-group">
-                        <label for="loginPassword">كلمة المرور</label>
-                        <input type="password" id="loginPassword" class="form-control" placeholder="أدخل كلمة المرور" required>
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">تسجيل الدخول</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
                 </form>
                 <div class="form-link">
-                    <p>ليس لديك حساب؟ <a href="#" onclick="showPage('signup')">إنشاء حساب</a></p>
+                    <p>Don't have an account? <a href="#" onclick="showPage('signup')">Create Account</a></p>
                 </div>
             </div>
         </div>
 
-        <!-- صفحة إنشاء حساب -->
+        <!-- Signup Page -->
         <div id="signup" class="page">
             <div class="auth-container">
-                <h2 class="auth-title">إنشاء حساب جديد</h2>
+                <h2 class="auth-title">Create Account</h2>
                 <form id="signupForm">
                     <div class="form-group">
-                        <label for="fullName">الاسم الكامل</label>
-                        <input type="text" id="fullName" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupEmail">البريد الإلكتروني</label>
-                        <input type="email" id="signupEmail" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" class="form-control" placeholder="Enter your email" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupAge">العمر</label>
-                        <input type="number" id="signupAge" class="form-control" placeholder="أدخل عمرك" min="18" max="100" required>
+                        <label for="signupAge">Age</label>
+                        <input type="number" id="signupAge" class="form-control" placeholder="Enter your age" min="18" max="100" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupPassword">كلمة المرور</label>
-                        <input type="password" id="signupPassword" class="form-control" placeholder="أنشئ كلمة مرور قوية" required minlength="6">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" class="form-control" placeholder="Create a strong password" required minlength="6">
                     </div>
                     <div class="form-group">
-                        <label for="confirmPassword">تأكيد كلمة المرور</label>
-                        <input type="password" id="confirmPassword" class="form-control" placeholder="أكد كلمة المرور" required>
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
                     </div>
                     <div class="form-group">
-                        <label>الاهتمامات (اختر 3 على الأقل)</label>
-                        <div class="user-interests" id="interestSelection">
-                            <span class="interest-tag selectable" data-interest="سفر">سفر</span>
-                            <span class="interest-tag selectable" data-interest="موسيقى">موسيقى</span>
-                            <span class="interest-tag selectable" data-interest="رياضة">رياضة</span>
-                            <span class="interest-tag selectable" data-interest="تكنولوجيا">تكنولوجيا</span>
-                            <span class="interest-tag selectable" data-interest="قراءة">قراءة</span>
-                            <span class="interest-tag selectable" data-interest="طبخ">طبخ</span>
-                            <span class="interest-tag selectable" data-interest="فن">فن</span>
-                            <span class="interest-tag selectable" data-interest="تصوير">تصوير</span>
+                        <label>Interests (Choose at least 3)</label>
+                        <div id="interestSelection">
+                            <span class="interest-tag selectable" data-interest="travel">Travel</span>
+                            <span class="interest-tag selectable" data-interest="music">Music</span>
+                            <span class="interest-tag selectable" data-interest="sports">Sports</span>
+                            <span class="interest-tag selectable" data-interest="technology">Technology</span>
+                            <span class="interest-tag selectable" data-interest="reading">Reading</span>
+                            <span class="interest-tag selectable" data-interest="cooking">Cooking</span>
+                            <span class="interest-tag selectable" data-interest="art">Art</span>
+                            <span class="interest-tag selectable" data-interest="photography">Photography</span>
+                            <span class="interest-tag selectable" data-interest="gaming">Gaming</span>
+                            <span class="interest-tag selectable" data-interest="fitness">Fitness</span>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">إنشاء حساب</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
                 </form>
                 <div class="form-link">
-                    <p>لديك حساب بالفعل؟ <a href="#" onclick="showPage('login')">تسجيل الدخول</a></p>
+                    <p>Already have an account? <a href="#" onclick="showPage('login')">Sign In</a></p>
                 </div>
             </div>
         </div>
 
-        <!-- صفحة اكتشاف الأشخاص -->
+        <!-- Discover Page -->
         <div id="discover" class="page">
             <div class="discover-header">
-                <h1>اكتشف أشخاصاً مذهلين</h1>
-                <p>ابحث عن وتواصل مع أشخاص مثيرين للاهتمام من جميع أنحاء العالم</p>
+                <h1>Discover Amazing People</h1>
+                <p>Find and connect with interesting people from around the world</p>
             </div>
             
             <div class="search-bar">
                 <i class="fas fa-search"></i>
-                <input type="text" class="form-control" placeholder="ابحث بالاسم، الاهتمامات، أو الموقع..." id="searchInput">
+                <input type="text" class="form-control" placeholder="Search by name, interests, or location..." id="searchInput">
             </div>
             
             <div class="users-grid" id="usersGrid">
-                <!-- سيتم تعبئته بواسطة JavaScript -->
+                <!-- Will be populated by JavaScript -->
             </div>
         </div>
 
-        <!-- صفحة الملف الشخصي -->
+        <!-- Profile Page -->
         <div id="profile" class="page">
             <div class="profile-header">
                 <div class="profile-avatar-large" id="profileAvatar">?</div>
-                <h1 class="profile-name" id="profileName">المستخدم</h1>
+                <h1 class="profile-name" id="profileName">User Profile</h1>
                 <p class="profile-email" id="profileEmail">user@example.com</p>
-                <p class="profile-age" id="profileAge">-- سنة</p>
+                <p class="profile-age" id="profileAge">-- years old</p>
                 <button class="btn btn-secondary" onclick="showPage('discover')">
-                    <i class="fas fa-globe"></i> اكتشف المزيد
+                    <i class="fas fa-globe"></i> Discover More
                 </button>
             </div>
             
             <div class="profile-stats">
                 <div class="stat-box">
                     <div class="stat-number" id="profileViews">0</div>
-                    <div class="stat-label">مشاهدة للملف</div>
+                    <div class="stat-label">Profile Views</div>
                 </div>
                 <div class="stat-box">
                     <div class="stat-number" id="profileLikes">0</div>
-                    <div class="stat-label">إعجاب تلقيت</div>
+                    <div class="stat-label">Likes Received</div>
                 </div>
                 <div class="stat-box">
                     <div class="stat-number" id="profileMatches">0</div>
-                    <div class="stat-label">تطابق</div>
+                    <div class="stat-label">Matches</div>
                 </div>
             </div>
             
             <div class="profile-section">
-                <h3 class="section-title">عني</h3>
-                <p id="profileBio">لم يتم إضافة نبذة عن المستخدم بعد.</p>
+                <h3 class="section-title">About Me</h3>
+                <p id="profileBio">No bio added yet. Click edit to add information about yourself.</p>
             </div>
             
             <div class="profile-section">
-                <h3 class="section-title">اهتماماتي</h3>
+                <h3 class="section-title">My Interests</h3>
                 <div class="user-interests" id="profileInterests">
-                    <!-- سيتم تعبئته بواسطة JavaScript -->
+                    <!-- Will be populated by JavaScript -->
                 </div>
             </div>
             
             <div class="profile-section">
-                <h3 class="section-title">النشاط الأخير</h3>
+                <h3 class="section-title">Recent Activity</h3>
                 <div id="recentActivity">
-                    <p>● سجلت الدخول اليوم</p>
+                    <p>● Last login: Today</p>
                 </div>
             </div>
         </div>
@@ -882,23 +1023,23 @@
         <div class="footer-content">
             <div class="footer-logo">VeXachat</div>
             <div class="footer-links">
-                <a href="#" onclick="showPage('home')">الرئيسية</a>
-                <a href="#" onclick="showPage('discover')">اكتشف</a>
-                <a href="#" onclick="showPage('profile')">الملف</a>
-                <a href="#" onclick="showNotification('سياسة الخصوصية قيد التطوير', 'info')">الخصوصية</a>
-                <a href="#" onclick="showNotification('شروط الخدمة قيد التطوير', 'info')">الشروط</a>
-                <a href="#" onclick="showNotification('contact@vexachat.com', 'info')">اتصل بنا</a>
+                <a href="#" onclick="showPage('home')">Home</a>
+                <a href="#" onclick="showPage('discover')">Discover</a>
+                <a href="#" onclick="showPage('profile')">Profile</a>
+                <a href="#" onclick="showNotification('Privacy Policy (Coming Soon)', 'info')">Privacy</a>
+                <a href="#" onclick="showNotification('Terms of Service (Coming Soon)', 'info')">Terms</a>
+                <a href="#" onclick="showNotification('Contact: support@vexachat.com', 'info')">Contact</a>
             </div>
-            <p class="copyright">© 2025 VeXachat. جميع الحقوق محفوظة.</p>
+            <p class="copyright">© 2025 VeXachat. All rights reserved. | Social Dating Platform</p>
         </div>
     </footer>
 
     <!-- ============================================
-         نظام إدارة المستخدمين - كامل في JavaScript
+         COMPLETE USER SYSTEM - ALL IN ONE FILE
          ============================================ -->
     <script>
         // ============================================
-        // نظام قاعدة البيانات المحلية (LocalStorage)
+        // USER MANAGEMENT SYSTEM WITH LOCALSTORAGE
         // ============================================
         class UserSystem {
             constructor() {
@@ -906,7 +1047,7 @@
             }
             
             initDatabase() {
-                // تهيئة قاعدة البيانات إذا لم تكن موجودة
+                // Initialize database if not exists
                 if (!localStorage.getItem('vexachat_users')) {
                     localStorage.setItem('vexachat_users', JSON.stringify([]));
                 }
@@ -923,7 +1064,16 @@
                     localStorage.setItem('vexachat_likes', JSON.stringify([]));
                 }
                 
-                // توليد مستخدمين تجريبيين إذا لم يكن هناك مستخدمين
+                if (!localStorage.getItem('vexachat_stats')) {
+                    localStorage.setItem('vexachat_stats', JSON.stringify({
+                        totalUsers: 0,
+                        activeUsers: 0,
+                        totalMatches: 0,
+                        totalMessages: 0
+                    }));
+                }
+                
+                // Generate demo users if no users exist
                 this.generateDemoUsers();
             }
             
@@ -933,47 +1083,66 @@
                     const demoUsers = [
                         {
                             id: 'demo1',
-                            fullName: 'أحمد محمد',
-                            email: 'ahmed@demo.com',
+                            fullName: 'Alex Johnson',
+                            email: 'alex@demo.com',
                             age: 28,
                             password: 'demo123',
-                            interests: ['سفر', 'تكنولوجيا', 'رياضة'],
-                            bio: 'مهندس برمجيات أحب السفر والتكنولوجيا',
-                            avatarInitial: 'أ',
+                            interests: ['travel', 'technology', 'sports'],
+                            bio: 'Software engineer who loves traveling and technology. Looking for meaningful connections.',
+                            avatarInitial: 'A',
                             joinDate: new Date().toISOString(),
                             profileViews: 45,
                             likesReceived: 12,
                             matches: 3,
+                            location: 'New York, USA',
                             isDemo: true
                         },
                         {
                             id: 'demo2',
-                            fullName: 'سارة خالد',
-                            email: 'sara@demo.com',
+                            fullName: 'Sarah Miller',
+                            email: 'sarah@demo.com',
                             age: 25,
                             password: 'demo123',
-                            interests: ['موسيقى', 'قراءة', 'فن'],
-                            bio: 'مصممة جرافيك وموسيقية هاوية',
-                            avatarInitial: 'س',
+                            interests: ['music', 'art', 'photography'],
+                            bio: 'Graphic designer and music lover. Enjoy hiking and exploring new coffee shops.',
+                            avatarInitial: 'S',
                             joinDate: new Date().toISOString(),
                             profileViews: 67,
                             likesReceived: 18,
                             matches: 5,
+                            location: 'London, UK',
                             isDemo: true
                         },
                         {
                             id: 'demo3',
-                            fullName: 'محمد علي',
-                            email: 'mohammed@demo.com',
+                            fullName: 'Michael Chen',
+                            email: 'michael@demo.com',
                             age: 30,
                             password: 'demo123',
-                            interests: ['رياضة', 'طبخ', 'سفر'],
-                            bio: 'مدرب لياقة وأحب الطبخ',
-                            avatarInitial: 'م',
+                            interests: ['fitness', 'cooking', 'reading'],
+                            bio: 'Fitness trainer and food enthusiast. Love trying new recipes and staying active.',
+                            avatarInitial: 'M',
                             joinDate: new Date().toISOString(),
                             profileViews: 32,
                             likesReceived: 8,
                             matches: 2,
+                            location: 'Tokyo, Japan',
+                            isDemo: true
+                        },
+                        {
+                            id: 'demo4',
+                            fullName: 'Emma Wilson',
+                            email: 'emma@demo.com',
+                            age: 26,
+                            password: 'demo123',
+                            interests: ['travel', 'photography', 'art'],
+                            bio: 'Photographer and travel blogger. Always looking for new adventures.',
+                            avatarInitial: 'E',
+                            joinDate: new Date().toISOString(),
+                            profileViews: 89,
+                            likesReceived: 25,
+                            matches: 7,
+                            location: 'Paris, France',
                             isDemo: true
                         }
                     ];
@@ -983,44 +1152,59 @@
                     });
                     
                     this.saveAllUsers(users);
+                    this.updateStats();
                 }
             }
             
             // ============================================
-            // عمليات المستخدمين
+            // USER OPERATIONS
             // ============================================
             registerUser(userData) {
                 const users = this.getAllUsers();
                 
-                // التحقق من عدم وجود مستخدم بنفس البريد
-                if (users.some(u => u.email === userData.email)) {
-                    return { success: false, message: 'البريد الإلكتروني مسجل مسبقاً' };
+                // Check if email already exists
+                if (users.some(u => u.email.toLowerCase() === userData.email.toLowerCase())) {
+                    return { success: false, message: 'Email already registered' };
                 }
                 
-                // إنشاء ID فريد
+                // Validate password strength
+                if (userData.password.length < 6) {
+                    return { success: false, message: 'Password must be at least 6 characters' };
+                }
+                
+                // Create unique ID
                 userData.id = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
                 userData.joinDate = new Date().toISOString();
                 userData.profileViews = 0;
                 userData.likesReceived = 0;
                 userData.matches = 0;
                 userData.isDemo = false;
+                userData.location = 'Not specified';
+                userData.bio = userData.bio || 'Hello! I\'m new to VeXachat.';
+                userData.avatarInitial = userData.fullName.charAt(0).toUpperCase();
                 
                 users.push(userData);
                 this.saveAllUsers(users);
+                
+                // Update statistics
+                this.updateStats();
                 
                 return { success: true, user: userData };
             }
             
             loginUser(email, password) {
                 const users = this.getAllUsers();
-                const user = users.find(u => u.email === email && u.password === password);
+                const user = users.find(u => 
+                    u.email.toLowerCase() === email.toLowerCase() && 
+                    u.password === password
+                );
                 
                 if (user) {
                     this.setCurrentUser(user);
                     return { success: true, user };
                 }
                 
-                return { success: false, message: 'البريد الإلكتروني أو كلمة المرور غير صحيحة' };
+                return { success: false, message: 'Invalid email or password' };
             }
             
             logoutUser() {
@@ -1045,7 +1229,7 @@
                     users[index] = { ...users[index], ...updates };
                     this.saveAllUsers(users);
                     
-                    // تحديث المستخدم الحالي إذا كان هو نفسه
+                    // Update current user if it's the same user
                     const currentUser = this.getCurrentUser();
                     if (currentUser && currentUser.id === userId) {
                         this.setCurrentUser(users[index]);
@@ -1054,7 +1238,7 @@
                     return { success: true, user: users[index] };
                 }
                 
-                return { success: false, message: 'المستخدم غير موجود' };
+                return { success: false, message: 'User not found' };
             }
             
             getAllUsers() {
@@ -1066,21 +1250,21 @@
             }
             
             // ============================================
-            // نظام الإعجابات والمطابقات
+            // LIKE & MATCH SYSTEM
             // ============================================
             likeUser(userId, targetUserId) {
                 const likes = JSON.parse(localStorage.getItem('vexachat_likes')) || [];
                 
-                // التحقق إذا كان الإعجاب موجود بالفعل
+                // Check if like already exists
                 const existingLike = likes.find(like => 
                     like.userId === userId && like.targetUserId === targetUserId
                 );
                 
                 if (existingLike) {
-                    return { success: false, message: 'لقد أبديت إعجابك بهذا المستخدم من قبل' };
+                    return { success: false, message: 'You already liked this user' };
                 }
                 
-                // إضافة الإعجاب الجديد
+                // Add new like
                 likes.push({
                     id: 'like_' + Date.now(),
                     userId,
@@ -1090,10 +1274,10 @@
                 
                 localStorage.setItem('vexachat_likes', JSON.stringify(likes));
                 
-                // زيادة عداد الإعجابات للمستخدم المستهدف
+                // Increment likes received for target user
                 this.incrementLikes(targetUserId);
                 
-                // التحقق من وجود تطابق متبادل
+                // Check for mutual like (match)
                 const mutualLike = likes.find(like => 
                     like.userId === targetUserId && like.targetUserId === userId
                 );
@@ -1102,14 +1286,14 @@
                     this.createMatch(userId, targetUserId);
                     return { 
                         success: true, 
-                        message: 'إعجاب متبادل! تم إنشاء تطابق جديد',
+                        message: 'It\'s a match! You both like each other!',
                         isMatch: true 
                     };
                 }
                 
                 return { 
                     success: true, 
-                    message: 'تم إرسال الإعجاب بنجاح',
+                    message: 'Like sent successfully',
                     isMatch: false 
                 };
             }
@@ -1127,17 +1311,17 @@
             createMatch(userId1, userId2) {
                 const matches = JSON.parse(localStorage.getItem('vexachat_matches')) || [];
                 
-                // التحقق من عدم وجود تطابق مسبق
+                // Check if match already exists
                 const existingMatch = matches.find(match => 
                     (match.user1Id === userId1 && match.user2Id === userId2) ||
                     (match.user1Id === userId2 && match.user2Id === userId1)
                 );
                 
                 if (existingMatch) {
-                    return { success: false, message: 'التطابق موجود بالفعل' };
+                    return { success: false, message: 'Match already exists' };
                 }
                 
-                // إنشاء تطابق جديد
+                // Create new match
                 const match = {
                     id: 'match_' + Date.now(),
                     user1Id: userId1,
@@ -1149,9 +1333,12 @@
                 matches.push(match);
                 localStorage.setItem('vexachat_matches', JSON.stringify(matches));
                 
-                // زيادة عداد المطابقات لكلا المستخدمين
+                // Increment match count for both users
                 this.incrementMatches(userId1);
                 this.incrementMatches(userId2);
+                
+                // Update statistics
+                this.updateStats();
                 
                 return { success: true, match };
             }
@@ -1167,22 +1354,35 @@
             }
             
             // ============================================
-            // إحصائيات النظام
+            // STATISTICS
             // ============================================
-            getStats() {
+            updateStats() {
                 const users = this.getAllUsers();
+                const matches = JSON.parse(localStorage.getItem('vexachat_matches')) || [];
+                
+                const stats = {
+                    totalUsers: users.length,
+                    activeUsers: Math.floor(Math.random() * 100) + 50, // Simulated active users
+                    totalMatches: matches.length,
+                    totalMessages: Math.floor(Math.random() * 10000) + 5000
+                };
+                
+                localStorage.setItem('vexachat_stats', JSON.stringify(stats));
+                return stats;
+            }
+            
+            getStats() {
+                const stats = JSON.parse(localStorage.getItem('vexachat_stats')) || this.updateStats();
                 const currentUser = this.getCurrentUser();
                 
                 return {
-                    totalUsers: users.length,
-                    onlineUsers: Math.floor(users.length * 0.3), // 30% افتراضياً
-                    totalMatches: (JSON.parse(localStorage.getItem('vexachat_matches')) || []).length,
+                    ...stats,
                     currentUser: currentUser
                 };
             }
             
             // ============================================
-            // واجهة المستخدم
+            // UI UPDATES
             // ============================================
             updateUserMenu() {
                 const userMenu = document.getElementById('userMenu');
@@ -1191,23 +1391,23 @@
                 if (currentUser) {
                     userMenu.innerHTML = `
                         <nav>
-                            <a href="#" onclick="showPage('home')" ${window.currentPage === 'home' ? 'class="active"' : ''}>الرئيسية</a>
-                            <a href="#" onclick="showPage('discover')" ${window.currentPage === 'discover' ? 'class="active"' : ''}>اكتشف</a>
-                            <a href="#" onclick="showPage('profile')" ${window.currentPage === 'profile' ? 'class="active"' : ''}>ملفي</a>
+                            <a href="#" onclick="showPage('home')" ${window.currentPage === 'home' ? 'class="active"' : ''}>Home</a>
+                            <a href="#" onclick="showPage('discover')" ${window.currentPage === 'discover' ? 'class="active"' : ''}>Discover</a>
+                            <a href="#" onclick="showPage('profile')" ${window.currentPage === 'profile' ? 'class="active"' : ''}>My Profile</a>
                         </nav>
-                        <div class="user-avatar-small" onclick="showPage('profile')">
-                            ${currentUser.avatarInitial || currentUser.fullName.charAt(0)}
+                        <div class="user-avatar-small" onclick="showPage('profile')" title="${currentUser.fullName}">
+                            ${currentUser.avatarInitial}
                         </div>
                         <button class="btn-logout" onclick="logout()">
-                            <i class="fas fa-sign-out-alt"></i> خروج
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                     `;
                 } else {
                     userMenu.innerHTML = `
                         <nav>
-                            <a href="#" onclick="showPage('home')" ${window.currentPage === 'home' ? 'class="active"' : ''}>الرئيسية</a>
-                            <a href="#" onclick="showPage('login')" ${window.currentPage === 'login' ? 'class="active"' : ''}>تسجيل الدخول</a>
-                            <a href="#" onclick="showPage('signup')" ${window.currentPage === 'signup' ? 'class="active"' : ''}>إنشاء حساب</a>
+                            <a href="#" onclick="showPage('home')" ${window.currentPage === 'home' ? 'class="active"' : ''}>Home</a>
+                            <a href="#" onclick="showPage('login')" ${window.currentPage === 'login' ? 'class="active"' : ''}>Login</a>
+                            <a href="#" onclick="showPage('signup')" ${window.currentPage === 'signup' ? 'class="active"' : ''}>Sign Up</a>
                         </nav>
                     `;
                 }
@@ -1215,13 +1415,13 @@
         }
 
         // ============================================
-        // تهيئة النظام
+        // INITIALIZE SYSTEM
         // ============================================
         const userSystem = new UserSystem();
         window.currentPage = 'home';
 
         // ============================================
-        // دوال المساعدة
+        // HELPER FUNCTIONS
         // ============================================
         function showNotification(message, type = 'info') {
             const container = document.getElementById('notificationContainer');
@@ -1235,7 +1435,7 @@
             
             container.appendChild(notification);
             
-            // إزالة الإشعار بعد 5 ثواني
+            // Remove notification after 5 seconds
             setTimeout(() => {
                 notification.style.animation = 'slideDown 0.3s ease reverse';
                 setTimeout(() => {
@@ -1245,19 +1445,19 @@
         }
 
         function showPage(pageId) {
-            // إخفاء جميع الصفحات
+            // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
             
-            // إظهار الصفحة المحددة
+            // Show selected page
             document.getElementById(pageId).classList.add('active');
             window.currentPage = pageId;
             
-            // تحديث قائمة المستخدم
+            // Update user menu
             userSystem.updateUserMenu();
             
-            // تحديث محتوى الصفحات حسب الحاجة
+            // Update page content as needed
             if (pageId === 'home') {
                 updateHomeStats();
             } else if (pageId === 'discover') {
@@ -1266,7 +1466,7 @@
                 loadProfile();
             }
             
-            // التمرير للأعلى
+            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1274,7 +1474,7 @@
             const stats = userSystem.getStats();
             
             document.getElementById('totalUsers').textContent = stats.totalUsers;
-            document.getElementById('onlineUsers').textContent = stats.onlineUsers;
+            document.getElementById('activeUsers').textContent = stats.activeUsers;
             document.getElementById('matchesMade').textContent = stats.totalMatches;
         }
 
@@ -1283,7 +1483,7 @@
             const currentUser = userSystem.getCurrentUser();
             const allUsers = userSystem.getAllUsers();
             
-            // تصفية المستخدم الحالي من القائمة
+            // Filter out current user from list
             const otherUsers = allUsers.filter(user => 
                 !currentUser || user.id !== currentUser.id
             );
@@ -1299,8 +1499,8 @@
                     </div>
                     <div class="user-info">
                         <h3 class="user-name">${user.fullName}</h3>
-                        <p class="user-age">${user.age} سنة</p>
-                        <p class="user-bio">${user.bio || 'لم يتم إضافة نبذة بعد'}</p>
+                        <p class="user-age">${user.age} years old</p>
+                        <p class="user-bio">${user.bio || 'No bio added yet'}</p>
                         <div class="user-interests">
                             ${(user.interests || []).slice(0, 3).map(interest => 
                                 `<span class="interest-tag">${interest}</span>`
@@ -1309,9 +1509,9 @@
                                 `<span class="interest-tag">+${(user.interests || []).length - 3}</span>` : ''}
                         </div>
                         <div class="user-actions">
-                            <button class="btn btn-primary" onclick="viewUserProfile('${user.id}')">عرض الملف</button>
+                            <button class="btn btn-primary" onclick="viewUserProfile('${user.id}')">View Profile</button>
                             <button class="btn btn-secondary" onclick="likeUser('${user.id}')">
-                                <i class="fas fa-heart"></i> إعجاب
+                                <i class="fas fa-heart"></i> Like
                             </button>
                         </div>
                     </div>
@@ -1328,15 +1528,15 @@
                     currentUser.avatarInitial || currentUser.fullName.charAt(0);
                 document.getElementById('profileName').textContent = currentUser.fullName;
                 document.getElementById('profileEmail').textContent = currentUser.email;
-                document.getElementById('profileAge').textContent = `${currentUser.age} سنة`;
+                document.getElementById('profileAge').textContent = `${currentUser.age} years old`;
                 document.getElementById('profileBio').textContent = 
-                    currentUser.bio || 'لم يتم إضافة نبذة عن المستخدم بعد.';
+                    currentUser.bio || 'No bio added yet. Click edit to add information about yourself.';
                 
                 document.getElementById('profileViews').textContent = currentUser.profileViews || 0;
                 document.getElementById('profileLikes').textContent = currentUser.likesReceived || 0;
                 document.getElementById('profileMatches').textContent = currentUser.matches || 0;
                 
-                // تحديث الاهتمامات
+                // Update interests
                 const interestsContainer = document.getElementById('profileInterests');
                 interestsContainer.innerHTML = '';
                 
@@ -1347,12 +1547,12 @@
                     interestsContainer.appendChild(tag);
                 });
             } else {
-                // إذا لم يكن المستخدم مسجل الدخول، عرض رسالة
-                document.getElementById('profileName').textContent = 'زائر';
-                document.getElementById('profileEmail').textContent = 'يجب تسجيل الدخول لعرض الملف الشخصي';
-                document.getElementById('profileBio').textContent = 'سجل الدخول لعرض ملفك الشخصي والإعدادات';
+                // If user is not logged in, show message
+                document.getElementById('profileName').textContent = 'Guest';
+                document.getElementById('profileEmail').textContent = 'Please login to view your profile';
+                document.getElementById('profileBio').textContent = 'Sign in to view your profile and settings';
                 
-                showNotification('يجب تسجيل الدخول لعرض الملف الشخصي', 'error');
+                showNotification('Please login to view your profile', 'error');
                 setTimeout(() => showPage('login'), 1000);
             }
         }
@@ -1362,15 +1562,35 @@
             const user = users.find(u => u.id === userId);
             
             if (user) {
-                showNotification(`عرض ملف ${user.fullName}`, 'info');
+                showNotification(`Viewing ${user.fullName}'s profile`, 'info');
                 
-                // زيادة عدد المشاهدات
+                // Increment profile views
                 userSystem.updateUser(userId, {
                     profileViews: (user.profileViews || 0) + 1
                 });
                 
-                // يمكن إضافة صفحة عرض ملفات الآخرين لاحقاً
-                alert(`ملف ${user.fullName}\n\nالعمر: ${user.age}\nالبريد: ${user.email}\n\n${user.bio || 'لا توجد نبذة'}`);
+                // Show user profile in modal
+                const modalContent = `
+                    <div style="padding: 20px; max-width: 500px; margin: 0 auto;">
+                        <h2 style="color: var(--electric); margin-bottom: 20px;">${user.fullName}</h2>
+                        <p><strong>Age:</strong> ${user.age}</p>
+                        <p><strong>Location:</strong> ${user.location || 'Not specified'}</p>
+                        <p><strong>Joined:</strong> ${new Date(user.joinDate).toLocaleDateString()}</p>
+                        <p><strong>Bio:</strong> ${user.bio || 'No bio added'}</p>
+                        <div style="margin-top: 20px;">
+                            <strong>Interests:</strong>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+                                ${(user.interests || []).map(interest => 
+                                    `<span style="background: rgba(0, 240, 255, 0.1); padding: 5px 12px; border-radius: 15px; font-size: 0.9rem;">${interest}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                if (window.confirm(modalContent)) {
+                    // User clicked OK
+                }
             }
         }
 
@@ -1378,8 +1598,13 @@
             const currentUser = userSystem.getCurrentUser();
             
             if (!currentUser) {
-                showNotification('يجب تسجيل الدخول لإرسال إعجاب', 'error');
+                showNotification('Please login to send likes', 'error');
                 showPage('login');
+                return;
+            }
+            
+            if (currentUser.id === targetUserId) {
+                showNotification('You cannot like yourself', 'error');
                 return;
             }
             
@@ -1387,13 +1612,18 @@
             
             if (result.success) {
                 if (result.isMatch) {
-                    showNotification('🎉 تطابق جديد! إعجاب متبادل!', 'success');
+                    showNotification('🎉 MATCH! You both like each other!', 'success');
                 } else {
-                    showNotification('تم إرسال الإعجاب بنجاح', 'success');
+                    showNotification('Like sent successfully!', 'success');
                 }
                 
-                // تحديث الإحصائيات
+                // Update statistics
                 updateHomeStats();
+                
+                // Update profile if on profile page
+                if (window.currentPage === 'profile') {
+                    loadProfile();
+                }
             } else {
                 showNotification(result.message, 'error');
             }
@@ -1401,14 +1631,14 @@
 
         function logout() {
             userSystem.logoutUser();
-            showNotification('تم تسجيل الخروج بنجاح', 'success');
+            showNotification('Logged out successfully', 'success');
             showPage('home');
         }
 
         // ============================================
-        // معالجة النماذج
+        // FORM HANDLING
         // ============================================
-        // معالجة نموذج التسجيل
+        // Handle registration form
         document.getElementById('signupForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1418,57 +1648,56 @@
             const password = document.getElementById('signupPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             
-            // التحقق من صحة البيانات
+            // Validate form data
             if (!fullName || !email || !age || !password) {
-                showNotification('جميع الحقول مطلوبة', 'error');
+                showNotification('All fields are required', 'error');
                 return;
             }
             
             if (age < 18 || age > 100) {
-                showNotification('يجب أن يكون العمر بين 18 و 100 سنة', 'error');
+                showNotification('Age must be between 18 and 100', 'error');
                 return;
             }
             
             if (password.length < 6) {
-                showNotification('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'error');
+                showNotification('Password must be at least 6 characters', 'error');
                 return;
             }
             
             if (password !== confirmPassword) {
-                showNotification('كلمات المرور غير متطابقة', 'error');
+                showNotification('Passwords do not match', 'error');
                 return;
             }
             
-            // جمع الاهتمامات المختارة
+            // Collect selected interests
             const selectedInterests = Array.from(
                 document.querySelectorAll('#interestSelection .selectable.selected')
             ).map(el => el.dataset.interest);
             
             if (selectedInterests.length < 3) {
-                showNotification('اختر 3 اهتمامات على الأقل', 'error');
+                showNotification('Please select at least 3 interests', 'error');
                 return;
             }
             
-            // إنشاء بيانات المستخدم
+            // Create user data object
             const userData = {
                 fullName,
                 email,
                 age,
                 password,
                 interests: selectedInterests,
-                bio: 'مرحباً! أنا عضو جديد في VeXachat.',
-                avatarInitial: fullName.charAt(0)
+                bio: 'Hello! I\'m new to VeXachat and excited to meet new people!'
             };
             
-            // تسجيل المستخدم
+            // Register user
             const result = userSystem.registerUser(userData);
             
             if (result.success) {
-                // تسجيل الدخول تلقائياً
+                // Auto login after registration
                 const loginResult = userSystem.loginUser(email, password);
                 
                 if (loginResult.success) {
-                    showNotification('🎉 تم إنشاء حسابك وتسجيل الدخول بنجاح!', 'success');
+                    showNotification('🎉 Account created successfully! Welcome to VeXachat!', 'success');
                     setTimeout(() => {
                         showPage('profile');
                     }, 1500);
@@ -1478,7 +1707,7 @@
             }
         });
 
-        // معالجة نموذج تسجيل الدخول
+        // Handle login form
         document.getElementById('loginForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1486,14 +1715,14 @@
             const password = document.getElementById('loginPassword').value;
             
             if (!email || !password) {
-                showNotification('جميع الحقول مطلوبة', 'error');
+                showNotification('All fields are required', 'error');
                 return;
             }
             
             const result = userSystem.loginUser(email, password);
             
             if (result.success) {
-                showNotification(`مرحباً بعودتك ${result.user.fullName}!`, 'success');
+                showNotification(`Welcome back ${result.user.fullName}!`, 'success');
                 setTimeout(() => {
                     showPage('profile');
                 }, 1500);
@@ -1502,7 +1731,7 @@
             }
         });
 
-        // اختيار الاهتمامات
+        // Handle interest selection
         document.querySelectorAll('#interestSelection .selectable').forEach(tag => {
             tag.addEventListener('click', function() {
                 this.classList.toggle('selected');
@@ -1517,7 +1746,7 @@
             });
         });
 
-        // بحث المستخدمين
+        // Handle user search
         document.getElementById('searchInput')?.addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase().trim();
             
@@ -1545,16 +1774,16 @@
         });
 
         // ============================================
-        // التهيئة عند تحميل الصفحة
+        // PAGE INITIALIZATION
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // تحديث قائمة المستخدم
+            // Update user menu
             userSystem.updateUserMenu();
             
-            // تحديث الإحصائيات
+            // Update statistics
             updateHomeStats();
             
-            // تعيين الصفحة النشطة حسب وجود المستخدم
+            // Set active page based on user status
             const currentUser = userSystem.getCurrentUser();
             if (!currentUser) {
                 showPage('home');
@@ -1562,23 +1791,63 @@
                 showPage('profile');
             }
             
-            // تسجيل معلومات التطبيق
-            console.log('🚀 VeXachat - نظام المستخدمين المحلي يعمل بنجاح!');
-            console.log(`👥 عدد المستخدمين: ${userSystem.getAllUsers().length}`);
+            // Log app information
+            console.log('🚀 VeXachat - Complete User System Initialized!');
+            console.log(`👥 Total Users: ${userSystem.getAllUsers().length}`);
+            console.log(`📊 Stats: ${JSON.stringify(userSystem.getStats())}`);
         });
 
         // ============================================
-        // إضافة بعض الأحداث الإضافية
+        // ADDITIONAL FEATURES
         // ============================================
-        // تحديث الإحصائيات تلقائياً كل 30 ثانية
+        // Auto-update statistics every 30 seconds
         setInterval(updateHomeStats, 30000);
         
-        // تحديث قائمة المستخدمين كل دقيقة
+        // Auto-refresh discover page every minute
         setInterval(() => {
             if (window.currentPage === 'discover') {
                 loadDiscoverUsers();
             }
         }, 60000);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+H for Home
+            if (e.ctrlKey && e.key === 'h') {
+                e.preventDefault();
+                showPage('home');
+            }
+            // Ctrl+D for Discover
+            if (e.ctrlKey && e.key === 'd') {
+                e.preventDefault();
+                showPage('discover');
+            }
+            // Ctrl+P for Profile
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                showPage('profile');
+            }
+            // Escape to clear search
+            if (e.key === 'Escape') {
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.value = '';
+                    searchInput.dispatchEvent(new Event('input'));
+                }
+            }
+        });
+
+        // Online status simulation
+        setInterval(() => {
+            const stats = userSystem.getStats();
+            const activeUsersEl = document.getElementById('activeUsers');
+            if (activeUsersEl) {
+                // Simulate online users fluctuation
+                const fluctuation = Math.floor(Math.random() * 20) - 10;
+                const newActive = Math.max(50, stats.activeUsers + fluctuation);
+                activeUsersEl.textContent = newActive;
+            }
+        }, 60000); // Update every minute
     </script>
 </body>
 </html>
