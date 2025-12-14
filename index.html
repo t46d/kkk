@@ -192,6 +192,8 @@
             font-weight: bold;
             color: var(--dark-950);
             cursor: pointer;
+            background-size: cover;
+            background-position: center;
         }
 
         nav {
@@ -505,6 +507,20 @@
             font-weight: 900;
             color: var(--dark-950);
             animation: glow 2s ease-in-out infinite;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-avatar-large .initial {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .profile-name {
@@ -554,6 +570,77 @@
             padding: 30px;
             border-radius: 20px;
             margin-bottom: 30px;
+        }
+
+        /* Photo Upload Styles */
+        .photo-upload-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .upload-btn {
+            background: rgba(0, 240, 255, 0.1);
+            border: 2px dashed rgba(0, 240, 255, 0.3);
+            color: var(--electric);
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .upload-btn:hover {
+            background: rgba(0, 240, 255, 0.2);
+            border-color: var(--electric);
+        }
+
+        #profilePictureInput {
+            display: none;
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .photo-action-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
         }
 
         /* Discover Page */
@@ -614,11 +701,14 @@
         }
 
         .user-avatar {
-            height: 180px;
+            height: 200px;
             background: linear-gradient(135deg, var(--dark-800), var(--dark-900));
             display: flex;
             align-items: center;
             justify-content: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
         }
 
         .user-avatar-initial {
@@ -973,11 +1063,22 @@
         <!-- Profile Page -->
         <div id="profile" class="page">
             <div class="profile-header">
-                <div class="profile-avatar-large" id="profileAvatar">?</div>
+                <div class="profile-avatar-large" id="profileAvatar">
+                    <div class="initial" id="profileInitial">?</div>
+                </div>
                 <h1 class="profile-name" id="profileName">User Profile</h1>
                 <p class="profile-email" id="profileEmail">user@example.com</p>
                 <p class="profile-age" id="profileAge">-- years old</p>
-                <button class="btn btn-secondary" onclick="showPage('discover')">
+                
+                <!-- Photo Upload Button -->
+                <div class="photo-upload-container">
+                    <label class="upload-btn" for="profilePictureInput">
+                        <i class="fas fa-camera"></i> Upload Profile Photo
+                    </label>
+                    <input type="file" id="profilePictureInput" accept="image/*" style="display: none">
+                </div>
+                
+                <button class="btn btn-secondary" onclick="showPage('discover')" style="margin-top: 20px;">
                     <i class="fas fa-globe"></i> Discover More
                 </button>
             </div>
@@ -997,9 +1098,26 @@
                 </div>
             </div>
             
+            <!-- My Photos Section -->
+            <div class="profile-section">
+                <h3 class="section-title">My Photos</h3>
+                <div class="photos-grid" id="userPhotosGrid">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+                <div class="photo-upload-container" style="margin-top: 20px;">
+                    <label class="upload-btn" for="additionalPhotosInput">
+                        <i class="fas fa-plus"></i> Add More Photos
+                    </label>
+                    <input type="file" id="additionalPhotosInput" accept="image/*" multiple style="display: none">
+                </div>
+            </div>
+            
             <div class="profile-section">
                 <h3 class="section-title">About Me</h3>
                 <p id="profileBio">No bio added yet. Click edit to add information about yourself.</p>
+                <button class="btn btn-secondary" onclick="editBio()" style="margin-top: 10px;">
+                    <i class="fas fa-edit"></i> Edit Bio
+                </button>
             </div>
             
             <div class="profile-section">
@@ -1080,16 +1198,19 @@
             generateDemoUsers() {
                 const users = this.getAllUsers();
                 if (users.length === 0) {
+                    // English names with more female names as requested
                     const demoUsers = [
                         {
                             id: 'demo1',
-                            fullName: 'Alex Johnson',
-                            email: 'alex@demo.com',
+                            fullName: 'Emma Johnson',
+                            email: 'emma@demo.com',
                             age: 28,
                             password: 'demo123',
-                            interests: ['travel', 'technology', 'sports'],
-                            bio: 'Software engineer who loves traveling and technology. Looking for meaningful connections.',
-                            avatarInitial: 'A',
+                            interests: ['travel', 'photography', 'yoga'],
+                            bio: 'Marketing professional who loves traveling and capturing moments. Looking for meaningful connections.',
+                            avatarInitial: 'E',
+                            profilePicture: null,
+                            photos: [],
                             joinDate: new Date().toISOString(),
                             profileViews: 45,
                             likesReceived: 12,
@@ -1099,13 +1220,15 @@
                         },
                         {
                             id: 'demo2',
-                            fullName: 'Sarah Miller',
-                            email: 'sarah@demo.com',
+                            fullName: 'Sophia Williams',
+                            email: 'sophia@demo.com',
                             age: 25,
                             password: 'demo123',
-                            interests: ['music', 'art', 'photography'],
-                            bio: 'Graphic designer and music lover. Enjoy hiking and exploring new coffee shops.',
+                            interests: ['art', 'music', 'reading'],
+                            bio: 'Art director and classical music enthusiast. Enjoy painting and visiting museums.',
                             avatarInitial: 'S',
+                            profilePicture: null,
+                            photos: [],
                             joinDate: new Date().toISOString(),
                             profileViews: 67,
                             likesReceived: 18,
@@ -1115,34 +1238,146 @@
                         },
                         {
                             id: 'demo3',
-                            fullName: 'Michael Chen',
-                            email: 'michael@demo.com',
+                            fullName: 'Olivia Brown',
+                            email: 'olivia@demo.com',
                             age: 30,
                             password: 'demo123',
-                            interests: ['fitness', 'cooking', 'reading'],
-                            bio: 'Fitness trainer and food enthusiast. Love trying new recipes and staying active.',
-                            avatarInitial: 'M',
+                            interests: ['fitness', 'cooking', 'hiking'],
+                            bio: 'Personal trainer and food blogger. Passionate about healthy living and outdoor adventures.',
+                            avatarInitial: 'O',
+                            profilePicture: null,
+                            photos: [],
                             joinDate: new Date().toISOString(),
                             profileViews: 32,
                             likesReceived: 8,
                             matches: 2,
-                            location: 'Tokyo, Japan',
+                            location: 'Los Angeles, USA',
                             isDemo: true
                         },
                         {
                             id: 'demo4',
-                            fullName: 'Emma Wilson',
-                            email: 'emma@demo.com',
+                            fullName: 'Ava Davis',
+                            email: 'ava@demo.com',
                             age: 26,
                             password: 'demo123',
-                            interests: ['travel', 'photography', 'art'],
-                            bio: 'Photographer and travel blogger. Always looking for new adventures.',
-                            avatarInitial: 'E',
+                            interests: ['technology', 'gaming', 'travel'],
+                            bio: 'Software developer and gaming enthusiast. Love exploring new technologies and cultures.',
+                            avatarInitial: 'A',
+                            profilePicture: null,
+                            photos: [],
                             joinDate: new Date().toISOString(),
                             profileViews: 89,
                             likesReceived: 25,
                             matches: 7,
+                            location: 'Toronto, Canada',
+                            isDemo: true
+                        },
+                        {
+                            id: 'demo5',
+                            fullName: 'Isabella Martinez',
+                            email: 'isabella@demo.com',
+                            age: 27,
+                            password: 'demo123',
+                            interests: ['fashion', 'dance', 'photography'],
+                            bio: 'Fashion designer and professional dancer. Creative soul looking for inspiration and connection.',
+                            avatarInitial: 'I',
+                            profilePicture: null,
+                            photos: [],
+                            joinDate: new Date().toISOString(),
+                            profileViews: 54,
+                            likesReceived: 15,
+                            matches: 4,
+                            location: 'Madrid, Spain',
+                            isDemo: true
+                        },
+                        {
+                            id: 'demo6',
+                            fullName: 'Mia Garcia',
+                            email: 'mia@demo.com',
+                            age: 29,
+                            password: 'demo123',
+                            interests: ['writing', 'yoga', 'meditation'],
+                            bio: 'Author and mindfulness coach. Helping people find peace and write their stories.',
+                            avatarInitial: 'M',
+                            profilePicture: null,
+                            photos: [],
+                            joinDate: new Date().toISOString(),
+                            profileViews: 41,
+                            likesReceived: 11,
+                            matches: 3,
+                            location: 'Sydney, Australia',
+                            isDemo: true
+                        },
+                        {
+                            id: 'demo7',
+                            fullName: 'Charlotte Wilson',
+                            email: 'charlotte@demo.com',
+                            age: 24,
+                            password: 'demo123',
+                            interests: ['sports', 'travel', 'music'],
+                            bio: 'Professional athlete and travel blogger. Always on the move and seeking new adventures.',
+                            avatarInitial: 'C',
+                            profilePicture: null,
+                            photos: [],
+                            joinDate: new Date().toISOString(),
+                            profileViews: 72,
+                            likesReceived: 21,
+                            matches: 6,
                             location: 'Paris, France',
+                            isDemo: true
+                        },
+                        {
+                            id: 'demo8',
+                            fullName: 'Amelia Taylor',
+                            email: 'amelia@demo.com',
+                            age: 31,
+                            password: 'demo123',
+                            interests: ['business', 'networking', 'technology'],
+                            bio: 'Entrepreneur and startup advisor. Passionate about innovation and building meaningful connections.',
+                            avatarInitial: 'A',
+                            profilePicture: null,
+                            photos: [],
+                            joinDate: new Date().toISOString(),
+                            profileViews: 63,
+                            likesReceived: 17,
+                            matches: 5,
+                            location: 'Berlin, Germany',
+                            isDemo: true
+                        },
+                        {
+                            id: 'demo9',
+                            fullName: 'Lily Anderson',
+                            email: 'lily@demo.com',
+                            age: 26,
+                            password: 'demo123',
+                            interests: ['animals', 'nature', 'photography'],
+                            bio: 'Veterinarian and wildlife photographer. Animal lover exploring the beauty of nature.',
+                            avatarInitial: 'L',
+                            profilePicture: null,
+                            photos: [],
+                            joinDate: new Date().toISOString(),
+                            profileViews: 48,
+                            likesReceived: 13,
+                            matches: 4,
+                            location: 'Vancouver, Canada',
+                            isDemo: true
+                        },
+                        {
+                            id: 'demo10',
+                            fullName: 'Harper Thomas',
+                            email: 'harper@demo.com',
+                            age: 28,
+                            password: 'demo123',
+                            interests: ['music', 'art', 'cooking'],
+                            bio: 'Musician and culinary artist. Creating melodies and delicious meals.',
+                            avatarInitial: 'H',
+                            profilePicture: null,
+                            photos: [],
+                            joinDate: new Date().toISOString(),
+                            profileViews: 56,
+                            likesReceived: 16,
+                            matches: 4,
+                            location: 'Tokyo, Japan',
                             isDemo: true
                         }
                     ];
@@ -1182,6 +1417,8 @@
                 userData.location = 'Not specified';
                 userData.bio = userData.bio || 'Hello! I\'m new to VeXachat.';
                 userData.avatarInitial = userData.fullName.charAt(0).toUpperCase();
+                userData.profilePicture = null;
+                userData.photos = [];
                 
                 users.push(userData);
                 this.saveAllUsers(users);
@@ -1236,6 +1473,97 @@
                     }
                     
                     return { success: true, user: users[index] };
+                }
+                
+                return { success: false, message: 'User not found' };
+            }
+            
+            // Photo Management
+            addUserPhoto(userId, photoData) {
+                const users = this.getAllUsers();
+                const userIndex = users.findIndex(u => u.id === userId);
+                
+                if (userIndex !== -1) {
+                    if (!users[userIndex].photos) {
+                        users[userIndex].photos = [];
+                    }
+                    
+                    // Generate unique photo ID
+                    const photoId = 'photo_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                    const photo = {
+                        id: photoId,
+                        data: photoData,
+                        uploadedAt: new Date().toISOString()
+                    };
+                    
+                    users[userIndex].photos.push(photo);
+                    
+                    // If this is the first photo, set it as profile picture
+                    if (users[userIndex].photos.length === 1) {
+                        users[userIndex].profilePicture = photoData;
+                    }
+                    
+                    this.saveAllUsers(users);
+                    
+                    // Update current user
+                    const currentUser = this.getCurrentUser();
+                    if (currentUser && currentUser.id === userId) {
+                        this.setCurrentUser(users[userIndex]);
+                    }
+                    
+                    return { success: true, photo };
+                }
+                
+                return { success: false, message: 'User not found' };
+            }
+            
+            removeUserPhoto(userId, photoId) {
+                const users = this.getAllUsers();
+                const userIndex = users.findIndex(u => u.id === userId);
+                
+                if (userIndex !== -1 && users[userIndex].photos) {
+                    const photoIndex = users[userIndex].photos.findIndex(p => p.id === photoId);
+                    
+                    if (photoIndex !== -1) {
+                        // Check if this photo is the profile picture
+                        const photoData = users[userIndex].photos[photoIndex].data;
+                        if (users[userIndex].profilePicture === photoData) {
+                            // Set profile picture to null or next available photo
+                            users[userIndex].profilePicture = users[userIndex].photos.length > 1 ? 
+                                users[userIndex].photos[0].data : null;
+                        }
+                        
+                        users[userIndex].photos.splice(photoIndex, 1);
+                        this.saveAllUsers(users);
+                        
+                        // Update current user
+                        const currentUser = this.getCurrentUser();
+                        if (currentUser && currentUser.id === userId) {
+                            this.setCurrentUser(users[userIndex]);
+                        }
+                        
+                        return { success: true };
+                    }
+                }
+                
+                return { success: false, message: 'Photo not found' };
+            }
+            
+            setProfilePicture(userId, photoData) {
+                const users = this.getAllUsers();
+                const userIndex = users.findIndex(u => u.id === userId);
+                
+                if (userIndex !== -1) {
+                    users[userIndex].profilePicture = photoData;
+                    this.saveAllUsers(users);
+                    
+                    // Update current user
+                    const currentUser = this.getCurrentUser();
+                    if (currentUser && currentUser.id === userId) {
+                        this.setCurrentUser(users[userIndex]);
+                    }
+                    
+                    return { success: true };
                 }
                 
                 return { success: false, message: 'User not found' };
@@ -1395,8 +1723,9 @@
                             <a href="#" onclick="showPage('discover')" ${window.currentPage === 'discover' ? 'class="active"' : ''}>Discover</a>
                             <a href="#" onclick="showPage('profile')" ${window.currentPage === 'profile' ? 'class="active"' : ''}>My Profile</a>
                         </nav>
-                        <div class="user-avatar-small" onclick="showPage('profile')" title="${currentUser.fullName}">
-                            ${currentUser.avatarInitial}
+                        <div class="user-avatar-small" onclick="showPage('profile')" title="${currentUser.fullName}"
+                             style="${currentUser.profilePicture ? `background-image: url('${currentUser.profilePicture}')` : ''}">
+                            ${currentUser.profilePicture ? '' : currentUser.avatarInitial}
                         </div>
                         <button class="btn-logout" onclick="logout()">
                             <i class="fas fa-sign-out-alt"></i> Logout
@@ -1464,6 +1793,7 @@
                 loadDiscoverUsers();
             } else if (pageId === 'profile') {
                 loadProfile();
+                loadUserPhotos();
             }
             
             // Scroll to top
@@ -1493,9 +1823,17 @@
             otherUsers.forEach(user => {
                 const userCard = document.createElement('div');
                 userCard.className = 'user-card';
+                
+                // Set background image if user has profile picture
+                const avatarStyle = user.profilePicture ? 
+                    `background-image: url('${user.profilePicture}')` : 
+                    '';
+                
                 userCard.innerHTML = `
-                    <div class="user-avatar">
-                        <div class="user-avatar-initial">${user.avatarInitial || user.fullName.charAt(0)}</div>
+                    <div class="user-avatar" style="${avatarStyle}">
+                        ${!user.profilePicture ? `
+                            <div class="user-avatar-initial">${user.avatarInitial || user.fullName.charAt(0)}</div>
+                        ` : ''}
                     </div>
                     <div class="user-info">
                         <h3 class="user-name">${user.fullName}</h3>
@@ -1524,8 +1862,19 @@
             const currentUser = userSystem.getCurrentUser();
             
             if (currentUser) {
-                document.getElementById('profileAvatar').textContent = 
-                    currentUser.avatarInitial || currentUser.fullName.charAt(0);
+                // Set profile avatar
+                const profileAvatar = document.getElementById('profileAvatar');
+                const profileInitial = document.getElementById('profileInitial');
+                
+                if (currentUser.profilePicture) {
+                    profileAvatar.style.backgroundImage = `url('${currentUser.profilePicture}')`;
+                    profileInitial.style.display = 'none';
+                } else {
+                    profileAvatar.style.backgroundImage = '';
+                    profileInitial.textContent = currentUser.avatarInitial || currentUser.fullName.charAt(0);
+                    profileInitial.style.display = 'flex';
+                }
+                
                 document.getElementById('profileName').textContent = currentUser.fullName;
                 document.getElementById('profileEmail').textContent = currentUser.email;
                 document.getElementById('profileAge').textContent = `${currentUser.age} years old`;
@@ -1557,6 +1906,187 @@
             }
         }
 
+        function loadUserPhotos() {
+            const currentUser = userSystem.getCurrentUser();
+            const photosGrid = document.getElementById('userPhotosGrid');
+            
+            if (!currentUser || !photosGrid) return;
+            
+            photosGrid.innerHTML = '';
+            
+            // Add profile picture if exists
+            if (currentUser.profilePicture) {
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.innerHTML = `
+                    <img src="${currentUser.profilePicture}" alt="Profile picture">
+                    <div class="photo-actions">
+                        <button class="photo-action-btn" title="Profile Picture" style="background: var(--success);">
+                            <i class="fas fa-crown"></i>
+                        </button>
+                    </div>
+                    <div style="position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.7); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem;">
+                        Main
+                    </div>
+                `;
+                photosGrid.appendChild(photoItem);
+            }
+            
+            // Add other photos
+            if (currentUser.photos && currentUser.photos.length > 0) {
+                currentUser.photos.forEach(photo => {
+                    // Skip if this is the profile picture
+                    if (photo.data === currentUser.profilePicture) return;
+                    
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.innerHTML = `
+                        <img src="${photo.data}" alt="User photo">
+                        <div class="photo-actions">
+                            <button class="photo-action-btn" title="Set as Profile" onclick="setAsProfilePicture('${photo.id}')">
+                                <i class="fas fa-user-circle"></i>
+                            </button>
+                            <button class="photo-action-btn" title="Delete" onclick="deletePhoto('${photo.id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    photosGrid.appendChild(photoItem);
+                });
+            }
+            
+            // If no photos, show message
+            if (photosGrid.children.length === 0) {
+                photosGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--text-gray);">No photos yet. Upload some photos!</p>';
+            }
+        }
+
+        function handleProfilePictureUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Check file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                showNotification('File size too large. Maximum size is 5MB.', 'error');
+                return;
+            }
+            
+            // Check file type
+            if (!file.type.match('image.*')) {
+                showNotification('Please select an image file.', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const currentUser = userSystem.getCurrentUser();
+                if (!currentUser) {
+                    showNotification('Please login to upload photos', 'error');
+                    return;
+                }
+                
+                // Add photo to user's photos
+                const result = userSystem.addUserPhoto(currentUser.id, e.target.result);
+                
+                if (result.success) {
+                    showNotification('Profile picture uploaded successfully!', 'success');
+                    loadProfile();
+                    loadUserPhotos();
+                }
+            };
+            
+            reader.readAsDataURL(file);
+            event.target.value = ''; // Reset input
+        }
+
+        function handleAdditionalPhotosUpload(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+            
+            const currentUser = userSystem.getCurrentUser();
+            if (!currentUser) {
+                showNotification('Please login to upload photos', 'error');
+                return;
+            }
+            
+            let uploadedCount = 0;
+            let errorCount = 0;
+            
+            Array.from(files).forEach((file, index) => {
+                // Check file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    errorCount++;
+                    return;
+                }
+                
+                // Check file type
+                if (!file.type.match('image.*')) {
+                    errorCount++;
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    userSystem.addUserPhoto(currentUser.id, e.target.result);
+                    uploadedCount++;
+                    
+                    // If this is the last file, show notification
+                    if (uploadedCount + errorCount === files.length) {
+                        let message = `Successfully uploaded ${uploadedCount} photo(s).`;
+                        if (errorCount > 0) {
+                            message += ` ${errorCount} photo(s) failed (max size: 5MB, images only).`;
+                        }
+                        showNotification(message, uploadedCount > 0 ? 'success' : 'error');
+                        loadUserPhotos();
+                    }
+                };
+                
+                reader.readAsDataURL(file);
+            });
+            
+            event.target.value = ''; // Reset input
+        }
+
+        function setAsProfilePicture(photoId) {
+            const currentUser = userSystem.getCurrentUser();
+            if (!currentUser || !currentUser.photos) return;
+            
+            const photo = currentUser.photos.find(p => p.id === photoId);
+            if (!photo) return;
+            
+            userSystem.setProfilePicture(currentUser.id, photo.data);
+            showNotification('Profile picture updated!', 'success');
+            loadProfile();
+            loadUserPhotos();
+        }
+
+        function deletePhoto(photoId) {
+            if (!confirm('Are you sure you want to delete this photo?')) return;
+            
+            const currentUser = userSystem.getCurrentUser();
+            if (!currentUser) return;
+            
+            const result = userSystem.removeUserPhoto(currentUser.id, photoId);
+            
+            if (result.success) {
+                showNotification('Photo deleted successfully', 'success');
+                loadProfile();
+                loadUserPhotos();
+            }
+        }
+
+        function editBio() {
+            const currentUser = userSystem.getCurrentUser();
+            if (!currentUser) return;
+            
+            const newBio = prompt('Edit your bio:', currentUser.bio || '');
+            if (newBio !== null) {
+                userSystem.updateUser(currentUser.id, { bio: newBio });
+                showNotification('Bio updated successfully!', 'success');
+                loadProfile();
+            }
+        }
+
         function viewUserProfile(userId) {
             const users = userSystem.getAllUsers();
             const user = users.find(u => u.id === userId);
@@ -1570,16 +2100,21 @@
                 });
                 
                 // Show user profile in modal
-                const modalContent = `
-                    <div style="padding: 20px; max-width: 500px; margin: 0 auto;">
-                        <h2 style="color: var(--electric); margin-bottom: 20px;">${user.fullName}</h2>
+                let profileContent = `
+                    <div style="max-width: 500px; margin: 0 auto; text-align: center;">
+                        <div style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 20px; 
+                             ${user.profilePicture ? `background-image: url('${user.profilePicture}'); background-size: cover; background-position: center;` : 
+                             `background: linear-gradient(135deg, var(--electric), var(--neon-pink)); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; color: var(--dark-950);`}">
+                            ${!user.profilePicture ? (user.avatarInitial || user.fullName.charAt(0)) : ''}
+                        </div>
+                        <h2 style="color: var(--electric); margin-bottom: 10px;">${user.fullName}</h2>
                         <p><strong>Age:</strong> ${user.age}</p>
                         <p><strong>Location:</strong> ${user.location || 'Not specified'}</p>
                         <p><strong>Joined:</strong> ${new Date(user.joinDate).toLocaleDateString()}</p>
                         <p><strong>Bio:</strong> ${user.bio || 'No bio added'}</p>
                         <div style="margin-top: 20px;">
                             <strong>Interests:</strong>
-                            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; justify-content: center;">
                                 ${(user.interests || []).map(interest => 
                                     `<span style="background: rgba(0, 240, 255, 0.1); padding: 5px 12px; border-radius: 15px; font-size: 0.9rem;">${interest}</span>`
                                 ).join('')}
@@ -1588,9 +2123,7 @@
                     </div>
                 `;
                 
-                if (window.confirm(modalContent)) {
-                    // User clicked OK
-                }
+                alert(profileContent);
             }
         }
 
@@ -1746,6 +2279,10 @@
             });
         });
 
+        // Handle photo uploads
+        document.getElementById('profilePictureInput')?.addEventListener('change', handleProfilePictureUpload);
+        document.getElementById('additionalPhotosInput')?.addEventListener('change', handleAdditionalPhotosUpload);
+
         // Handle user search
         document.getElementById('searchInput')?.addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase().trim();
@@ -1794,6 +2331,7 @@
             // Log app information
             console.log('🚀 VeXachat - Complete User System Initialized!');
             console.log(`👥 Total Users: ${userSystem.getAllUsers().length}`);
+            console.log(`👩 Demo Users: 10 female users with English names`);
             console.log(`📊 Stats: ${JSON.stringify(userSystem.getStats())}`);
         });
 
