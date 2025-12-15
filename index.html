@@ -1,82 +1,251 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VeXachat - Social Dating Platform</title>
+    <title>VeXachat - Advanced Social Dating Platform | Launching 2026</title>
     
     <!-- ============================================
-         ALL FAVICONS EMBEDDED IN ONE FILE
+         GOOGLE SEARCH CONSOLE VERIFICATION
          ============================================ -->
+    <meta name="google-site-verification" content="AMhNu1WcbrN9WVLW-1cASHweDOr3aQGKb4Z4WX5uL7s" />
+    
+    <!-- ============================================
+         GLOBAL SEO & SOCIAL MEDIA TAGS
+         ============================================ -->
+    <meta name="description" content="VeXachat - Advanced AI-powered social dating platform. Connect with meaningful relationships through intelligent matching, video chat rooms, and global community.">
+    <meta name="keywords" content="dating app, social dating, AI matching, video chat, relationships, online dating, matchmaking, friendship, connection">
+    <meta name="author" content="VeXachat Team">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0A0A0A">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vexachat.world">
+    <meta property="og:title" content="VeXachat - Advanced Social Dating Platform">
+    <meta property="og:description" content="Experience the future of social dating with AI-powered matching and immersive chat experiences.">
+    <meta property="og:image" content="https://vexachat.world/social-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vexachat.world">
+    <meta property="twitter:title" content="VeXachat - Advanced Social Dating Platform">
+    <meta property="twitter:description" content="Experience the future of social dating with AI-powered matching and immersive chat experiences.">
+    <meta property="twitter:image" content="https://vexachat.world/social-preview.jpg">
+    
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="Global">
+    <meta name="geo.placename" content="Worldwide">
+    <meta name="geo.position" content="0;0">
+    <meta name="ICBM" content="0, 0">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "VeXachat",
+        "description": "Advanced AI-powered social dating platform with intelligent matching and video chat rooms",
+        "url": "https://vexachat.world",
+        "applicationCategory": "SocialNetworkingApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "1500"
+        },
+        "datePublished": "2024-01-01",
+        "dateModified": "2024-12-01"
+    }
+    </script>
+    
+    <!-- Favicons -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2300F0FF'/><stop offset='50%' stop-color='%23FF00C8'/><stop offset='100%' stop-color='%23B500FF'/></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23g)'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>💬</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2300F0FF'/><stop offset='50%' stop-color='%23FF00C8'/><stop offset='100%' stop-color='%23B500FF'/></linearGradient></defs><circle cx='50' cy='50' r='48' fill='url(%23g)'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>💬</text></svg>">
-    <meta name="theme-color" content="#0a0a0a">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Global Promotion System Styles -->
+    <style>
+        /* Global Promotion Widget */
+        .global-promotion-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 300px;
+            animation: slideInRight 0.5s ease;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .promotion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .promotion-header h4 {
+            color: #00F0FF;
+            font-size: 1rem;
+            margin: 0;
+        }
+        
+        .close-promotion {
+            background: none;
+            border: none;
+            color: #9AA0A6;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .promotion-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .promo-btn-small {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: #00F0FF;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .promo-btn-small:hover {
+            background: rgba(0, 240, 255, 0.2);
+        }
+        
+        /* Share Buttons in Hero */
+        .share-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: none;
+            color: white;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .share-btn.twitter {
+            background: #1DA1F2;
+        }
+        
+        .share-btn.facebook {
+            background: #4267B2;
+        }
+        
+        .share-btn.whatsapp {
+            background: #25D366;
+        }
+        
+        .share-btn.link {
+            background: #B500FF;
+        }
+        
+        /* Global Countdown Timer */
+        .countdown-timer {
+            background: rgba(0, 240, 255, 0.1);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin: 40px auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .countdown-timer h3 {
+            color: #00F0FF;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            background: rgba(10, 10, 10, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+        
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00F0FF;
+            margin-bottom: 5px;
+        }
+        
+        .countdown-label {
+            color: #9AA0A6;
+            font-size: 0.9rem;
+        }
+    </style>
+    
     <style>
         /* ============================================
-           ALL CSS STYLES EMBEDDED HERE
+           ADVANCED HOMEPAGE STYLES (From homepage_advanced.html)
            ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        :root {
-            --electric: #00F0FF;
-            --neon-pink: #FF00C8;
-            --neon-violet: #B500FF;
-            --dark-950: #0A0A0A;
-            --dark-900: #151515;
-            --dark-800: #202020;
-            --text-light: #EAEAEA;
-            --text-gray: #9AA0A6;
-            --success: #00FF9F;
-            --error: #FF4757;
-            --warning: #FFA500;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
-            background: var(--dark-950);
-            color: var(--text-light);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0A0A0A;
+            color: #EAEAEA;
             overflow-x: hidden;
-            min-height: 100vh;
-            line-height: 1.6;
-        }
-
-        /* Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(255, 0, 200, 0.8); }
-            100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        @keyframes slideDown {
-            from { top: -100px; opacity: 0; }
-            to { top: 100px; opacity: 1; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Animated Background */
@@ -86,280 +255,277 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
+            z-index: -1;
             background: 
                 radial-gradient(ellipse at 20% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 80%, rgba(255, 0, 200, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse at 50% 50%, rgba(181, 0, 255, 0.1) 0%, transparent 50%);
+            animation: backgroundPulse 10s ease-in-out infinite;
         }
 
-        /* User Notifications */
-        .notification {
-            position: fixed;
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 15px 25px;
-            border-radius: 10px;
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            animation: slideDown 0.3s ease;
-            max-width: 90%;
-            text-align: center;
-            backdrop-filter: blur(10px);
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
         }
 
-        .notification.success {
-            background: rgba(0, 255, 159, 0.9);
-            color: var(--dark-950);
-            border: 1px solid rgba(0, 255, 159, 0.5);
-        }
-
-        .notification.error {
-            background: rgba(255, 71, 87, 0.9);
-            color: white;
-            border: 1px solid rgba(255, 71, 87, 0.5);
-        }
-
-        .notification.info {
-            background: rgba(0, 240, 255, 0.9);
-            color: var(--dark-950);
-            border: 1px solid rgba(0, 240, 255, 0.5);
-        }
-
-        /* Header & Navigation */
-        .coming-soon-banner {
+        /* Floating Particles */
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
-            color: var(--dark-950);
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(0, 240, 255, 0.6);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Launch Banner - UPDATED TO 2026 */
+        .launch-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #00F0FF, #FF00C8);
+            color: #0A0A0A;
             text-align: center;
             padding: 12px;
             font-weight: 700;
             z-index: 1001;
             animation: glow 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
         }
 
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 200, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
+        }
+
+        /* Header */
         header {
             position: fixed;
-            top: 50px;
+            top: 50px; /* Adjusted for banner */
             width: 100%;
-            z-index: 1000;
-            padding: 15px 0;
-            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 10, 10, 0.7);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+            z-index: 1000;
+            padding: 1rem 2rem;
         }
 
         .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
-            max-width: 1400px;
-            margin: 0 auto;
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00F0FF, #FF00C8);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
-        }
-
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .user-avatar-small {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--dark-950);
-            cursor: pointer;
-            background-size: cover;
-            background-position: center;
+            letter-spacing: 2px;
         }
 
         nav {
             display: flex;
-            gap: 20px;
+            gap: 2rem;
             align-items: center;
         }
 
         nav a {
-            color: var(--text-light);
+            color: #EAEAEA;
             text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 8px;
             transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00F0FF, #FF00C8);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::before {
+            width: 100%;
         }
 
         nav a:hover {
-            color: var(--electric);
-            background: rgba(0, 240, 255, 0.1);
+            color: #00F0FF;
         }
 
-        nav a.active {
-            color: var(--electric);
-            background: rgba(0, 240, 255, 0.15);
-        }
-
-        .btn-logout {
-            background: rgba(255, 71, 87, 0.1);
-            border: 1px solid var(--error);
-            color: var(--error);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .btn-logout:hover {
-            background: rgba(255, 71, 87, 0.2);
-        }
-
-        /* Main Content */
-        .pages-container {
-            padding-top: 120px;
-            min-height: 100vh;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 120px 20px 40px;
-        }
-
-        .page {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* Home Page */
+        /* Hero Section */
         .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12rem 2rem 4rem; /* Increased top padding for banner */
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
             text-align: center;
-            padding: 60px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
+            z-index: 1;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 900;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink), var(--neon-violet));
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #00F0FF 0%, #FF00C8 50%, #B500FF 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             animation: gradientShift 8s ease infinite;
+            background-size: 200% 200%;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero p {
-            font-size: 1.3rem;
-            color: var(--text-gray);
-            margin-bottom: 50px;
-            line-height: 1.6;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #9AA0A6;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 20px;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .btn {
-            padding: 14px 36px;
+            padding: 1.2rem 3rem;
             border: none;
             border-radius: 12px;
+            font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
-            color: var(--dark-950);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+            background: linear-gradient(135deg, #00F0FF, #FF00C8);
+            color: #0A0A0A;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5), 0 0 60px rgba(255, 0, 200, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 0 50px rgba(0, 240, 255, 0.7);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.7), 0 0 80px rgba(255, 0, 200, 0.5);
         }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid rgba(0, 240, 255, 0.3);
-            color: var(--electric);
+            color: #00F0FF;
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
             background: rgba(0, 240, 255, 0.1);
-            border-color: var(--electric);
+            border-color: #00F0FF;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
         }
 
-        .stats-section {
-            padding: 80px 20px;
+        /* Stats Section */
+        .stats {
+            padding: 4rem 2rem;
             background: rgba(0, 240, 255, 0.02);
             border-top: 1px solid rgba(0, 240, 255, 0.1);
             border-bottom: 1px solid rgba(0, 240, 255, 0.1);
-            margin-top: 50px;
         }
 
         .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
+            gap: 3rem;
             text-align: center;
         }
 
         .stat-item h3 {
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            font-size: 3rem;
+            background: linear-gradient(135deg, #00F0FF, #FF00C8);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
         }
 
         .stat-item p {
-            color: var(--text-gray);
+            color: #9AA0A6;
             font-size: 1.1rem;
         }
 
         /* Features Section */
-        .features-section {
-            padding: 100px 20px;
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .section-title {
+        .features h2 {
             text-align: center;
-            font-size: 3.5rem;
-            margin-bottom: 70px;
-            background: linear-gradient(135deg, var(--electric), var(--neon-violet));
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #00F0FF, #B500FF);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -368,410 +534,65 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 2rem;
         }
 
         .feature-card {
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.2);
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
-            border-color: var(--electric);
+            border-color: #00F0FF;
             box-shadow: 0 20px 60px rgba(0, 240, 255, 0.2);
         }
 
         .feature-icon {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
         }
 
         .feature-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--electric);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00F0FF;
         }
 
-        /* Auth Forms */
-        .auth-container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 40px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .auth-title {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 14px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: var(--text-light);
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--electric);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-        }
-
-        .form-link {
-            text-align: center;
-            margin-top: 25px;
-            color: var(--text-gray);
-        }
-
-        .form-link a {
-            color: var(--electric);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .form-link a:hover {
-            text-decoration: underline;
-        }
-
-        /* Interest Selection */
-        .interest-tag {
-            padding: 6px 14px;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 20px;
-            color: var(--electric);
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-block;
-            margin: 5px;
-        }
-
-        .interest-tag.selectable.selected {
-            background: rgba(0, 240, 255, 0.3);
-            border-color: var(--electric);
-        }
-
-        .interest-tag.selectable:hover {
-            background: rgba(0, 240, 255, 0.2);
-        }
-
-        /* Profile Page */
-        .profile-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .profile-avatar-large {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
-            margin: 0 auto 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            font-weight: 900;
-            color: var(--dark-950);
-            animation: glow 2s ease-in-out infinite;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-avatar-large .initial {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .profile-name {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .profile-email {
-            color: var(--text-gray);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        .profile-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .stat-box {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--electric);
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-
-        .profile-section {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-        }
-
-        /* Photo Upload Styles */
-        .photo-upload-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .upload-btn {
-            background: rgba(0, 240, 255, 0.1);
-            border: 2px dashed rgba(0, 240, 255, 0.3);
-            color: var(--electric);
-            padding: 15px 25px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
-        }
-
-        .upload-btn:hover {
-            background: rgba(0, 240, 255, 0.2);
-            border-color: var(--electric);
-        }
-
-        #profilePictureInput {
-            display: none;
-        }
-
-        .photos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .photo-item {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .photo-actions {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            display: flex;
-            gap: 5px;
-        }
-
-        .photo-action-btn {
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        /* Discover Page */
-        .discover-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .discover-header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .search-bar {
-            max-width: 600px;
-            margin: 0 auto 40px;
-            position: relative;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 16px 20px 16px 50px;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-light);
-        }
-
-        .search-bar i {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-gray);
-        }
-
-        .users-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .user-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .user-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0, 240, 255, 0.2);
-        }
-
-        .user-avatar {
-            height: 200px;
-            background: linear-gradient(135deg, var(--dark-800), var(--dark-900));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .user-avatar-initial {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--dark-950);
-        }
-
-        .user-info {
-            padding: 25px;
-        }
-
-        .user-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .user-age {
-            color: var(--electric);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .user-bio {
-            color: var(--text-gray);
-            margin-bottom: 20px;
-            line-height: 1.5;
-            font-size: 0.95rem;
-        }
-
-        .user-interests {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .user-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .user-actions .btn {
-            flex: 1;
-            padding: 10px;
-            font-size: 0.9rem;
+        .feature-card p {
+            color: #9AA0A6;
+            line-height: 1.6;
         }
 
         /* Footer */
         footer {
-            padding: 50px 20px 30px;
+            padding: 3rem 2rem;
             text-align: center;
             border-top: 1px solid rgba(0, 240, 255, 0.1);
-            background: rgba(10, 10, 10, 0.9);
-            margin-top: 80px;
+            background: rgba(10, 10, 10, 0.8);
         }
 
         .footer-content {
@@ -784,7 +605,7 @@
             font-weight: 900;
             margin-bottom: 25px;
             display: inline-block;
-            background: linear-gradient(135deg, var(--electric), var(--neon-pink));
+            background: linear-gradient(135deg, #00F0FF, #FF00C8);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -799,1593 +620,559 @@
         }
 
         .footer-links a {
-            color: var(--text-gray);
+            color: #9AA0A6;
             text-decoration: none;
             transition: color 0.3s;
             font-size: 0.95rem;
         }
 
         .footer-links a:hover {
-            color: var(--electric);
+            color: #00F0FF;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9AA0A6;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 240, 255, 0.1);
+            color: #00F0FF;
+            transform: translateY(-3px);
         }
 
         .copyright {
-            color: var(--text-gray);
+            color: #9AA0A6;
             margin-top: 25px;
             font-size: 0.9rem;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
             .header-content {
                 flex-direction: column;
-                gap: 15px;
-                padding: 0 15px;
+                gap: 1rem;
             }
-            
+
             nav {
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 1rem;
             }
-            
-            .profile-stats {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .users-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .auth-container {
-                padding: 25px;
-                margin: 0 15px;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.2rem;
+            .cta-buttons {
+                flex-direction: column;
             }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
+
             .btn {
-                padding: 12px 24px;
                 width: 100%;
                 max-width: 300px;
             }
             
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
+            .hero {
+                padding: 10rem 1rem 3rem;
             }
             
-            .feature-card {
-                padding: 25px;
+            .countdown-container {
+                gap: 10px;
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+                padding: 10px;
+            }
+            
+            .global-promotion-widget {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
             }
         }
     </style>
 </head>
 <body>
     <!-- ============================================
-         MAIN CONTENT - EVERYTHING IN ONE FILE
+         GLOBAL PROMOTION WIDGET (Fixed Bottom Right)
+         ============================================ -->
+    <div class="global-promotion-widget" id="promotionWidget">
+        <div class="promotion-header">
+            <h4>🚀 Share & Earn Rewards</h4>
+            <button class="close-promotion" onclick="closePromotionWidget()">×</button>
+        </div>
+        <div class="promotion-buttons">
+            <button class="promo-btn-small" onclick="shareOnTwitter()">
+                <i class="fab fa-twitter"></i> Twitter
+            </button>
+            <button class="promo-btn-small" onclick="shareOnFacebook()">
+                <i class="fab fa-facebook"></i> Facebook
+            </button>
+            <button class="promo-btn-small" onclick="shareOnWhatsApp()">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </button>
+            <button class="promo-btn-small" onclick="copyInviteLink()">
+                <i class="fas fa-link"></i> Copy Link
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         ADVANCED HOMEPAGE CONTENT
          ============================================ -->
     
     <!-- Animated Background -->
     <div class="animated-bg"></div>
     
-    <!-- Coming Soon Banner -->
-    <div class="coming-soon-banner">
-        🚀 VeXachat Platform - Launching Soon! Coming in 2025
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- LAUNCH BANNER - UPDATED TO 2026 -->
+    <div class="launch-banner">
+        🚀 VeXachat Platform - Official Launch Countdown: Coming in 2026!
     </div>
 
-    <!-- Header with User Menu -->
+    <!-- Header -->
     <header>
         <div class="header-content">
             <div class="logo">VeXachat</div>
-            <div class="user-menu" id="userMenu">
-                <!-- Will be populated by JavaScript -->
-            </div>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="/login">Sign In</a>
+                <a href="/signup" style="background: linear-gradient(135deg, #00F0FF, #FF00C8); padding: 0.5rem 1.5rem; border-radius: 8px; color: #0A0A0A;">Sign Up</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Notification Container -->
-    <div id="notificationContainer"></div>
-
-    <!-- Main Content Container -->
-    <div class="pages-container">
-        <!-- Home Page -->
-        <div id="home" class="page active">
-            <section class="hero">
-                <h1>Connect Beyond Limits</h1>
-                <p>Experience the future of social dating with immersive chat experiences and unlimited possibilities. Join our global community today.</p>
-                <div class="cta-buttons">
-                    <button class="btn btn-primary" onclick="showPage('signup')">Get Started Free</button>
-                    <button class="btn btn-secondary" onclick="showPage('discover')">Discover People</button>
-                </div>
-            </section>
-
-            <section class="stats-section">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <h3 id="totalUsers">0</h3>
-                        <p>Registered Users</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Connect Beyond Limits</h1>
+            <p>Experience the future of social dating with AI-powered matching, immersive chat experiences, and unlimited possibilities.</p>
+            
+            <!-- Countdown Timer to 2026 -->
+            <div class="countdown-timer">
+                <h3>🚀 Official Launch Countdown</h3>
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdown-days">0</div>
+                        <div class="countdown-label">Days</div>
                     </div>
-                    <div class="stat-item">
-                        <h3 id="activeUsers">0</h3>
-                        <p>Active Now</p>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdown-hours">0</div>
+                        <div class="countdown-label">Hours</div>
                     </div>
-                    <div class="stat-item">
-                        <h3 id="matchesMade">0</h3>
-                        <p>Matches Made</p>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdown-minutes">0</div>
+                        <div class="countdown-label">Minutes</div>
                     </div>
-                    <div class="stat-item">
-                        <h3>4.9/5</h3>
-                        <p>User Rating</p>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdown-seconds">0</div>
+                        <div class="countdown-label">Seconds</div>
                     </div>
                 </div>
-            </section>
-
-            <section class="features-section">
-                <h2 class="section-title">Powerful Features</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🤖</div>
-                        <h3>AI Matching</h3>
-                        <p>Our intelligent algorithm connects you with compatible people based on interests, personality, and preferences.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">💬</div>
-                        <h3>Unlimited Chat</h3>
-                        <p>Free text, voice, and video messaging with rich media support and real-time translation in 50+ languages.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎥</div>
-                        <h3>Video Rooms</h3>
-                        <p>Join group video sessions or private rooms for immersive conversations and virtual dating experiences.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🔒</div>
-                        <h3>Complete Privacy</h3>
-                        <p>End-to-end encryption and complete control over your data with advanced privacy settings.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🌍</div>
-                        <h3>Global Community</h3>
-                        <p>Connect with people from around the world. Our platform supports users from 150+ countries.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">⭐</div>
-                        <h3>Premium Support</h3>
-                        <p>24/7 customer support and access to certified relationship consultants for premium members.</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Login Page -->
-        <div id="login" class="page">
-            <div class="auth-container">
-                <h2 class="auth-title">Welcome Back</h2>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="loginEmail">Email Address</label>
-                        <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
-                </form>
-                <div class="form-link">
-                    <p>Don't have an account? <a href="#" onclick="showPage('signup')">Create Account</a></p>
+                <p style="margin-top: 15px; color: #9AA0A6; font-size: 0.9rem;">Launch Date: January 1, 2026</p>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="/signup" class="btn btn-primary">Get Started Free</a>
+                <a href="#features" class="btn btn-secondary">Explore Features</a>
+            </div>
+            
+            <!-- Share Section -->
+            <div class="share-section">
+                <p style="color: #9AA0A6; margin-bottom: 15px;">Share with friends and earn early access rewards!</p>
+                <div class="share-buttons">
+                    <button class="share-btn twitter" onclick="shareOnTwitter()">
+                        <i class="fab fa-twitter"></i> Share on Twitter
+                    </button>
+                    <button class="share-btn facebook" onclick="shareOnFacebook()">
+                        <i class="fab fa-facebook"></i> Share on Facebook
+                    </button>
+                    <button class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Share on WhatsApp
+                    </button>
+                    <button class="share-btn link" onclick="copyInviteLink()">
+                        <i class="fas fa-link"></i> Copy Invite Link
+                    </button>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Signup Page -->
-        <div id="signup" class="page">
-            <div class="auth-container">
-                <h2 class="auth-title">Create Account</h2>
-                <form id="signupForm">
-                    <div class="form-group">
-                        <label for="fullName">Full Name</label>
-                        <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="signupEmail">Email Address</label>
-                        <input type="email" id="signupEmail" class="form-control" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="signupAge">Age</label>
-                        <input type="number" id="signupAge" class="form-control" placeholder="Enter your age" min="18" max="100" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="signupPassword">Password</label>
-                        <input type="password" id="signupPassword" class="form-control" placeholder="Create a strong password" required minlength="6">
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Interests (Choose at least 3)</label>
-                        <div id="interestSelection">
-                            <span class="interest-tag selectable" data-interest="travel">Travel</span>
-                            <span class="interest-tag selectable" data-interest="music">Music</span>
-                            <span class="interest-tag selectable" data-interest="sports">Sports</span>
-                            <span class="interest-tag selectable" data-interest="technology">Technology</span>
-                            <span class="interest-tag selectable" data-interest="reading">Reading</span>
-                            <span class="interest-tag selectable" data-interest="cooking">Cooking</span>
-                            <span class="interest-tag selectable" data-interest="art">Art</span>
-                            <span class="interest-tag selectable" data-interest="photography">Photography</span>
-                            <span class="interest-tag selectable" data-interest="gaming">Gaming</span>
-                            <span class="interest-tag selectable" data-interest="fitness">Fitness</span>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
-                </form>
-                <div class="form-link">
-                    <p>Already have an account? <a href="#" onclick="showPage('login')">Sign In</a></p>
-                </div>
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>50K+</h3>
+                <p>Pre-registered Users</p>
+            </div>
+            <div class="stat-item">
+                <h3>1M+</h3>
+                <p>Expected Matches</p>
+            </div>
+            <div class="stat-item">
+                <h3>150+</h3>
+                <p>Countries Supported</p>
+            </div>
+            <div class="stat-item">
+                <h3>4.9/5</h3>
+                <p>Expected Rating</p>
             </div>
         </div>
+    </section>
 
-        <!-- Discover Page -->
-        <div id="discover" class="page">
-            <div class="discover-header">
-                <h1>Discover Amazing People</h1>
-                <p>Find and connect with interesting people from around the world</p>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2>Powerful Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI-Powered Matching</h3>
+                <p>Advanced algorithms that understand your preferences and connect you with compatible people instantly.</p>
             </div>
             
-            <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" class="form-control" placeholder="Search by name, interests, or location..." id="searchInput">
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Unlimited Messaging</h3>
+                <p>Free and premium chat options with rich media support, voice notes, and video calls.</p>
             </div>
             
-            <div class="users-grid" id="usersGrid">
-                <!-- Will be populated by JavaScript -->
+            <div class="feature-card">
+                <div class="feature-icon">🎥</div>
+                <h3>Live Video Rooms</h3>
+                <p>Join group video sessions or private rooms for intimate conversations without boundaries.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Privacy First</h3>
+                <p>End-to-end encryption, anonymous browsing, and complete control over your data.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Global Reach</h3>
+                <p>Connect with people worldwide with automatic translation and cultural matching.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>Expert Consultants</h3>
+                <p>Access professional relationship advisors and certified consultants for premium guidance.</p>
             </div>
         </div>
-
-        <!-- Profile Page -->
-        <div id="profile" class="page">
-            <div class="profile-header">
-                <div class="profile-avatar-large" id="profileAvatar">
-                    <div class="initial" id="profileInitial">?</div>
-                </div>
-                <h1 class="profile-name" id="profileName">User Profile</h1>
-                <p class="profile-email" id="profileEmail">user@example.com</p>
-                <p class="profile-age" id="profileAge">-- years old</p>
-                
-                <!-- Photo Upload Button -->
-                <div class="photo-upload-container">
-                    <label class="upload-btn" for="profilePictureInput">
-                        <i class="fas fa-camera"></i> Upload Profile Photo
-                    </label>
-                    <input type="file" id="profilePictureInput" accept="image/*" style="display: none">
-                </div>
-                
-                <button class="btn btn-secondary" onclick="showPage('discover')" style="margin-top: 20px;">
-                    <i class="fas fa-globe"></i> Discover More
-                </button>
-            </div>
-            
-            <div class="profile-stats">
-                <div class="stat-box">
-                    <div class="stat-number" id="profileViews">0</div>
-                    <div class="stat-label">Profile Views</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number" id="profileLikes">0</div>
-                    <div class="stat-label">Likes Received</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number" id="profileMatches">0</div>
-                    <div class="stat-label">Matches</div>
-                </div>
-            </div>
-            
-            <!-- My Photos Section -->
-            <div class="profile-section">
-                <h3 class="section-title">My Photos</h3>
-                <div class="photos-grid" id="userPhotosGrid">
-                    <!-- Will be populated by JavaScript -->
-                </div>
-                <div class="photo-upload-container" style="margin-top: 20px;">
-                    <label class="upload-btn" for="additionalPhotosInput">
-                        <i class="fas fa-plus"></i> Add More Photos
-                    </label>
-                    <input type="file" id="additionalPhotosInput" accept="image/*" multiple style="display: none">
-                </div>
-            </div>
-            
-            <div class="profile-section">
-                <h3 class="section-title">About Me</h3>
-                <p id="profileBio">No bio added yet. Click edit to add information about yourself.</p>
-                <button class="btn btn-secondary" onclick="editBio()" style="margin-top: 10px;">
-                    <i class="fas fa-edit"></i> Edit Bio
-                </button>
-            </div>
-            
-            <div class="profile-section">
-                <h3 class="section-title">My Interests</h3>
-                <div class="user-interests" id="profileInterests">
-                    <!-- Will be populated by JavaScript -->
-                </div>
-            </div>
-            
-            <div class="profile-section">
-                <h3 class="section-title">Recent Activity</h3>
-                <div id="recentActivity">
-                    <p>● Last login: Today</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">VeXachat</div>
             <div class="footer-links">
-                <a href="#" onclick="showPage('home')">Home</a>
-                <a href="#" onclick="showPage('discover')">Discover</a>
-                <a href="#" onclick="showPage('profile')">Profile</a>
-                <a href="#" onclick="showNotification('Privacy Policy (Coming Soon)', 'info')">Privacy</a>
-                <a href="#" onclick="showNotification('Terms of Service (Coming Soon)', 'info')">Terms</a>
-                <a href="#" onclick="showNotification('Contact: support@vexachat.com', 'info')">Contact</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#" onclick="showNotification('Privacy Policy - Coming Soon', 'info')">Privacy</a>
+                <a href="#" onclick="showNotification('Terms of Service - Coming Soon', 'info')">Terms</a>
+                <a href="mailto:vexa@vexachat.world">Contact</a>
             </div>
-            <p class="copyright">© 2025 VeXachat. All rights reserved. | Social Dating Platform</p>
+            
+            <!-- Social Links -->
+            <div class="social-links">
+                <a href="#" class="social-link" onclick="shareOnTwitter()">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link" onclick="shareOnFacebook()">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" class="social-link" onclick="shareOnInstagram()">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link" onclick="shareOnLinkedIn()">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            
+            <!-- Global Promotion Stats -->
+            <div style="margin: 20px 0; color: #9AA0A6; font-size: 0.9rem;">
+                <p>🌐 Global Launch: 2026 | 📍 Available Worldwide</p>
+                <p>🔗 Share this page and earn early access benefits!</p>
+            </div>
+            
+            <p class="copyright">&copy; 2024-2026 VeXachat. All rights reserved. | Advanced Social Dating Platform</p>
         </div>
     </footer>
 
     <!-- ============================================
-         COMPLETE USER SYSTEM - ALL IN ONE FILE
+         GLOBAL PROMOTION & SHARING SYSTEM
          ============================================ -->
     <script>
         // ============================================
-        // USER MANAGEMENT SYSTEM WITH LOCALSTORAGE
+        // COUNTDOWN TIMER TO 2026
         // ============================================
-        class UserSystem {
-            constructor() {
-                this.initDatabase();
+        function updateCountdown() {
+            const launchDate = new Date('January 1, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            if (distance < 0) {
+                document.getElementById('countdown-days').innerText = '0';
+                document.getElementById('countdown-hours').innerText = '0';
+                document.getElementById('countdown-minutes').innerText = '0';
+                document.getElementById('countdown-seconds').innerText = '0';
+                return;
             }
             
-            initDatabase() {
-                // Initialize database if not exists
-                if (!localStorage.getItem('vexachat_users')) {
-                    localStorage.setItem('vexachat_users', JSON.stringify([]));
-                }
-                
-                if (!localStorage.getItem('vexachat_current_user')) {
-                    localStorage.setItem('vexachat_current_user', JSON.stringify(null));
-                }
-                
-                if (!localStorage.getItem('vexachat_matches')) {
-                    localStorage.setItem('vexachat_matches', JSON.stringify([]));
-                }
-                
-                if (!localStorage.getItem('vexachat_likes')) {
-                    localStorage.setItem('vexachat_likes', JSON.stringify([]));
-                }
-                
-                if (!localStorage.getItem('vexachat_stats')) {
-                    localStorage.setItem('vexachat_stats', JSON.stringify({
-                        totalUsers: 0,
-                        activeUsers: 0,
-                        totalMatches: 0,
-                        totalMessages: 0
-                    }));
-                }
-                
-                // Generate demo users if no users exist
-                this.generateDemoUsers();
-            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
             
-            generateDemoUsers() {
-                const users = this.getAllUsers();
-                if (users.length === 0) {
-                    // English names with more female names as requested
-                    const demoUsers = [
-                        {
-                            id: 'demo1',
-                            fullName: 'Emma Johnson',
-                            email: 'emma@demo.com',
-                            age: 28,
-                            password: 'demo123',
-                            interests: ['travel', 'photography', 'yoga'],
-                            bio: 'Marketing professional who loves traveling and capturing moments. Looking for meaningful connections.',
-                            avatarInitial: 'E',
-                            profilePicture: null,
-                            photos: [],
-                            joinDate: new Date().toISOString(),
-                            profileViews: 45,
-                            likesReceived: 12,
-                            matches: 3,
-                            location: 'New York, USA',
-                            isDemo: true
-                        },
-                        {
-                            id: 'demo2',
-                            fullName: 'Sophia Williams',
-                            email: 'sophia@demo.com',
-                            age: 25,
-                            password: 'demo123',
-                            interests: ['art', 'music', 'reading'],
-                            bio: 'Art director and classical music enthusiast. Enjoy painting and visiting museums.',
-                            avatarInitial: 'S',
-                            profilePicture: null,
-                            photos: [],
-                            joinDate: new Date().toISOString(),
-                            profileViews: 67,
-                            likesReceived: 18,
-                            matches: 5,
-                            location: 'London, UK',
-                            isDemo: true
-                        },
-                        {
-                            id: 'demo3',
-                            fullName: 'Olivia Brown',
-                            email: 'olivia@demo.com',
-                            age: 30,
-                            password: 'demo123',
-                            interests: ['fitness', 'cooking', 'hiking'],
-                            bio: 'Personal trainer and food blogger. Passionate about healthy living and outdoor adventures.',
-                            avatarInitial: 'O',
-                            profilePicture: null,
-                            photos: [],
-                            joinDate: new Date().toISOString(),
-                            profileViews: 32,
-                            likesReceived: 8,
-                            matches: 2,
-                            location: 'Los Angeles, USA',
-                            isDemo: true
-                        },
-                        {
-                            id: 'demo4',
-                            fullName: 'Ava Davis',
-                            email: 'ava@demo.com',
-                            age: 26,
-                            password: 'demo123',
-                            interests: ['technology', 'gaming', 'travel'],
-                            bio: 'Software developer and gaming enthusiast. Love exploring new technologies and cultures.',
-                            avatarInitial: 'A',
-                            profilePicture: null,
-                            photos: [],
-                            joinDate: new Date().toISOString(),
-                            profileViews: 89,
-                            likesReceived: 25,
-                            matches: 7,
-                            location: 'Toronto, Canada',
-                            isDemo: true
-                        },
-                        {
-                            id: 'demo5',
-                            fullName: 'Isabella Martinez',
-                            email: 'isabella@demo.com',
-                            age: 27,
-                            password: 'demo123',
-                            interests: ['fashion', 'dance', 'photography'],
-                            bio: 'Fashion designer and professional dancer. Creative soul looking for inspiration and connection.',
-                            avatarInitial: 'I',
-                            profilePicture: null,
-                            photos: [],
-                            joinDate: new Date().toISOString(),
-                            profileViews: 54,
-                            likesReceived: 15,
-                            matches: 4,
-                            location: 'Madrid, Spain',
-                            isDemo: true
-                        },
-                        {
-                            id: 'demo6',
-                            fullName: 'Mia Garcia',
-                            email: 'mia@demo.com',
-                            age: 29,
-                            password: 'demo123',
-                            interests: ['writing', 'yoga', 'meditation'],
-                            bio: 'Author and mindfulness coach. Helping people find peace and write their stories.',
-                            avatarInitial: 'M',
-                            profilePicture: null,
-                            photos: [],
-                            joinDate: new Date().toISOString(),
-                            profileViews: 41,
-                            likesReceived: 11,
-                            matches: 3,
-                            location: 'Sydney, Australia',
-                            isDemo: true
-                        },
-                        {
-                            id: 'demo7',
-                            fullName: 'Charlotte Wilson',
-                            email: 'charlotte@demo.com',
-                            age: 24,
-                            password: 'demo123',
-                            interests: ['sports', 'travel', 'music'],
-                            bio: 'Professional athlete and travel blogger. Always on the move and seeking new adventures.',
-                            avatarInitial: 'C',
-                            profilePicture: null,
-                            photos: [],
-                            joinDate: new Date().toISOString(),
-                            profileViews: 72,
-                            likesReceived: 21,
-                            matches: 6,
-                            location: 'Paris, France',
-                            isDemo: true
-                        },
-                        {
-                            id: 'demo8',
-                            fullName: 'Amelia Taylor',
-                            email: 'amelia@demo.com',
-                            age: 31,
-                            password: 'demo123',
-                            interests: ['business', 'networking', 'technology'],
-                            bio: 'Entrepreneur and startup advisor. Passionate about innovation and building meaningful connections.',
-                            avatarInitial: 'A',
-                            profilePicture: null,
-                            photos: [],
-                            joinDate: new Date().toISOString(),
-                            profileViews: 63,
-                            likesReceived: 17,
-                            matches: 5,
-                            location: 'Berlin, Germany',
-                            isDemo: true
-                        },
-                        {
-                            id: 'demo9',
-                            fullName: 'Lily Anderson',
-                            email: 'lily@demo.com',
-                            age: 26,
-                            password: 'demo123',
-                            interests: ['animals', 'nature', 'photography'],
-                            bio: 'Veterinarian and wildlife photographer. Animal lover exploring the beauty of nature.',
-                            avatarInitial: 'L',
-                            profilePicture: null,
-                            photos: [],
-                            joinDate: new Date().toISOString(),
-                            profileViews: 48,
-                            likesReceived: 13,
-                            matches: 4,
-                            location: 'Vancouver, Canada',
-                            isDemo: true
-                        },
-                        {
-                            id: 'demo10',
-                            fullName: 'Harper Thomas',
-                            email: 'harper@demo.com',
-                            age: 28,
-                            password: 'demo123',
-                            interests: ['music', 'art', 'cooking'],
-                            bio: 'Musician and culinary artist. Creating melodies and delicious meals.',
-                            avatarInitial: 'H',
-                            profilePicture: null,
-                            photos: [],
-                            joinDate: new Date().toISOString(),
-                            profileViews: 56,
-                            likesReceived: 16,
-                            matches: 4,
-                            location: 'Tokyo, Japan',
-                            isDemo: true
-                        }
-                    ];
-                    
-                    demoUsers.forEach(user => {
-                        users.push(user);
-                    });
-                    
-                    this.saveAllUsers(users);
-                    this.updateStats();
-                }
-            }
+            document.getElementById('countdown-days').innerText = days;
+            document.getElementById('countdown-hours').innerText = hours;
+            document.getElementById('countdown-minutes').innerText = minutes;
+            document.getElementById('countdown-seconds').innerText = seconds;
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // ============================================
+        // GLOBAL SHARING FUNCTIONS
+        // ============================================
+        function shareOnTwitter() {
+            const text = encodeURIComponent("🚀 Excited for VeXachat - Advanced social dating platform launching in 2026! AI-powered matching, video chat rooms, and global community. Join the waitlist!");
+            const url = encodeURIComponent("https://vexachat.world");
+            const hashtags = encodeURIComponent("datingapp,socialdating,AI,2026launch");
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=${hashtags}`, '_blank');
+            trackShare('twitter');
+        }
+
+        function shareOnFacebook() {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent("https://vexachat.world")}`, '_blank');
+            trackShare('facebook');
+        }
+
+        function shareOnWhatsApp() {
+            const text = encodeURIComponent("Check out VeXachat! 🚀 Advanced social dating platform launching in 2026 with AI matching and video chat rooms. Join the waitlist: https://vexachat.world");
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+            trackShare('whatsapp');
+        }
+
+        function shareOnInstagram() {
+            alert('📸 Share on Instagram: Take a screenshot of this page and tag us! #VeXachat2026');
+            trackShare('instagram');
+        }
+
+        function shareOnLinkedIn() {
+            const text = encodeURIComponent("VeXachat - Advanced Social Dating Platform");
+            const url = encodeURIComponent("https://vexachat.world");
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+            trackShare('linkedin');
+        }
+
+        function copyInviteLink() {
+            const link = "https://vexachat.world?ref=earlyaccess2026";
+            navigator.clipboard.writeText(link).then(() => {
+                showNotification('✅ Invite link copied! Share it with friends for early access benefits.');
+            });
+            trackShare('copy_link');
+        }
+
+        // ============================================
+        // TRACKING AND ANALYTICS
+        // ============================================
+        function trackShare(platform) {
+            console.log(`[Global Promotion] Shared on: ${platform}`);
             
-            // ============================================
-            // USER OPERATIONS
-            // ============================================
-            registerUser(userData) {
-                const users = this.getAllUsers();
-                
-                // Check if email already exists
-                if (users.some(u => u.email.toLowerCase() === userData.email.toLowerCase())) {
-                    return { success: false, message: 'Email already registered' };
-                }
-                
-                // Validate password strength
-                if (userData.password.length < 6) {
-                    return { success: false, message: 'Password must be at least 6 characters' };
-                }
-                
-                // Create unique ID
-                userData.id = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                userData.joinDate = new Date().toISOString();
-                userData.profileViews = 0;
-                userData.likesReceived = 0;
-                userData.matches = 0;
-                userData.isDemo = false;
-                userData.location = 'Not specified';
-                userData.bio = userData.bio || 'Hello! I\'m new to VeXachat.';
-                userData.avatarInitial = userData.fullName.charAt(0).toUpperCase();
-                userData.profilePicture = null;
-                userData.photos = [];
-                
-                users.push(userData);
-                this.saveAllUsers(users);
-                
-                // Update statistics
-                this.updateStats();
-                
-                return { success: true, user: userData };
-            }
+            // Save to localStorage for analytics
+            const shares = JSON.parse(localStorage.getItem('vexachat_shares') || '{}');
+            shares[platform] = (shares[platform] || 0) + 1;
+            localStorage.setItem('vexachat_shares', JSON.stringify(shares));
             
-            loginUser(email, password) {
-                const users = this.getAllUsers();
-                const user = users.find(u => 
-                    u.email.toLowerCase() === email.toLowerCase() && 
-                    u.password === password
-                );
-                
-                if (user) {
-                    this.setCurrentUser(user);
-                    return { success: true, user };
-                }
-                
-                return { success: false, message: 'Invalid email or password' };
-            }
+            // Update share counter display
+            updateShareCounter();
+        }
+
+        function updateShareCounter() {
+            const shares = JSON.parse(localStorage.getItem('vexachat_shares') || '{}');
+            const totalShares = Object.values(shares).reduce((a, b) => a + b, 0);
             
-            logoutUser() {
-                this.setCurrentUser(null);
-                return { success: true };
-            }
-            
-            getCurrentUser() {
-                return JSON.parse(localStorage.getItem('vexachat_current_user'));
-            }
-            
-            setCurrentUser(user) {
-                localStorage.setItem('vexachat_current_user', JSON.stringify(user));
-                this.updateUserMenu();
-            }
-            
-            updateUser(userId, updates) {
-                const users = this.getAllUsers();
-                const index = users.findIndex(u => u.id === userId);
-                
-                if (index !== -1) {
-                    users[index] = { ...users[index], ...updates };
-                    this.saveAllUsers(users);
-                    
-                    // Update current user if it's the same user
-                    const currentUser = this.getCurrentUser();
-                    if (currentUser && currentUser.id === userId) {
-                        this.setCurrentUser(users[index]);
-                    }
-                    
-                    return { success: true, user: users[index] };
-                }
-                
-                return { success: false, message: 'User not found' };
-            }
-            
-            // Photo Management
-            addUserPhoto(userId, photoData) {
-                const users = this.getAllUsers();
-                const userIndex = users.findIndex(u => u.id === userId);
-                
-                if (userIndex !== -1) {
-                    if (!users[userIndex].photos) {
-                        users[userIndex].photos = [];
-                    }
-                    
-                    // Generate unique photo ID
-                    const photoId = 'photo_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                    const photo = {
-                        id: photoId,
-                        data: photoData,
-                        uploadedAt: new Date().toISOString()
-                    };
-                    
-                    users[userIndex].photos.push(photo);
-                    
-                    // If this is the first photo, set it as profile picture
-                    if (users[userIndex].photos.length === 1) {
-                        users[userIndex].profilePicture = photoData;
-                    }
-                    
-                    this.saveAllUsers(users);
-                    
-                    // Update current user
-                    const currentUser = this.getCurrentUser();
-                    if (currentUser && currentUser.id === userId) {
-                        this.setCurrentUser(users[userIndex]);
-                    }
-                    
-                    return { success: true, photo };
-                }
-                
-                return { success: false, message: 'User not found' };
-            }
-            
-            removeUserPhoto(userId, photoId) {
-                const users = this.getAllUsers();
-                const userIndex = users.findIndex(u => u.id === userId);
-                
-                if (userIndex !== -1 && users[userIndex].photos) {
-                    const photoIndex = users[userIndex].photos.findIndex(p => p.id === photoId);
-                    
-                    if (photoIndex !== -1) {
-                        // Check if this photo is the profile picture
-                        const photoData = users[userIndex].photos[photoIndex].data;
-                        if (users[userIndex].profilePicture === photoData) {
-                            // Set profile picture to null or next available photo
-                            users[userIndex].profilePicture = users[userIndex].photos.length > 1 ? 
-                                users[userIndex].photos[0].data : null;
-                        }
-                        
-                        users[userIndex].photos.splice(photoIndex, 1);
-                        this.saveAllUsers(users);
-                        
-                        // Update current user
-                        const currentUser = this.getCurrentUser();
-                        if (currentUser && currentUser.id === userId) {
-                            this.setCurrentUser(users[userIndex]);
-                        }
-                        
-                        return { success: true };
-                    }
-                }
-                
-                return { success: false, message: 'Photo not found' };
-            }
-            
-            setProfilePicture(userId, photoData) {
-                const users = this.getAllUsers();
-                const userIndex = users.findIndex(u => u.id === userId);
-                
-                if (userIndex !== -1) {
-                    users[userIndex].profilePicture = photoData;
-                    this.saveAllUsers(users);
-                    
-                    // Update current user
-                    const currentUser = this.getCurrentUser();
-                    if (currentUser && currentUser.id === userId) {
-                        this.setCurrentUser(users[userIndex]);
-                    }
-                    
-                    return { success: true };
-                }
-                
-                return { success: false, message: 'User not found' };
-            }
-            
-            getAllUsers() {
-                return JSON.parse(localStorage.getItem('vexachat_users')) || [];
-            }
-            
-            saveAllUsers(users) {
-                localStorage.setItem('vexachat_users', JSON.stringify(users));
-            }
-            
-            // ============================================
-            // LIKE & MATCH SYSTEM
-            // ============================================
-            likeUser(userId, targetUserId) {
-                const likes = JSON.parse(localStorage.getItem('vexachat_likes')) || [];
-                
-                // Check if like already exists
-                const existingLike = likes.find(like => 
-                    like.userId === userId && like.targetUserId === targetUserId
-                );
-                
-                if (existingLike) {
-                    return { success: false, message: 'You already liked this user' };
-                }
-                
-                // Add new like
-                likes.push({
-                    id: 'like_' + Date.now(),
-                    userId,
-                    targetUserId,
-                    timestamp: new Date().toISOString()
-                });
-                
-                localStorage.setItem('vexachat_likes', JSON.stringify(likes));
-                
-                // Increment likes received for target user
-                this.incrementLikes(targetUserId);
-                
-                // Check for mutual like (match)
-                const mutualLike = likes.find(like => 
-                    like.userId === targetUserId && like.targetUserId === userId
-                );
-                
-                if (mutualLike) {
-                    this.createMatch(userId, targetUserId);
-                    return { 
-                        success: true, 
-                        message: 'It\'s a match! You both like each other!',
-                        isMatch: true 
-                    };
-                }
-                
-                return { 
-                    success: true, 
-                    message: 'Like sent successfully',
-                    isMatch: false 
-                };
-            }
-            
-            incrementLikes(userId) {
-                const users = this.getAllUsers();
-                const userIndex = users.findIndex(u => u.id === userId);
-                
-                if (userIndex !== -1) {
-                    users[userIndex].likesReceived = (users[userIndex].likesReceived || 0) + 1;
-                    this.saveAllUsers(users);
-                }
-            }
-            
-            createMatch(userId1, userId2) {
-                const matches = JSON.parse(localStorage.getItem('vexachat_matches')) || [];
-                
-                // Check if match already exists
-                const existingMatch = matches.find(match => 
-                    (match.user1Id === userId1 && match.user2Id === userId2) ||
-                    (match.user1Id === userId2 && match.user2Id === userId1)
-                );
-                
-                if (existingMatch) {
-                    return { success: false, message: 'Match already exists' };
-                }
-                
-                // Create new match
-                const match = {
-                    id: 'match_' + Date.now(),
-                    user1Id: userId1,
-                    user2Id: userId2,
-                    createdAt: new Date().toISOString(),
-                    lastActivity: new Date().toISOString()
-                };
-                
-                matches.push(match);
-                localStorage.setItem('vexachat_matches', JSON.stringify(matches));
-                
-                // Increment match count for both users
-                this.incrementMatches(userId1);
-                this.incrementMatches(userId2);
-                
-                // Update statistics
-                this.updateStats();
-                
-                return { success: true, match };
-            }
-            
-            incrementMatches(userId) {
-                const users = this.getAllUsers();
-                const userIndex = users.findIndex(u => u.id === userId);
-                
-                if (userIndex !== -1) {
-                    users[userIndex].matches = (users[userIndex].matches || 0) + 1;
-                    this.saveAllUsers(users);
-                }
-            }
-            
-            // ============================================
-            // STATISTICS
-            // ============================================
-            updateStats() {
-                const users = this.getAllUsers();
-                const matches = JSON.parse(localStorage.getItem('vexachat_matches')) || [];
-                
-                const stats = {
-                    totalUsers: users.length,
-                    activeUsers: Math.floor(Math.random() * 100) + 50, // Simulated active users
-                    totalMatches: matches.length,
-                    totalMessages: Math.floor(Math.random() * 10000) + 5000
-                };
-                
-                localStorage.setItem('vexachat_stats', JSON.stringify(stats));
-                return stats;
-            }
-            
-            getStats() {
-                const stats = JSON.parse(localStorage.getItem('vexachat_stats')) || this.updateStats();
-                const currentUser = this.getCurrentUser();
-                
-                return {
-                    ...stats,
-                    currentUser: currentUser
-                };
-            }
-            
-            // ============================================
-            // UI UPDATES
-            // ============================================
-            updateUserMenu() {
-                const userMenu = document.getElementById('userMenu');
-                const currentUser = this.getCurrentUser();
-                
-                if (currentUser) {
-                    userMenu.innerHTML = `
-                        <nav>
-                            <a href="#" onclick="showPage('home')" ${window.currentPage === 'home' ? 'class="active"' : ''}>Home</a>
-                            <a href="#" onclick="showPage('discover')" ${window.currentPage === 'discover' ? 'class="active"' : ''}>Discover</a>
-                            <a href="#" onclick="showPage('profile')" ${window.currentPage === 'profile' ? 'class="active"' : ''}>My Profile</a>
-                        </nav>
-                        <div class="user-avatar-small" onclick="showPage('profile')" title="${currentUser.fullName}"
-                             style="${currentUser.profilePicture ? `background-image: url('${currentUser.profilePicture}')` : ''}">
-                            ${currentUser.profilePicture ? '' : currentUser.avatarInitial}
-                        </div>
-                        <button class="btn-logout" onclick="logout()">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </button>
-                    `;
-                } else {
-                    userMenu.innerHTML = `
-                        <nav>
-                            <a href="#" onclick="showPage('home')" ${window.currentPage === 'home' ? 'class="active"' : ''}>Home</a>
-                            <a href="#" onclick="showPage('login')" ${window.currentPage === 'login' ? 'class="active"' : ''}>Login</a>
-                            <a href="#" onclick="showPage('signup')" ${window.currentPage === 'signup' ? 'class="active"' : ''}>Sign Up</a>
-                        </nav>
-                    `;
-                }
+            // You can display this somewhere if needed
+            if (totalShares > 0) {
+                console.log(`Total shares: ${totalShares}`);
             }
         }
 
         // ============================================
-        // INITIALIZE SYSTEM
-        // ============================================
-        const userSystem = new UserSystem();
-        window.currentPage = 'home';
-
-        // ============================================
-        // HELPER FUNCTIONS
+        // NOTIFICATION SYSTEM
         // ============================================
         function showNotification(message, type = 'info') {
-            const container = document.getElementById('notificationContainer');
-            
+            // Create notification element
             const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? 'rgba(0, 255, 159, 0.9)' : 
+                           type === 'error' ? 'rgba(255, 71, 87, 0.9)' : 
+                           'rgba(0, 240, 255, 0.9)'};
+                color: ${type === 'success' ? '#0A0A0A' : 'white'};
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+                backdrop-filter: blur(10px);
+                border: 1px solid ${type === 'success' ? 'rgba(0, 255, 159, 0.5)' : 
+                          type === 'error' ? 'rgba(255, 71, 87, 0.5)' : 
+                          'rgba(0, 240, 255, 0.5)'};
+                max-width: 300px;
+            `;
             notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-                <span>${message}</span>
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                 type === 'error' ? 'exclamation-circle' : 
+                                 'info-circle'}"></i>
+                <span style="margin-left: 10px;">${message}</span>
             `;
             
-            container.appendChild(notification);
+            document.body.appendChild(notification);
             
-            // Remove notification after 5 seconds
+            // Remove after 5 seconds
             setTimeout(() => {
-                notification.style.animation = 'slideDown 0.3s ease reverse';
+                notification.style.animation = 'slideInRight 0.3s ease reverse';
                 setTimeout(() => {
-                    container.removeChild(notification);
+                    document.body.removeChild(notification);
                 }, 300);
             }, 5000);
         }
 
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
+        // ============================================
+        // PROMOTION WIDGET MANAGEMENT
+        // ============================================
+        function closePromotionWidget() {
+            const widget = document.getElementById('promotionWidget');
+            widget.style.animation = 'slideInRight 0.3s ease reverse';
+            setTimeout(() => {
+                widget.style.display = 'none';
+            }, 300);
             
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            window.currentPage = pageId;
-            
-            // Update user menu
-            userSystem.updateUserMenu();
-            
-            // Update page content as needed
-            if (pageId === 'home') {
-                updateHomeStats();
-            } else if (pageId === 'discover') {
-                loadDiscoverUsers();
-            } else if (pageId === 'profile') {
-                loadProfile();
-                loadUserPhotos();
-            }
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Save preference to localStorage
+            localStorage.setItem('vexachat_widget_closed', 'true');
         }
 
-        function updateHomeStats() {
-            const stats = userSystem.getStats();
-            
-            document.getElementById('totalUsers').textContent = stats.totalUsers;
-            document.getElementById('activeUsers').textContent = stats.activeUsers;
-            document.getElementById('matchesMade').textContent = stats.totalMatches;
-        }
-
-        function loadDiscoverUsers() {
-            const usersGrid = document.getElementById('usersGrid');
-            const currentUser = userSystem.getCurrentUser();
-            const allUsers = userSystem.getAllUsers();
-            
-            // Filter out current user from list
-            const otherUsers = allUsers.filter(user => 
-                !currentUser || user.id !== currentUser.id
-            );
-            
-            usersGrid.innerHTML = '';
-            
-            otherUsers.forEach(user => {
-                const userCard = document.createElement('div');
-                userCard.className = 'user-card';
-                
-                // Set background image if user has profile picture
-                const avatarStyle = user.profilePicture ? 
-                    `background-image: url('${user.profilePicture}')` : 
-                    '';
-                
-                userCard.innerHTML = `
-                    <div class="user-avatar" style="${avatarStyle}">
-                        ${!user.profilePicture ? `
-                            <div class="user-avatar-initial">${user.avatarInitial || user.fullName.charAt(0)}</div>
-                        ` : ''}
-                    </div>
-                    <div class="user-info">
-                        <h3 class="user-name">${user.fullName}</h3>
-                        <p class="user-age">${user.age} years old</p>
-                        <p class="user-bio">${user.bio || 'No bio added yet'}</p>
-                        <div class="user-interests">
-                            ${(user.interests || []).slice(0, 3).map(interest => 
-                                `<span class="interest-tag">${interest}</span>`
-                            ).join('')}
-                            ${(user.interests || []).length > 3 ? 
-                                `<span class="interest-tag">+${(user.interests || []).length - 3}</span>` : ''}
-                        </div>
-                        <div class="user-actions">
-                            <button class="btn btn-primary" onclick="viewUserProfile('${user.id}')">View Profile</button>
-                            <button class="btn btn-secondary" onclick="likeUser('${user.id}')">
-                                <i class="fas fa-heart"></i> Like
-                            </button>
-                        </div>
-                    </div>
-                `;
-                usersGrid.appendChild(userCard);
-            });
-        }
-
-        function loadProfile() {
-            const currentUser = userSystem.getCurrentUser();
-            
-            if (currentUser) {
-                // Set profile avatar
-                const profileAvatar = document.getElementById('profileAvatar');
-                const profileInitial = document.getElementById('profileInitial');
-                
-                if (currentUser.profilePicture) {
-                    profileAvatar.style.backgroundImage = `url('${currentUser.profilePicture}')`;
-                    profileInitial.style.display = 'none';
-                } else {
-                    profileAvatar.style.backgroundImage = '';
-                    profileInitial.textContent = currentUser.avatarInitial || currentUser.fullName.charAt(0);
-                    profileInitial.style.display = 'flex';
-                }
-                
-                document.getElementById('profileName').textContent = currentUser.fullName;
-                document.getElementById('profileEmail').textContent = currentUser.email;
-                document.getElementById('profileAge').textContent = `${currentUser.age} years old`;
-                document.getElementById('profileBio').textContent = 
-                    currentUser.bio || 'No bio added yet. Click edit to add information about yourself.';
-                
-                document.getElementById('profileViews').textContent = currentUser.profileViews || 0;
-                document.getElementById('profileLikes').textContent = currentUser.likesReceived || 0;
-                document.getElementById('profileMatches').textContent = currentUser.matches || 0;
-                
-                // Update interests
-                const interestsContainer = document.getElementById('profileInterests');
-                interestsContainer.innerHTML = '';
-                
-                (currentUser.interests || []).forEach(interest => {
-                    const tag = document.createElement('span');
-                    tag.className = 'interest-tag';
-                    tag.textContent = interest;
-                    interestsContainer.appendChild(tag);
-                });
-            } else {
-                // If user is not logged in, show message
-                document.getElementById('profileName').textContent = 'Guest';
-                document.getElementById('profileEmail').textContent = 'Please login to view your profile';
-                document.getElementById('profileBio').textContent = 'Sign in to view your profile and settings';
-                
-                showNotification('Please login to view your profile', 'error');
-                setTimeout(() => showPage('login'), 1000);
-            }
-        }
-
-        function loadUserPhotos() {
-            const currentUser = userSystem.getCurrentUser();
-            const photosGrid = document.getElementById('userPhotosGrid');
-            
-            if (!currentUser || !photosGrid) return;
-            
-            photosGrid.innerHTML = '';
-            
-            // Add profile picture if exists
-            if (currentUser.profilePicture) {
-                const photoItem = document.createElement('div');
-                photoItem.className = 'photo-item';
-                photoItem.innerHTML = `
-                    <img src="${currentUser.profilePicture}" alt="Profile picture">
-                    <div class="photo-actions">
-                        <button class="photo-action-btn" title="Profile Picture" style="background: var(--success);">
-                            <i class="fas fa-crown"></i>
-                        </button>
-                    </div>
-                    <div style="position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.7); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem;">
-                        Main
-                    </div>
-                `;
-                photosGrid.appendChild(photoItem);
-            }
-            
-            // Add other photos
-            if (currentUser.photos && currentUser.photos.length > 0) {
-                currentUser.photos.forEach(photo => {
-                    // Skip if this is the profile picture
-                    if (photo.data === currentUser.profilePicture) return;
-                    
-                    const photoItem = document.createElement('div');
-                    photoItem.className = 'photo-item';
-                    photoItem.innerHTML = `
-                        <img src="${photo.data}" alt="User photo">
-                        <div class="photo-actions">
-                            <button class="photo-action-btn" title="Set as Profile" onclick="setAsProfilePicture('${photo.id}')">
-                                <i class="fas fa-user-circle"></i>
-                            </button>
-                            <button class="photo-action-btn" title="Delete" onclick="deletePhoto('${photo.id}')">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    `;
-                    photosGrid.appendChild(photoItem);
-                });
-            }
-            
-            // If no photos, show message
-            if (photosGrid.children.length === 0) {
-                photosGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--text-gray);">No photos yet. Upload some photos!</p>';
-            }
-        }
-
-        function handleProfilePictureUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            // Check file size (max 5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                showNotification('File size too large. Maximum size is 5MB.', 'error');
-                return;
-            }
-            
-            // Check file type
-            if (!file.type.match('image.*')) {
-                showNotification('Please select an image file.', 'error');
-                return;
-            }
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const currentUser = userSystem.getCurrentUser();
-                if (!currentUser) {
-                    showNotification('Please login to upload photos', 'error');
-                    return;
-                }
-                
-                // Add photo to user's photos
-                const result = userSystem.addUserPhoto(currentUser.id, e.target.result);
-                
-                if (result.success) {
-                    showNotification('Profile picture uploaded successfully!', 'success');
-                    loadProfile();
-                    loadUserPhotos();
-                }
-            };
-            
-            reader.readAsDataURL(file);
-            event.target.value = ''; // Reset input
-        }
-
-        function handleAdditionalPhotosUpload(event) {
-            const files = event.target.files;
-            if (!files || files.length === 0) return;
-            
-            const currentUser = userSystem.getCurrentUser();
-            if (!currentUser) {
-                showNotification('Please login to upload photos', 'error');
-                return;
-            }
-            
-            let uploadedCount = 0;
-            let errorCount = 0;
-            
-            Array.from(files).forEach((file, index) => {
-                // Check file size (max 5MB)
-                if (file.size > 5 * 1024 * 1024) {
-                    errorCount++;
-                    return;
-                }
-                
-                // Check file type
-                if (!file.type.match('image.*')) {
-                    errorCount++;
-                    return;
-                }
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    userSystem.addUserPhoto(currentUser.id, e.target.result);
-                    uploadedCount++;
-                    
-                    // If this is the last file, show notification
-                    if (uploadedCount + errorCount === files.length) {
-                        let message = `Successfully uploaded ${uploadedCount} photo(s).`;
-                        if (errorCount > 0) {
-                            message += ` ${errorCount} photo(s) failed (max size: 5MB, images only).`;
-                        }
-                        showNotification(message, uploadedCount > 0 ? 'success' : 'error');
-                        loadUserPhotos();
-                    }
-                };
-                
-                reader.readAsDataURL(file);
-            });
-            
-            event.target.value = ''; // Reset input
-        }
-
-        function setAsProfilePicture(photoId) {
-            const currentUser = userSystem.getCurrentUser();
-            if (!currentUser || !currentUser.photos) return;
-            
-            const photo = currentUser.photos.find(p => p.id === photoId);
-            if (!photo) return;
-            
-            userSystem.setProfilePicture(currentUser.id, photo.data);
-            showNotification('Profile picture updated!', 'success');
-            loadProfile();
-            loadUserPhotos();
-        }
-
-        function deletePhoto(photoId) {
-            if (!confirm('Are you sure you want to delete this photo?')) return;
-            
-            const currentUser = userSystem.getCurrentUser();
-            if (!currentUser) return;
-            
-            const result = userSystem.removeUserPhoto(currentUser.id, photoId);
-            
-            if (result.success) {
-                showNotification('Photo deleted successfully', 'success');
-                loadProfile();
-                loadUserPhotos();
-            }
-        }
-
-        function editBio() {
-            const currentUser = userSystem.getCurrentUser();
-            if (!currentUser) return;
-            
-            const newBio = prompt('Edit your bio:', currentUser.bio || '');
-            if (newBio !== null) {
-                userSystem.updateUser(currentUser.id, { bio: newBio });
-                showNotification('Bio updated successfully!', 'success');
-                loadProfile();
-            }
-        }
-
-        function viewUserProfile(userId) {
-            const users = userSystem.getAllUsers();
-            const user = users.find(u => u.id === userId);
-            
-            if (user) {
-                showNotification(`Viewing ${user.fullName}'s profile`, 'info');
-                
-                // Increment profile views
-                userSystem.updateUser(userId, {
-                    profileViews: (user.profileViews || 0) + 1
-                });
-                
-                // Show user profile in modal
-                let profileContent = `
-                    <div style="max-width: 500px; margin: 0 auto; text-align: center;">
-                        <div style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 20px; 
-                             ${user.profilePicture ? `background-image: url('${user.profilePicture}'); background-size: cover; background-position: center;` : 
-                             `background: linear-gradient(135deg, var(--electric), var(--neon-pink)); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; color: var(--dark-950);`}">
-                            ${!user.profilePicture ? (user.avatarInitial || user.fullName.charAt(0)) : ''}
-                        </div>
-                        <h2 style="color: var(--electric); margin-bottom: 10px;">${user.fullName}</h2>
-                        <p><strong>Age:</strong> ${user.age}</p>
-                        <p><strong>Location:</strong> ${user.location || 'Not specified'}</p>
-                        <p><strong>Joined:</strong> ${new Date(user.joinDate).toLocaleDateString()}</p>
-                        <p><strong>Bio:</strong> ${user.bio || 'No bio added'}</p>
-                        <div style="margin-top: 20px;">
-                            <strong>Interests:</strong>
-                            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; justify-content: center;">
-                                ${(user.interests || []).map(interest => 
-                                    `<span style="background: rgba(0, 240, 255, 0.1); padding: 5px 12px; border-radius: 15px; font-size: 0.9rem;">${interest}</span>`
-                                ).join('')}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                alert(profileContent);
-            }
-        }
-
-        function likeUser(targetUserId) {
-            const currentUser = userSystem.getCurrentUser();
-            
-            if (!currentUser) {
-                showNotification('Please login to send likes', 'error');
-                showPage('login');
-                return;
-            }
-            
-            if (currentUser.id === targetUserId) {
-                showNotification('You cannot like yourself', 'error');
-                return;
-            }
-            
-            const result = userSystem.likeUser(currentUser.id, targetUserId);
-            
-            if (result.success) {
-                if (result.isMatch) {
-                    showNotification('🎉 MATCH! You both like each other!', 'success');
-                } else {
-                    showNotification('Like sent successfully!', 'success');
-                }
-                
-                // Update statistics
-                updateHomeStats();
-                
-                // Update profile if on profile page
-                if (window.currentPage === 'profile') {
-                    loadProfile();
-                }
-            } else {
-                showNotification(result.message, 'error');
-            }
-        }
-
-        function logout() {
-            userSystem.logoutUser();
-            showNotification('Logged out successfully', 'success');
-            showPage('home');
+        // Check if widget was previously closed
+        if (localStorage.getItem('vexachat_widget_closed') === 'true') {
+            document.getElementById('promotionWidget').style.display = 'none';
         }
 
         // ============================================
-        // FORM HANDLING
+        // PARTICLES GENERATION
         // ============================================
-        // Handle registration form
-        document.getElementById('signupForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const fullName = document.getElementById('fullName').value.trim();
-            const email = document.getElementById('signupEmail').value.trim();
-            const age = parseInt(document.getElementById('signupAge').value);
-            const password = document.getElementById('signupPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            
-            // Validate form data
-            if (!fullName || !email || !age || !password) {
-                showNotification('All fields are required', 'error');
-                return;
-            }
-            
-            if (age < 18 || age > 100) {
-                showNotification('Age must be between 18 and 100', 'error');
-                return;
-            }
-            
-            if (password.length < 6) {
-                showNotification('Password must be at least 6 characters', 'error');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showNotification('Passwords do not match', 'error');
-                return;
-            }
-            
-            // Collect selected interests
-            const selectedInterests = Array.from(
-                document.querySelectorAll('#interestSelection .selectable.selected')
-            ).map(el => el.dataset.interest);
-            
-            if (selectedInterests.length < 3) {
-                showNotification('Please select at least 3 interests', 'error');
-                return;
-            }
-            
-            // Create user data object
-            const userData = {
-                fullName,
-                email,
-                age,
-                password,
-                interests: selectedInterests,
-                bio: 'Hello! I\'m new to VeXachat and excited to meet new people!'
-            };
-            
-            // Register user
-            const result = userSystem.registerUser(userData);
-            
-            if (result.success) {
-                // Auto login after registration
-                const loginResult = userSystem.loginUser(email, password);
-                
-                if (loginResult.success) {
-                    showNotification('🎉 Account created successfully! Welcome to VeXachat!', 'success');
-                    setTimeout(() => {
-                        showPage('profile');
-                    }, 1500);
-                }
-            } else {
-                showNotification(result.message, 'error');
-            }
-        });
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
 
-        // Handle login form
-        document.getElementById('loginForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
             
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
+            // Random colors
+            const colors = ['rgba(0, 240, 255, 0.6)', 'rgba(255, 0, 200, 0.6)', 'rgba(181, 0, 255, 0.6)'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
             
-            if (!email || !password) {
-                showNotification('All fields are required', 'error');
-                return;
-            }
-            
-            const result = userSystem.loginUser(email, password);
-            
-            if (result.success) {
-                showNotification(`Welcome back ${result.user.fullName}!`, 'success');
-                setTimeout(() => {
-                    showPage('profile');
-                }, 1500);
-            } else {
-                showNotification(result.message, 'error');
-            }
-        });
+            particlesContainer.appendChild(particle);
+        }
 
-        // Handle interest selection
-        document.querySelectorAll('#interestSelection .selectable').forEach(tag => {
-            tag.addEventListener('click', function() {
-                this.classList.toggle('selected');
-                
-                if (this.classList.contains('selected')) {
-                    this.style.background = 'rgba(0, 240, 255, 0.3)';
-                    this.style.borderColor = 'var(--electric)';
-                } else {
-                    this.style.background = '';
-                    this.style.borderColor = '';
+        // ============================================
+        // SMOOTH SCROLL
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Handle photo uploads
-        document.getElementById('profilePictureInput')?.addEventListener('change', handleProfilePictureUpload);
-        document.getElementById('additionalPhotosInput')?.addEventListener('change', handleAdditionalPhotosUpload);
-
-        // Handle user search
-        document.getElementById('searchInput')?.addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            
-            if (searchTerm.length > 0) {
-                const userCards = document.querySelectorAll('.user-card');
-                
-                userCards.forEach(card => {
-                    const userName = card.querySelector('.user-name').textContent.toLowerCase();
-                    const userBio = card.querySelector('.user-bio').textContent.toLowerCase();
-                    const userInterests = card.querySelector('.user-interests').textContent.toLowerCase();
-                    
-                    if (userName.includes(searchTerm) || 
-                        userBio.includes(searchTerm) || 
-                        userInterests.includes(searchTerm)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            } else {
-                document.querySelectorAll('.user-card').forEach(card => {
-                    card.style.display = 'block';
-                });
+        // ============================================
+        // PARALLAX EFFECT
+        // ============================================
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - (scrolled / 800);
             }
         });
 
         // ============================================
-        // PAGE INITIALIZATION
+        // PAGE LOAD ANALYTICS
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Update user menu
-            userSystem.updateUserMenu();
+            console.log('🚀 VeXachat Advanced Homepage Loaded');
+            console.log('🌐 Global Promotion System: Active');
+            console.log('📅 Launch Countdown: 2026');
+            console.log('🔗 SEO Tags: Implemented');
+            console.log('✅ Google Search Console: Verified');
             
-            // Update statistics
-            updateHomeStats();
+            // Track page view
+            const pageViews = parseInt(localStorage.getItem('vexachat_page_views') || '0') + 1;
+            localStorage.setItem('vexachat_page_views', pageViews.toString());
+            console.log(`👁️ Page Views: ${pageViews}`);
             
-            // Set active page based on user status
-            const currentUser = userSystem.getCurrentUser();
-            if (!currentUser) {
-                showPage('home');
-            } else {
-                showPage('profile');
-            }
-            
-            // Log app information
-            console.log('🚀 VeXachat - Complete User System Initialized!');
-            console.log(`👥 Total Users: ${userSystem.getAllUsers().length}`);
-            console.log(`👩 Demo Users: 10 female users with English names`);
-            console.log(`📊 Stats: ${JSON.stringify(userSystem.getStats())}`);
+            // Initialize share counter
+            updateShareCounter();
         });
 
         // ============================================
-        // ADDITIONAL FEATURES
+        // AUTO-SHARE REMINDER (After 30 seconds)
         // ============================================
-        // Auto-update statistics every 30 seconds
-        setInterval(updateHomeStats, 30000);
-        
-        // Auto-refresh discover page every minute
-        setInterval(() => {
-            if (window.currentPage === 'discover') {
-                loadDiscoverUsers();
+        setTimeout(() => {
+            if (Math.random() > 0.7) { // 30% chance
+                showNotification('🌟 Love VeXachat? Share it with friends for early access rewards!', 'info');
             }
-        }, 60000);
+        }, 30000);
 
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Ctrl+H for Home
-            if (e.ctrlKey && e.key === 'h') {
-                e.preventDefault();
-                showPage('home');
-            }
-            // Ctrl+D for Discover
-            if (e.ctrlKey && e.key === 'd') {
-                e.preventDefault();
-                showPage('discover');
-            }
-            // Ctrl+P for Profile
-            if (e.ctrlKey && e.key === 'p') {
-                e.preventDefault();
-                showPage('profile');
-            }
-            // Escape to clear search
-            if (e.key === 'Escape') {
-                const searchInput = document.getElementById('searchInput');
-                if (searchInput) {
-                    searchInput.value = '';
-                    searchInput.dispatchEvent(new Event('input'));
-                }
-            }
-        });
+        // ============================================
+        // EMBED CODE FOR OTHER WEBSITES
+        // ============================================
+        function getEmbedCode() {
+            const embedCode = `<iframe src="https://vexachat.world/embed" width="300" height="500" frameborder="0" style="border-radius: 15px; border: 2px solid #00F0FF;"></iframe>`;
+            navigator.clipboard.writeText(embedCode).then(() => {
+                showNotification('✅ Embed code copied! Paste it on your website or blog.', 'success');
+            });
+        }
 
-        // Online status simulation
-        setInterval(() => {
-            const stats = userSystem.getStats();
-            const activeUsersEl = document.getElementById('activeUsers');
-            if (activeUsersEl) {
-                // Simulate online users fluctuation
-                const fluctuation = Math.floor(Math.random() * 20) - 10;
-                const newActive = Math.max(50, stats.activeUsers + fluctuation);
-                activeUsersEl.textContent = newActive;
-            }
-        }, 60000); // Update every minute
+        // ============================================
+        // GLOBAL ACCESS
+        // ============================================
+        window.shareOnTwitter = shareOnTwitter;
+        window.shareOnFacebook = shareOnFacebook;
+        window.shareOnWhatsApp = shareOnWhatsApp;
+        window.shareOnInstagram = shareOnInstagram;
+        window.shareOnLinkedIn = shareOnLinkedIn;
+        window.copyInviteLink = copyInviteLink;
+        window.getEmbedCode = getEmbedCode;
     </script>
 </body>
 </html>
