@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeXachat - Coming Soon</title>
+  
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KVLNZW4D');</script>
+  <!-- End Google Tag Manager -->
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0A0A0A;
+      color: #EAEAEA;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .coming-soon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    /* Animated Background */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255, 0, 200, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(181, 0, 255, 0.1) 0%, transparent 50%);
+      animation: backgroundPulse 10s ease-in-out infinite;
+    }
+
+    @keyframes backgroundPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Logo */
+    .logo {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #00F0FF, #FF00C8, #B500FF);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 50px rgba(0, 240, 255, 0.5);
+      letter-spacing: 3px;
+    }
+
+    /* Main Title */
+    .main-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #00F0FF 0%, #FF00C8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 4s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Countdown Timer */
+    .countdown {
+      display: flex;
+      gap: 2rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .countdown-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #00F0FF, #FF00C8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+
+    .countdown-label {
+      font-size: 1rem;
+      color: #9AA0A6;
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Description */
+    .description {
+      font-size: 1.2rem;
+      color: #9AA0A6;
+      max-width: 600px;
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    /* Notify Form */
+    .notify-form {
+      display: flex;
+      gap: 1rem;
+      max-width: 500px;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .notify-input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 10px;
+      color: #EAEAEA;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .notify-input:focus {
+      outline: none;
+      border-color: #00F0FF;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    .notify-btn {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #00F0FF, #FF00C8);
+      border: none;
+      border-radius: 10px;
+      color: #0A0A0A;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .notify-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.4);
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      color: #9AA0A6;
+      font-size: 1.5rem;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      color: #00F0FF;
+      transform: translateY(-3px);
+    }
+
+    /* Floating Particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(0, 240, 255, 0.6);
+      border-radius: 50%;
+      animation: float 20s infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+      }
+    }
+
+    /* Admin Access */
+    .admin-access {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+    }
+
+    .admin-btn {
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 0, 200, 0.3);
+      border-radius: 5px;
+      color: #FF00C8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .admin-btn:hover {
+      background: rgba(255, 0, 200, 0.1);
+      border-color: #FF00C8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 2.5rem;
+      }
+
+      .main-title {
+        font-size: 2.5rem;
+      }
+
+      .countdown-number {
+        font-size: 2.5rem;
+      }
+
+      .countdown {
+        gap: 1rem;
+      }
+
+      .notify-form {
+        flex-direction: column;
+      }
+
+      .admin-access {
+        position: static;
+        margin-top: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVLNZW4D"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Animated Background -->
+  <div class="animated-bg"></div>
+  
+  <!-- Floating Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Coming Soon Content -->
+  <div class="coming-soon-container">
+    <div class="logo">VeXachat</div>
+    
+    <h1 class="main-title">Coming Soon</h1>
+    
+    <p class="description">
+      We're building the next generation of social dating. 
+      Get ready for AI-powered connections, immersive experiences, 
+      and unlimited possibilities.
+    </p>
+
+    <!-- Countdown Timer -->
+    <div class="countdown" id="countdown">
+      <div class="countdown-item">
+        <div class="countdown-number" id="days">00</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="hours">00</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="minutes">00</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="seconds">00</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div>
+
+    <!-- Notify Form -->
+    <form class="notify-form" id="notifyForm">
+      <input type="email" class="notify-input" placeholder="Enter your email for early access" required>
+      <button type="submit" class="notify-btn">Notify Me</button>
+    </form>
+
+    <!-- Social Links -->
+    <div class="social-links">
+      <a href="#" class="social-link">📧</a>
+      <a href="#" class="social-link">🐦</a>
+      <a href="#" class="social-link">📸</a>
+      <a href="#" class="social-link">💼</a>
+    </div>
+
+    <!-- Admin Access -->
+    <div class="admin-access">
+      <a href="/index.html" class="admin-btn">Admin Access</a>
+    </div>
+  </div>
+
+  <script>
+    // Generate floating particles
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 30;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 20 + 's';
+      particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+      
+      const colors = ['rgba(0, 240, 255, 0.6)', 'rgba(255, 0, 200, 0.6)', 'rgba(181, 0, 255, 0.6)'];
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      
+      particlesContainer.appendChild(particle);
+    }
+
+    // Countdown Timer
+    const launchDate = new Date('2025-02-01T00:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML = '<div class="main-title">🚀 We\'re Live!</div>';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days.toString().padStart(2, '0');
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // Update countdown every second
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Notify Form Submission
+    document.getElementById('notifyForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('.notify-input').value;
+      
+      // Send to backend
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('✅ You\'ll be notified when we launch!');
+          this.reset();
+        }
+      })
+      .catch(() => {
+        alert('✅ You\'ll be notified when we launch!');
+        this.reset();
+      });
+    });
+
+    // Initialize Google Tag Manager
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'coming_soon_view',
+      'page': 'coming-soon'
+    });
+  </script>
+</body>
+</html>
