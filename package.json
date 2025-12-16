@@ -1,0 +1,32 @@
+{
+  "name": "vexachat",
+  "version": "1.0.0",
+  "description": "VeXachat - منصة التعارف والدردشة بدون قيود",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "setup": "npm install && mkdir -p uploads/profiles uploads/gallery",
+    "backup": "mongodump --db vexachat --out ./backups/$(date +%Y%m%d_%H%M%S)"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "bcryptjs": "^2.4.3",
+    "multer": "^1.4.5-lts.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "keywords": [
+    "dating",
+    "chat",
+    "social",
+    "arabic",
+    "platform"
+  ],
+  "author": "VeXachat Team",
+  "license": "ISC"
+}
