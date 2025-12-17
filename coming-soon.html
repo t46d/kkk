@@ -1,430 +1,477 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VeXachat - Coming Soon</title>
-  
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-KVLNZW4D');</script>
-  <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeXachat - Free Chat & Dating Platform | Launching 2026</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KVLNZW4D');</script>
+    <!-- End Google Tag Manager -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        body {
+            background: #0A0A0A;
+            color: #EAEAEA;
+            min-height: 100vh;
+            overflow-x: hidden;
+            direction: ltr;
+            text-align: left;
+        }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0A0A0A;
-      color: #EAEAEA;
-      height: 100vh;
-      overflow: hidden;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-    .coming-soon-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      padding: 2rem;
-      position: relative;
-    }
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+        }
 
-    /* Animated Background */
-    .animated-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: 
-        radial-gradient(ellipse at 20% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(255, 0, 200, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(181, 0, 255, 0.1) 0%, transparent 50%);
-      animation: backgroundPulse 10s ease-in-out infinite;
-    }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00F0FF, #FF00C8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+        }
 
-    @keyframes backgroundPulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 0.8; }
-    }
+        .admin-btn {
+            background: rgba(255, 0, 200, 0.1);
+            border: 1px solid rgba(255, 0, 200, 0.3);
+            color: #FF00C8;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
 
-    /* Logo */
-    .logo {
-      font-size: 4rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #00F0FF, #FF00C8, #B500FF);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 50px rgba(0, 240, 255, 0.5);
-      letter-spacing: 3px;
-    }
+        .admin-btn:hover {
+            background: rgba(255, 0, 200, 0.2);
+            box-shadow: 0 0 20px rgba(255, 0, 200, 0.3);
+        }
 
-    /* Main Title */
-    .main-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #00F0FF 0%, #FF00C8 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: gradientShift 4s ease infinite;
-      background-size: 200% 200%;
-    }
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+            margin: 0 20px;
+        }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            color: #9AA0A6;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
 
-    /* Countdown Timer */
-    .countdown {
-      display: flex;
-      gap: 2rem;
-      margin: 3rem 0;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+        .lang-btn.active {
+            background: rgba(0, 240, 255, 0.1);
+            color: #00F0FF;
+            border-color: #00F0FF;
+        }
 
-    .countdown-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+        }
 
-    .countdown-number {
-      font-size: 3.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #00F0FF, #FF00C8);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      line-height: 1;
-    }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00F0FF, #FF00C8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
-    .countdown-label {
-      font-size: 1rem;
-      color: #9AA0A6;
-      margin-top: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
+        .hero p {
+            font-size: 1.5rem;
+            color: #9AA0A6;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
 
-    /* Description */
-    .description {
-      font-size: 1.2rem;
-      color: #9AA0A6;
-      max-width: 600px;
-      margin-bottom: 3rem;
-      line-height: 1.6;
-    }
+        /* Countdown */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
 
-    /* Notify Form */
-    .notify-form {
-      display: flex;
-      gap: 1rem;
-      max-width: 500px;
-      width: 100%;
-      margin-bottom: 2rem;
-    }
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            min-width: 120px;
+        }
 
-    .notify-input {
-      flex: 1;
-      padding: 1rem 1.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      border-radius: 10px;
-      color: #EAEAEA;
-      font-size: 1rem;
-      transition: all 0.3s;
-    }
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #00F0FF;
+            margin-bottom: 10px;
+        }
 
-    .notify-input:focus {
-      outline: none;
-      border-color: #00F0FF;
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-    }
+        .countdown-label {
+            color: #9AA0A6;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
 
-    .notify-btn {
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, #00F0FF, #FF00C8);
-      border: none;
-      border-radius: 10px;
-      color: #0A0A0A;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 1rem;
-    }
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
 
-    .notify-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.4);
-    }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s;
+            text-align: center;
+        }
 
-    /* Social Links */
-    .social-links {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #00F0FF;
+            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.1);
+        }
 
-    .social-link {
-      color: #9AA0A6;
-      font-size: 1.5rem;
-      transition: all 0.3s;
-      text-decoration: none;
-    }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
 
-    .social-link:hover {
-      color: #00F0FF;
-      transform: translateY(-3px);
-    }
+        .feature-card h3 {
+            color: #00F0FF;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
 
-    /* Floating Particles */
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
+        .feature-card p {
+            color: #9AA0A6;
+            line-height: 1.6;
+        }
 
-    .particle {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: rgba(0, 240, 255, 0.6);
-      border-radius: 50%;
-      animation: float 20s infinite;
-    }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
+            color: #9AA0A6;
+            margin-top: 80px;
+        }
 
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) translateX(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) translateX(100px);
-        opacity: 0;
-      }
-    }
+        /* Age Warning */
+        .age-warning {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 30px auto;
+            max-width: 800px;
+            color: #FF4757;
+        }
 
-    /* Admin Access */
-    .admin-access {
-      position: absolute;
-      bottom: 2rem;
-      right: 2rem;
-    }
-
-    .admin-btn {
-      padding: 0.5rem 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 0, 200, 0.3);
-      border-radius: 5px;
-      color: #FF00C8;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: all 0.3s;
-    }
-
-    .admin-btn:hover {
-      background: rgba(255, 0, 200, 0.1);
-      border-color: #FF00C8;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .logo {
-        font-size: 2.5rem;
-      }
-
-      .main-title {
-        font-size: 2.5rem;
-      }
-
-      .countdown-number {
-        font-size: 2.5rem;
-      }
-
-      .countdown {
-        gap: 1rem;
-      }
-
-      .notify-form {
-        flex-direction: column;
-      }
-
-      .admin-access {
-        position: static;
-        margin-top: 2rem;
-      }
-    }
-  </style>
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .countdown {
+                gap: 15px;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+                padding: 15px;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .language-switcher {
+                margin: 10px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVLNZW4D"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVLNZW4D"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-  <!-- Animated Background -->
-  <div class="animated-bg"></div>
-  
-  <!-- Floating Particles -->
-  <div class="particles" id="particles"></div>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">VeXachat</div>
+            
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('ar')">AR</button>
+                <button class="lang-btn" onclick="changeLanguage('th')">TH</button>
+                <button class="lang-btn" onclick="changeLanguage('ru')">RU</button>
+            </div>
+            
+            <button class="admin-btn" onclick="showAdminLogin()">🔐 Admin Login</button>
+        </div>
 
-  <!-- Coming Soon Content -->
-  <div class="coming-soon-container">
-    <div class="logo">VeXachat</div>
-    
-    <h1 class="main-title">Coming Soon</h1>
-    
-    <p class="description">
-      We're building the next generation of social dating. 
-      Get ready for AI-powered connections, immersive experiences, 
-      and unlimited possibilities.
-    </p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Free Chat & Dating Without Limits</h1>
+            <p>
+                A new experience for free chat and dating. Connect with people from around the world,
+                share your moments, and build real relationships in a safe and open environment.
+            </p>
+            
+            <!-- Age Warning -->
+            <div class="age-warning">
+                ⚠️ This platform is for individuals aged 18 years and above
+            </div>
 
-    <!-- Countdown Timer -->
-    <div class="countdown" id="countdown">
-      <div class="countdown-item">
-        <div class="countdown-number" id="days">00</div>
-        <div class="countdown-label">Days</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-number" id="hours">00</div>
-        <div class="countdown-label">Hours</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-number" id="minutes">00</div>
-        <div class="countdown-label">Minutes</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-number" id="seconds">00</div>
-        <div class="countdown-label">Seconds</div>
-      </div>
+            <!-- Countdown Timer -->
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Instant Chat</h3>
+                <p>Real-time chat with people from different parts of the world without restrictions</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Direct Contact</h3>
+                <p>Connect via WhatsApp with one click when the other party agrees</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Multi-language</h3>
+                <p>Support for languages: English, Arabic, Thai, Russian</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Full Privacy</h3>
+                <p>Complete control over your information and who you share your data with</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🖼️</div>
+                <h3>Photo Gallery</h3>
+                <p>Create a personal gallery to display photos and special moments</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Global Community</h3>
+                <p>Join a diverse community from different cultures and backgrounds</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2025-2026 VeXachat. All rights reserved</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                Free chat and dating platform for adults (18+)
+            </p>
+        </footer>
     </div>
 
-    <!-- Notify Form -->
-    <form class="notify-form" id="notifyForm">
-      <input type="email" class="notify-input" placeholder="Enter your email for early access" required>
-      <button type="submit" class="notify-btn">Notify Me</button>
-    </form>
-
-    <!-- Social Links -->
-    <div class="social-links">
-      <a href="#" class="social-link">📧</a>
-      <a href="#" class="social-link">🐦</a>
-      <a href="#" class="social-link">📸</a>
-      <a href="#" class="social-link">💼</a>
+    <!-- Admin Login Modal -->
+    <div id="adminModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; display:flex; align-items:center; justify-content:center;">
+        <div style="background:#1a1a1a; padding:40px; border-radius:15px; max-width:500px; width:90%; border:2px solid rgba(0,240,255,0.3);">
+            <h2 style="color:#00F0FF; margin-bottom:30px; text-align:center;">🔐 Admin Login</h2>
+            
+            <div style="margin-bottom:20px;">
+                <label style="display:block; color:#00F0FF; margin-bottom:8px;">Username</label>
+                <input type="text" id="adminUsername" style="width:100%; padding:12px; background:#2a2a2a; border:1px solid #00F0FF; border-radius:8px; color:white; font-size:16px;" placeholder="Enter admin username">
+            </div>
+            
+            <div style="margin-bottom:30px;">
+                <label style="display:block; color:#00F0FF; margin-bottom:8px;">Password</label>
+                <input type="password" id="adminPassword" style="width:100%; padding:12px; background:#2a2a2a; border:1px solid #00F0FF; border-radius:8px; color:white; font-size:16px;" placeholder="Enter password">
+            </div>
+            
+            <div style="display:flex; gap:10px;">
+                <button onclick="loginAdmin()" style="flex:1; padding:15px; background:linear-gradient(135deg, #00F0FF, #FF00C8); border:none; border-radius:8px; color:black; font-weight:bold; font-size:16px; cursor:pointer;">
+                    Login
+                </button>
+                <button onclick="hideAdminLogin()" style="flex:1; padding:15px; background:#333; border:none; border-radius:8px; color:white; font-size:16px; cursor:pointer;">
+                    Cancel
+                </button>
+            </div>
+            
+            <div style="margin-top:20px; text-align:center; color:#9AA0A6; font-size:0.9rem;">
+                <p>Access to the full platform is only available to authorized administrators</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Admin Access -->
-    <div class="admin-access">
-      <a href="/index.html" class="admin-btn">Admin Access</a>
-    </div>
-  </div>
-
-  <script>
-    // Generate floating particles
-    const particlesContainer = document.getElementById('particles');
-    const particleCount = 30;
-
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.animationDelay = Math.random() * 20 + 's';
-      particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-      
-      const colors = ['rgba(0, 240, 255, 0.6)', 'rgba(255, 0, 200, 0.6)', 'rgba(181, 0, 255, 0.6)'];
-      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-      
-      particlesContainer.appendChild(particle);
-    }
-
-    // Countdown Timer
-    const launchDate = new Date('2025-02-01T00:00:00').getTime();
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
-
-      if (distance < 0) {
-        document.getElementById('countdown').innerHTML = '<div class="main-title">🚀 We\'re Live!</div>';
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById('days').textContent = days.toString().padStart(2, '0');
-      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-    }
-
-    // Update countdown every second
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // Notify Form Submission
-    document.getElementById('notifyForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = this.querySelector('.notify-input').value;
-      
-      // Send to backend
-      fetch('/api/notify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          alert('✅ You\'ll be notified when we launch!');
-          this.reset();
+    <script>
+        // Countdown Timer to 2026
+        const launchDate = new Date('January 1, 2026 00:00:00').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            if (distance < 0) {
+                document.querySelector('.hero h1').textContent = 'VeXachat is Now Available! 🎉';
+                document.querySelector('.countdown').innerHTML = `
+                    <div style="background:linear-gradient(135deg, #00F0FF, #FF00C8); padding:20px; border-radius:15px; color:black; font-weight:bold; font-size:1.5rem;">
+                        Platform is Live Now! 🚀
+                    </div>
+                `;
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
         }
-      })
-      .catch(() => {
-        alert('✅ You\'ll be notified when we launch!');
-        this.reset();
-      });
-    });
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
 
-    // Initialize Google Tag Manager
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      'event': 'coming_soon_view',
-      'page': 'coming-soon'
-    });
-  </script>
+        // Language Switching
+        function changeLanguage(lang) {
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Save language preference
+            localStorage.setItem('preferred_language', lang);
+            
+            // Show notification
+            const messages = {
+                en: 'Language changed to English',
+                ar: 'تم تغيير اللغة إلى العربية',
+                th: 'เปลี่ยนภาษาเป็นไทย',
+                ru: 'Язык изменен на русский'
+            };
+            
+            alert(`🌐 ${messages[lang]}`);
+        }
+
+        // Admin Login Functions
+        function showAdminLogin() {
+            document.getElementById('adminModal').style.display = 'flex';
+        }
+        
+        function hideAdminLogin() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+        
+        function loginAdmin() {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Admin password (you can change this)
+            const ADMIN_USERNAME = "admin";
+            const ADMIN_PASSWORD = "VexaChat2026!";
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                // Save admin session
+                localStorage.setItem('admin_logged_in', 'true');
+                localStorage.setItem('admin_username', username);
+                
+                // Go to admin panel
+                window.location.href = 'admin.html';
+            } else {
+                alert('❌ Invalid username or password');
+            }
+        }
+        
+        // Load preferred language
+        const preferredLang = localStorage.getItem('preferred_language') || 'en';
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.textContent.includes(preferredLang.toUpperCase())) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        // Initialize Google Tag Manager
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'page_view',
+            'page_title': 'VeXachat Coming Soon',
+            'language': 'en'
+        });
+    </script>
 </body>
 </html>
