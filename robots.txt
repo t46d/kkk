@@ -1,130 +1,32 @@
-# ============================================
-# VeXachat - robots.txt
-# Last Updated: 2024-12-01
-# ============================================
-
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /platform
+Disallow: /uploads/
+Disallow: /api/
+Disallow: /node_modules/
 
-# ============================================
-# SITEMAP LOCATION
-# ============================================
 Sitemap: https://vexachat.world/sitemap.xml
 
-# ============================================
-# DISALLOWED PATHS (for security and privacy)
-# ============================================
-Disallow: /admin/
-Disallow: /login/
-Disallow: /signup/
-Disallow: /api/
-Disallow: /private/
-Disallow: /config/
-Disallow: /backend/
-Disallow: /cgi-bin/
-Disallow: /wp-admin/
-Disallow: /wp-includes/
-Disallow: /search/
-Disallow: /?ref=
-
-# ============================================
-# ALLOW IMPORTANT PAGES FOR SEO
-# ============================================
-Allow: /about
-Allow: /features
-Allow: /privacy
-Allow: /terms
-Allow: /contact
-Allow: /blog
-
-# ============================================
-# BLOCK COMMON VULNERABLE FILES
-# ============================================
-Disallow: /phpinfo.php
-Disallow: /server-status
-Disallow: /server-info
-Disallow: /debug.log
-Disallow: /error_log
-Disallow: /.htaccess
-Disallow: /.env
-Disallow: /config.php
-Disallow: /configuration.php
-Disallow: /wp-config.php
-
-# ============================================
-# BLOCK UNNECESSARY FILES
-# ============================================
-Disallow: /readme.html
-Disallow: /license.txt
-Disallow: /changelog.txt
-Disallow: /composer.json
-Disallow: /package.json
-
-# ============================================
-# ALLOW SOCIAL MEDIA BOTS
-# ============================================
-User-agent: Twitterbot
-Allow: /
-
-User-agent: FacebookExternalHit
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: Pinterest
-Allow: /
-
-# ============================================
-# CRAWL DELAY (to prevent server overload)
-# ============================================
+# Crawl delay to prevent server overload
 Crawl-delay: 2
 
-# ============================================
-# SPECIFIC BOTS HANDLING
-# ============================================
+# Admin panel access (blocked for crawlers)
+User-agent: *
+Disallow: /admin-panel
+Disallow: /dashboard
+Disallow: /control-panel
 
-# Allow Googlebot full access
+# Allow specific crawlers
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
 
-# Allow Googlebot-Image for images
-User-agent: Googlebot-Image
-Allow: /
-Disallow: /*.gif$
-
-# Allow Googlebot-Mobile
-User-agent: Googlebot-Mobile
-Allow: /
-
-# Bingbot
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 2
 
-# Yandex
-User-agent: Yandex
-Allow: /
-Crawl-delay: 3
-
-# Baidu
-User-agent: Baiduspider
-Allow: /
-Crawl-delay: 5
-
-# DuckDuckGo
-User-agent: DuckDuckBot
-Allow: /
-Crawl-delay: 1
-
-# Applebot
-User-agent: Applebot
-Allow: /
-
-# ============================================
-# BLOCK MALICIOUS/BAD BOTS
-# ============================================
+# Block bad bots
 User-agent: AhrefsBot
 Disallow: /
 
@@ -134,87 +36,5 @@ Disallow: /
 User-agent: MJ12bot
 Disallow: /
 
-User-agent: dotbot
+User-agent: DotBot
 Disallow: /
-
-User-agent: MegaIndex
-Disallow: /
-
-User-agent: BLEXBot
-Disallow: /
-
-User-agent: Ezooms
-Disallow: /
-
-User-agent: YandexImages
-Disallow: /
-
-User-agent: zoominfobot
-Disallow: /
-
-User-agent: Mail.RU_Bot
-Disallow: /
-
-User-agent: Sogou
-Disallow: /
-
-User-agent: YoudaoBot
-Disallow: /
-
-# ============================================
-# BLOCK SCANNERS AND HACKERS
-# ============================================
-User-agent: sqlmap
-Disallow: /
-
-User-agent: nessus
-Disallow: /
-
-User-agent: nmap
-Disallow: /
-
-User-agent: Acunetix
-Disallow: /
-
-User-agent: Netsparker
-Disallow: /
-
-User-agent: dirbuster
-Disallow: /
-
-User-agent: wpscan
-Disallow: /
-
-# ============================================
-# BLOCK ARCHIVE/COPY BOTS
-# ============================================
-User-agent: ia_archiver
-Disallow: /
-
-User-agent: archive.org_bot
-Disallow: /
-
-User-agent: Wayback
-Disallow: /
-
-# ============================================
-# ALLOW RSS/ATOM FEEDS (if you have)
-# ============================================
-Allow: /feed/
-Allow: /rss/
-Allow: /atom/
-
-# ============================================
-# VISIT FREQUENCY & PRIORITY HINTS
-# ============================================
-# For Googlebot
-User-agent: Googlebot
-Visit-time: 0600-2300
-Request-rate: 1/2
-
-# For all other bots
-Request-rate: 1/5
-
-# ============================================
-# END OF robots.txt
-# ============================================
