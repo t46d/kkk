@@ -1,0 +1,26 @@
+/* TEAM */
+Owner: VeXachat Team
+Email: vexa@vexachat.world
+Twitter: @vexachat
+Website: https://vexachat.world
+
+/* THANKS */
+Thanks to all our users and contributors.
+
+/* TECHNOLOGY */
+Frontend: HTML5, CSS3, JavaScript
+Backend: Node.js, Express.js
+Database: MongoDB
+Server: VPS/Hosting
+Languages: English, Arabic, Thai, Russian
+
+/* STANDARDS */
+HTML5, CSS3, ES6+
+W3C Validated
+Mobile Responsive
+GDPR Compliant (18+)
+
+/* LAUNCH */
+Launched: 2024
+Current Version: 2026
+Platform Status: Coming Soon
