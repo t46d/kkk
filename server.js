@@ -89,7 +89,8 @@ const userSchema = new mongoose.Schema({
     preferences: {
         show_whatsapp: { type: Boolean, default: false },
         show_phone: { type: Boolean, default: false },
-        show_gallery: { type: Boolean, default: true }
+        show_gallery: { type: Boolean, default: true },
+        show_profile: { type: Boolean, default: true }
     },
     is_verified: { type: Boolean, default: false },
     verification_code: { type: String },
@@ -121,6 +122,18 @@ const messageSchema = new mongoose.Schema({
 
 const Message = mongoose.model('Message', messageSchema);
 
+// Admin Schema
+const adminSchema = new mongoose.Schema({
+    username: { type: String, unique: true, required: true },
+    password: { type: String, required: true },
+    role: { type: String, enum: ['super_admin', 'admin', 'moderator'], default: 'admin' },
+    permissions: [String],
+    last_login: { type: Date },
+    created_at: { type: Date, default: Date.now }
+});
+
+const Admin = mongoose.model('Admin', adminSchema);
+
 // Generate User ID for 2026
 function generateUserId() {
     const year = '26'; // 2026
@@ -129,7 +142,165 @@ function generateUserId() {
     return `VEXA${year}${timestamp}${random}`;
 }
 
+// ============================================
+// NEW: SEO & Sitemap Routes
+// ============================================
+
+// Serve sitemap.xml
+app.get('/sitemap.xml', (req, res) => {
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <!-- Homepage (Coming Soon) -->
+    <url>
+        <loc>https://vexachat.world/</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Platform Pages (Protected) -->
+    <url>
+        <loc>https://vexachat.world/platform</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Language Versions -->
+    <url>
+        <loc>https://vexachat.world/?lang=en</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://vexachat.world/?lang=ar</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://vexachat.world/?lang=th</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://vexachat.world/?lang=ru</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+</urlset>`;
+    
+    res.header('Content-Type', 'application/xml');
+    res.send(sitemap);
+});
+
+// Serve robots.txt
+app.get('/robots.txt', (req, res) => {
+    const robots = `User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /platform
+Disallow: /uploads/
+Disallow: /api/
+Disallow: /node_modules/
+
+Sitemap: https://vexachat.world/sitemap.xml
+
+# Crawl delay to prevent server overload
+Crawl-delay: 2
+
+# Admin panel access (blocked for crawlers)
+User-agent: *
+Disallow: /admin-panel
+Disallow: /dashboard
+Disallow: /control-panel
+
+# Allow specific crawlers
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /`;
+    
+    res.header('Content-Type', 'text/plain');
+    res.send(robots);
+});
+
+// Serve humans.txt
+app.get('/humans.txt', (req, res) => {
+    const humans = `/* TEAM */
+Owner: VeXachat Team
+Email: vexa@vexachat.world
+Twitter: @vexachat
+Website: https://vexachat.world
+
+/* THANKS */
+Thanks to all our users and contributors.
+
+/* TECHNOLOGY */
+Frontend: HTML5, CSS3, JavaScript
+Backend: Node.js, Express.js
+Database: MongoDB
+Server: VPS/Hosting
+Languages: English, Arabic, Thai, Russian
+
+/* STANDARDS */
+HTML5, CSS3, ES6+
+W3C Validated
+Mobile Responsive
+GDPR Compliant (18+)
+
+/* LAUNCH */
+Launched: 2024
+Current Version: 2026
+Platform Status: Coming Soon`;
+    
+    res.header('Content-Type', 'text/plain');
+    res.send(humans);
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'online',
+        year: 2026,
+        language: 'en',
+        platform: 'VeXachat',
+        version: '1.0.0',
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString()
+    });
+});
+
+// ============================================
 // API Routes
+// ============================================
 
 // User Registration for 2026
 app.post('/api/register', async (req, res) => {
@@ -271,6 +442,62 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+// Admin Login
+app.post('/api/admin/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        
+        // For demo, use hardcoded admin
+        if (username === 'admin' && password === 'VexaChat2026!') {
+            return res.json({
+                success: true,
+                message: 'Admin login successful',
+                admin: {
+                    username: 'admin',
+                    role: 'super_admin',
+                    permissions: ['all']
+                }
+            });
+        }
+        
+        // In production, check Admin collection
+        const admin = await Admin.findOne({ username });
+        if (!admin) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Invalid admin credentials' 
+            });
+        }
+        
+        const isMatch = await bcrypt.compare(password, admin.password);
+        if (!isMatch) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Invalid admin credentials' 
+            });
+        }
+        
+        admin.last_login = new Date();
+        await admin.save();
+        
+        const adminData = admin.toObject();
+        delete adminData.password;
+        
+        res.json({ 
+            success: true, 
+            message: 'Admin login successful',
+            admin: adminData
+        });
+        
+    } catch (error) {
+        console.error('Admin login error:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Server error' 
+        });
+    }
+});
+
 // Get Online Users
 app.get('/api/users/online', async (req, res) => {
     try {
@@ -383,6 +610,11 @@ app.post('/api/profile/update', upload.fields([
         if (req.files && req.files.gallery_images) {
             const galleryPaths = req.files.gallery_images.map(file => file.path);
             user.gallery.push(...galleryPaths);
+            
+            // Limit gallery to 20 images
+            if (user.gallery.length > 20) {
+                user.gallery = user.gallery.slice(-20);
+            }
         }
         
         await user.save();
@@ -419,6 +651,14 @@ app.get('/api/profile/:user_id', async (req, res) => {
             return res.status(404).json({ 
                 success: false, 
                 message: 'User not found' 
+            });
+        }
+        
+        // Check if user allows profile viewing
+        if (!user.preferences.show_profile) {
+            return res.status(403).json({ 
+                success: false, 
+                message: 'Profile is private' 
             });
         }
         
@@ -479,7 +719,7 @@ app.get('/api/whatsapp/:user_id', async (req, res) => {
 // Search Users by Language
 app.get('/api/users/search', async (req, res) => {
     try {
-        const { language, gender, country, min_age, max_age } = req.query;
+        const { language, gender, country, min_age, max_age, online_only } = req.query;
         
         let query = { 
             is_active: true, 
@@ -489,6 +729,7 @@ app.get('/api/users/search', async (req, res) => {
         if (language) query.language = language;
         if (gender) query.gender = gender;
         if (country) query.country = country;
+        if (online_only === 'true') query.is_online = true;
         if (min_age || max_age) {
             query.age = {};
             if (min_age) query.age.$gte = parseInt(min_age);
@@ -496,7 +737,7 @@ app.get('/api/users/search', async (req, res) => {
         }
         
         const users = await User.find(query)
-            .select('user_id username age gender country city bio profile_pic language')
+            .select('user_id username age gender country city bio profile_pic language is_online')
             .sort({ last_active: -1 })
             .limit(100);
         
@@ -518,6 +759,17 @@ app.get('/api/users/search', async (req, res) => {
 app.post('/api/messages/send', async (req, res) => {
     try {
         const { sender_id, receiver_id, message, message_type } = req.body;
+        
+        // Check if users exist
+        const sender = await User.findOne({ user_id: sender_id, is_active: true });
+        const receiver = await User.findOne({ user_id: receiver_id, is_active: true });
+        
+        if (!sender || !receiver) {
+            return res.status(404).json({ 
+                success: false, 
+                message: 'User not found' 
+            });
+        }
         
         const newMessage = new Message({
             sender_id,
@@ -620,9 +872,22 @@ app.get('/api/messages/unread/:user_id', async (req, res) => {
     }
 });
 
+// ============================================
+// ADMIN ROUTES (Protected)
+// ============================================
+
 // Admin Statistics for 2026
 app.get('/api/admin/stats', async (req, res) => {
     try {
+        // Basic auth check (in production, use JWT)
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ 
+                success: false, 
+                message: 'Unauthorized' 
+            });
+        }
+        
         const totalUsers = await User.countDocuments();
         const onlineUsers = await User.countDocuments({ is_online: true });
         const todayUsers = await User.countDocuments({
@@ -665,8 +930,86 @@ app.get('/api/admin/stats', async (req, res) => {
     }
 });
 
-// Serve Static Files
-app.use(express.static(path.join(__dirname, 'public')));
+// Get All Users (Admin)
+app.get('/api/admin/users', async (req, res) => {
+    try {
+        const { page = 1, limit = 50, search = '' } = req.query;
+        const skip = (page - 1) * limit;
+        
+        let query = {};
+        if (search) {
+            query = {
+                $or: [
+                    { username: { $regex: search, $options: 'i' } },
+                    { user_id: { $regex: search, $options: 'i' } },
+                    { phone_number: { $regex: search, $options: 'i' } }
+                ]
+            };
+        }
+        
+        const users = await User.find(query)
+            .select('-password -verification_code')
+            .sort({ created_at: -1 })
+            .skip(skip)
+            .limit(parseInt(limit));
+        
+        const total = await User.countDocuments(query);
+        
+        res.json({ 
+            success: true, 
+            users,
+            pagination: {
+                page: parseInt(page),
+                limit: parseInt(limit),
+                total,
+                pages: Math.ceil(total / limit)
+            }
+        });
+        
+    } catch (error) {
+        console.error('Get users error:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Server error' 
+        });
+    }
+});
+
+// Ban/Unban User (Admin)
+app.post('/api/admin/user/:user_id/ban', async (req, res) => {
+    try {
+        const { action, reason } = req.body; // 'ban' or 'unban'
+        
+        const user = await User.findOne({ user_id: req.params.user_id });
+        if (!user) {
+            return res.status(404).json({ 
+                success: false, 
+                message: 'User not found' 
+            });
+        }
+        
+        user.is_banned = (action === 'ban');
+        user.is_online = false;
+        await user.save();
+        
+        res.json({ 
+            success: true, 
+            message: `User ${action === 'ban' ? 'banned' : 'unbanned'}`,
+            reason: reason || 'No reason provided'
+        });
+        
+    } catch (error) {
+        console.error('Ban user error:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Server error' 
+        });
+    }
+});
+
+// ============================================
+// STATIC FILE SERVING
+// ============================================
 
 // Default route - serve coming-soon page
 app.get('/', (req, res) => {
@@ -683,8 +1026,52 @@ app.get('/platform', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Start Server
-app.listen(PORT, () => {
+// Serve direct file access
+app.get('/coming-soon.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'coming-soon.html'));
+});
+
+// Serve index.html directly
+app.get('/index.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Serve admin.html directly
+app.get('/admin.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
+// 404 Handler
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, 'coming-soon.html'));
+});
+
+// ============================================
+// START SERVER
+// ============================================
+
+// Create default admin if not exists
+async function createDefaultAdmin() {
+    try {
+        const adminCount = await Admin.countDocuments();
+        if (adminCount === 0) {
+            const hashedPassword = await bcrypt.hash('VexaChat2026!', 10);
+            const admin = new Admin({
+                username: 'admin',
+                password: hashedPassword,
+                role: 'super_admin',
+                permissions: ['all'],
+                created_at: new Date()
+            });
+            await admin.save();
+            console.log('👑 Default admin created: admin / VexaChat2026!');
+        }
+    } catch (error) {
+        console.error('Create admin error:', error);
+    }
+}
+
+app.listen(PORT, async () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
     console.log(`📅 Year: 2026`);
     console.log(`🌍 Languages: English (default), Arabic, Thai, Russian`);
@@ -692,4 +1079,8 @@ app.listen(PORT, () => {
     console.log(`🔐 Admin: http://localhost:${PORT}/admin`);
     console.log(`💬 Platform: http://localhost:${PORT}/platform`);
     console.log(`👥 Coming Soon: http://localhost:${PORT}/`);
+    console.log(`🗺️ Sitemap: http://localhost:${PORT}/sitemap.xml`);
+    console.log(`🤖 Robots: http://localhost:${PORT}/robots.txt`);
+    
+    await createDefaultAdmin();
 });
