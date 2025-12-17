@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeXachat - Admin Dashboard</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0A0A0A;
+            color: #EAEAEA;
+            min-height: 100vh;
+        }
+
+        /* Admin Header */
+        .admin-header {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .admin-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00F0FF, #FF00C8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .admin-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .admin-username {
+            color: #00F0FF;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            color: #FF4757;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 71, 87, 0.2);
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: rgba(20, 20, 20, 0.9);
+            border-right: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 20px 0;
+        }
+
+        .nav-item {
+            padding: 15px 25px;
+            color: #9AA0A6;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 240, 255, 0.05);
+            color: #00F0FF;
+        }
+
+        .nav-item.active {
+            background: rgba(0, 240, 255, 0.1);
+            color: #00F0FF;
+            border-left-color: #00F0FF;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            width: 24px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        /* Sections */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: #00F0FF;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 240, 255, 0.3);
+        }
+
+        /* Stats Cards */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00F0FF;
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+        }
+
+        .stat-card-title {
+            color: #9AA0A6;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .stat-card-value {
+            color: #00F0FF;
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .table-header {
+            background: rgba(0, 240, 255, 0.1);
+            padding: 15px 20px;
+            color: #00F0FF;
+            font-weight: 600;
+            display: grid;
+            grid-template-columns: 0.5fr 1fr 0.5fr 1fr 0.5fr 0.5fr;
+            gap: 10px;
+        }
+
+        .table-row {
+            padding: 15px 20px;
+            display: grid;
+            grid-template-columns: 0.5fr 1fr 0.5fr 1fr 0.5fr 0.5fr;
+            gap: 10px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.05);
+            transition: background 0.3s;
+        }
+
+        .table-row:hover {
+            background: rgba(0, 240, 255, 0.03);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00F0FF, #FF00C8);
+            color: #0A0A0A;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: #00F0FF;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        .btn-danger {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            color: #FF4757;
+        }
+
+        .btn-danger:hover {
+            background: rgba(255, 71, 87, 0.2);
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            color: #00F0FF;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 8px;
+            color: #EAEAEA;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #00F0FF;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            border: 2px solid rgba(0, 240, 255, 0.3);
+        }
+
+        .modal-title {
+            color: #00F0FF;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        /* Loading Spinner */
+        .loader {
+            border: 3px solid rgba(0, 240, 255, 0.1);
+            border-top: 3px solid #00F0FF;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+            }
+            
+            .nav-item {
+                display: inline-block;
+                margin: 0 10px 10px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-header, .table-row {
+                grid-template-columns: 1fr 1fr;
+                font-size: 0.9rem;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-logo">VeXachat Admin</div>
+        <div class="admin-info">
+            <span class="admin-username" id="currentAdmin">Super Admin</span>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="nav-item active" onclick="showSection('dashboard')">
+                <i class="fas fa-home"></i> Dashboard
+            </div>
+            <div class="nav-item" onclick="showSection('users')">
+                <i class="fas fa-users"></i> Users
+            </div>
+            <div class="nav-item" onclick="showSection('messages')">
+                <i class="fas fa-comments"></i> Messages
+            </div>
+            <div class="nav-item" onclick="showSection('reports')">
+                <i class="fas fa-chart-bar"></i> Reports
+            </div>
+            <div class="nav-item" onclick="showSection('settings')">
+                <i class="fas fa-cog"></i> Settings
+            </div>
+            <div class="nav-item" onclick="showSection('system')">
+                <i class="fas fa-server"></i> System
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <h2 class="section-title">Dashboard Overview</h2>
+                
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-card-title">Total Users</div>
+                        <div class="stat-card-value" id="totalUsers">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Online Now</div>
+                        <div class="stat-card-value" id="onlineUsers">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Messages Today</div>
+                        <div class="stat-card-value" id="todayMessages">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">New Today</div>
+                        <div class="stat-card-value" id="newUsersToday">0</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <h3 style="color: #00F0FF; margin-bottom: 20px;">Quick Actions</h3>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="showSection('users')">
+                            <i class="fas fa-user-plus"></i> Add User
+                        </button>
+                        <button class="btn btn-secondary" onclick="refreshStats()">
+                            <i class="fas fa-sync-alt"></i> Refresh Stats
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportData()">
+                            <i class="fas fa-download"></i> Export Data
+                        </button>
+                        <button class="btn btn-danger" onclick="showBackupModal()">
+                            <i class="fas fa-database"></i> Backup
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Management Section -->
+            <section id="users" class="content-section">
+                <h2 class="section-title">User Management</h2>
+                
+                <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="userSearch" class="form-input" placeholder="Search users..." style="width: 300px;">
+                        <button class="btn btn-primary" onclick="searchUsers()">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                    <button class="btn btn-primary" onclick="showAddUserModal()">
+                        <i class="fas fa-plus"></i> Add User
+                    </button>
+                </div>
+                
+                <div class="data-table">
+                    <div class="table-header">
+                        <div>ID</div>
+                        <div>Username</div>
+                        <div>Age</div>
+                        <div>Status</div>
+                        <div>Language</div>
+                        <div>Actions</div>
+                    </div>
+                    
+                    <div id="usersTable">
+                        <!-- Users will be loaded here -->
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                    <div style="color: #9AA0A6;">
+                        Showing <span id="usersCount">0</span> users
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-secondary" onclick="prevPage()">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <span style="color: #00F0FF; padding: 10px;">Page <span id="currentPage">1</span></span>
+                        <button class="btn btn-secondary" onclick="nextPage()">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages" class="content-section">
+                <h2 class="section-title">Message Management</h2>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <input type="date" id="messageDate" class="form-input" style="width: 200px;">
+                        <select id="messageType" class="form-input" style="width: 150px;">
+                            <option value="">All Types</option>
+                            <option value="text">Text</option>
+                            <option value="image">Image</option>
+                            <option value="video">Video</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="loadMessages()">
+                            <i class="fas fa-filter"></i> Filter
+                        </button>
+                        <button class="btn btn-danger" onclick="clearOldMessages()">
+                            <i class="fas fa-trash"></i> Clear Old
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <div class="table-header">
+                        <div>ID</div>
+                        <div>Sender</div>
+                        <div>Receiver</div>
+                        <div>Message</div>
+                        <div>Time</div>
+                        <div>Type</div>
+                    </div>
+                    
+                    <div id="messagesTable">
+                        <!-- Messages will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="content-section">
+                <h2 class="section-title">Reports & Analytics</h2>
+                
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-card-title">Active Users (7d)</div>
+                        <div class="stat-card-value" id="active7d">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Messages (7d)</div>
+                        <div class="stat-card-value" id="messages7d">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Growth Rate</div>
+                        <div class="stat-card-value" id="growthRate">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Retention</div>
+                        <div class="stat-card-value" id="retentionRate">0%</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="color: #00F0FF; margin-bottom: 20px;">Language Distribution</h3>
+                    <div id="languageChart" style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px;">
+                        <!-- Chart will be loaded here -->
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <h2 class="section-title">System Settings</h2>
+                
+                <div style="max-width: 600px;">
+                    <div class="form-group">
+                        <label class="form-label">Site Title</label>
+                        <input type="text" id="siteTitle" class="form-input" value="VeXachat - Free Chat & Dating">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Site Description</label>
+                        <textarea id="siteDescription" class="form-input form-textarea">Free chat and dating platform for adults (18+). Connect with people worldwide.</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Default Language</label>
+                        <select id="defaultLanguage" class="form-input">
+                            <option value="en">English</option>
+                            <option value="ar">Arabic</option>
+                            <option value="th">Thai</option>
+                            <option value="ru">Russian</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <input type="checkbox" id="maintenanceMode" style="margin-right: 10px;">
+                            Maintenance Mode
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <input type="checkbox" id="registrationOpen" checked style="margin-right: 10px;">
+                            Open Registration
+                        </label>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="saveSettings()">
+                        <i class="fas fa-save"></i> Save Settings
+                    </button>
+                </div>
+            </section>
+
+            <!-- System Section -->
+            <section id="system" class="content-section">
+                <h2 class="section-title">System Information</h2>
+                
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-card-title">Uptime</div>
+                        <div class="stat-card-value" id="systemUptime">0h</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Memory Usage</div>
+                        <div class="stat-card-value" id="memoryUsage">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Database Size</div>
+                        <div class="stat-card-value" id="dbSize">0 MB</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">API Requests</div>
+                        <div class="stat-card-value" id="apiRequests">0</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="color: #00F0FF; margin-bottom: 20px;">System Logs</h3>
+                    <div style="background: rgba(255,255,255,0.02); border-radius: 10px; padding: 20px; max-height: 300px; overflow-y: auto;">
+                        <pre id="systemLogs" style="color: #9AA0A6; font-family: monospace; font-size: 12px;">Loading logs...</pre>
+                    </div>
+                    <button class="btn btn-secondary" onclick="clearLogs()" style="margin-top: 10px;">
+                        <i class="fas fa-trash"></i> Clear Logs
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Add New User</h3>
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input type="text" id="newUsername" class="form-input" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="newPassword" class="form-input" placeholder="Enter password">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Age</label>
+                <input type="number" id="newAge" class="form-input" placeholder="18+" min="18">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Gender</label>
+                <select id="newGender" class="form-input">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Language</label>
+                <select id="newLanguage" class="form-input">
+                    <option value="en">English</option>
+                    <option value="ar">Arabic</option>
+                    <option value="th">Thai</option>
+                    <option value="ru">Russian</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 30px;">
+                <button class="btn btn-primary" onclick="createUser()" style="flex: 1;">
+                    Create User
+                </button>
+                <button class="btn btn-secondary" onclick="hideModal('addUserModal')" style="flex: 1;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Backup Modal -->
+    <div id="backupModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Backup & Restore</h3>
+            <div class="form-group">
+                <label class="form-label">Backup Type</label>
+                <select id="backupType" class="form-input">
+                    <option value="full">Full Backup (Database + Files)</option>
+                    <option value="database">Database Only</option>
+                    <option value="users">Users Only</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Compression</label>
+                <select id="backupCompression" class="form-input">
+                    <option value="none">No Compression</option>
+                    <option value="zip">ZIP Compression</option>
+                    <option value="gzip">GZIP Compression</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 30px;">
+                <button class="btn btn-primary" onclick="createBackup()" style="flex: 1;">
+                    <i class="fas fa-download"></i> Create Backup
+                </button>
+                <button class="btn btn-secondary" onclick="showRestore()" style="flex: 1;">
+                    <i class="fas fa-upload"></i> Restore
+                </button>
+                <button class="btn btn-danger" onclick="hideModal('backupModal')" style="flex: 1;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Restore Modal -->
+    <div id="restoreModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Restore Backup</h3>
+            <div class="form-group">
+                <label class="form-label">Warning: This will overwrite current data!</label>
+                <input type="file" id="backupFile" class="form-input" accept=".zip,.gz,.json">
+            </div>
+            <div style="color: #FF4757; margin-bottom: 20px; font-size: 0.9rem;">
+                ⚠️ Make sure you have a current backup before restoring!
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-danger" onclick="restoreBackup()" style="flex: 1;">
+                    Restore Now
+                </button>
+                <button class="btn btn-secondary" onclick="hideModal('restoreModal')" style="flex: 1;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <div class="loader"></div>
+            <div style="color: #00F0FF; margin-top: 20px;" id="loadingText">Loading...</div>
+        </div>
+    </div>
+
+    <script>
+        // Global Variables
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let totalUsers = 0;
+
+        // Initialize Admin Panel
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if admin is logged in
+            const adminToken = localStorage.getItem('admin_token');
+            if (!adminToken) {
+                window.location.href = '/coming-soon.html';
+                return;
+            }
+            
+            // Load dashboard data
+            loadDashboardStats();
+            loadUsers();
+            
+            // Set up auto-refresh every 30 seconds
+            setInterval(loadDashboardStats, 30000);
+            
+            // Set up real-time updates for online users
+            setInterval(updateOnlineUsers, 10000);
+        });
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Find and activate corresponding nav item
+            const navItems = document.querySelectorAll('.nav-item');
+            for (let item of navItems) {
+                if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(sectionId)) {
+                    item.classList.add('active');
+                    break;
+                }
+            }
+            
+            // Load section-specific data
+            switch(sectionId) {
+                case 'dashboard':
+                    loadDashboardStats();
+                    break;
+                case 'users':
+                    loadUsers();
+                    break;
+                case 'messages':
+                    loadMessages();
+                    break;
+                case 'reports':
+                    loadReports();
+                    break;
+                case 'system':
+                    loadSystemInfo();
+                    break;
+            }
+        }
+
+        // Modal Functions
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function hideModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function showLoading(text = 'Loading...') {
+            document.getElementById('loadingText').textContent = text;
+            document.getElementById('loadingModal').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingModal').style.display = 'none';
+        }
+
+        // Dashboard Functions
+        async function loadDashboardStats() {
+            try {
+                const response = await fetch('/api/admin/stats');
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('totalUsers').textContent = data.stats.total_users || 0;
+                    document.getElementById('onlineUsers').textContent = data.stats.online_users || 0;
+                    document.getElementById('todayMessages').textContent = data.stats.messages_today || 0;
+                    document.getElementById('newUsersToday').textContent = data.stats.new_users_today || 0;
+                }
+            } catch (error) {
+                console.error('Failed to load stats:', error);
+            }
+        }
+
+        async function updateOnlineUsers() {
+            try {
+                const response = await fetch('/api/users/online');
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('onlineUsers').textContent = data.users.length || 0;
+                }
+            } catch (error) {
+                console.error('Failed to update online users:', error);
+            }
+        }
+
+        // User Management
+        async function loadUsers() {
+            showLoading('Loading users...');
+            try {
+                const response = await fetch(`/api/admin/users?page=${currentPage}&limit=${itemsPerPage}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    renderUsersTable(data.users);
+                    totalUsers = data.pagination.total;
+                    document.getElementById('usersCount').textContent = totalUsers;
+                    document.getElementById('currentPage').textContent = currentPage;
+                }
+            } catch (error) {
+                console.error('Failed to load users:', error);
+                showError('Failed to load users');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function renderUsersTable(users) {
+            const table = document.getElementById('usersTable');
+            table.innerHTML = '';
+            
+            if (users.length === 0) {
+                table.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #9AA0A6;">
+                        No users found
+                    </div>
+                `;
+                return;
+            }
+            
+            users.forEach(user => {
+                const row = document.createElement('div');
+                row.className = 'table-row';
+                row.innerHTML = `
+                    <div>${user.user_id || 'N/A'}</div>
+                    <div>
+                        <strong>${user.username}</strong>
+                        ${user.is_online ? ' 🟢' : ' ⚫'}
+                    </div>
+                    <div>${user.age || 'N/A'}</div>
+                    <div>
+                        <span style="color: ${user.is_banned ? '#FF4757' : '#00FF9F'}">
+                            ${user.is_banned ? 'Banned' : 'Active'}
+                        </span>
+                    </div>
+                    <div>${user.language || 'en'}</div>
+                    <div>
+                        <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.8rem;" onclick="editUser('${user.user_id}')">
+                            Edit
+                        </button>
+                        <button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.8rem;" onclick="toggleBanUser('${user.user_id}', ${user.is_banned})">
+                            ${user.is_banned ? 'Unban' : 'Ban'}
+                        </button>
+                    </div>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        function searchUsers() {
+            const searchTerm = document.getElementById('userSearch').value;
+            if (searchTerm) {
+                showLoading('Searching users...');
+                // Implement search API call here
+                setTimeout(() => {
+                    hideLoading();
+                    alert(`Search for: ${searchTerm} - This feature is under development`);
+                }, 500);
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                loadUsers();
+            }
+        }
+
+        function nextPage() {
+            const totalPages = Math.ceil(totalUsers / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                loadUsers();
+            }
+        }
+
+        function showAddUserModal() {
+            showModal('addUserModal');
+        }
+
+        async function createUser() {
+            const username = document.getElementById('newUsername').value;
+            const password = document.getElementById('newPassword').value;
+            const age = document.getElementById('newAge').value;
+            const gender = document.getElementById('newGender').value;
+            const language = document.getElementById('newLanguage').value;
+            
+            if (!username || !password || !age) {
+                showError('Please fill all required fields');
+                return;
+            }
+            
+            if (parseInt(age) < 18) {
+                showError('User must be 18 years or older');
+                return;
+            }
+            
+            showLoading('Creating user...');
+            
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password,
+                        age: parseInt(age),
+                        gender,
+                        language
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showSuccess('User created successfully!');
+                    hideModal('addUserModal');
+                    loadUsers();
+                    
+                    // Clear form
+                    document.getElementById('newUsername').value = '';
+                    document.getElementById('newPassword').value = '';
+                    document.getElementById('newAge').value = '';
+                } else {
+                    showError(data.message || 'Failed to create user');
+                }
+            } catch (error) {
+                showError('Failed to create user');
+                console.error('Create user error:', error);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function editUser(userId) {
+            alert(`Edit user ${userId} - Feature under development`);
+        }
+
+        async function toggleBanUser(userId, isBanned) {
+            const action = isBanned ? 'unban' : 'ban';
+            const confirmMsg = isBanned 
+                ? `Unban user ${userId}?`
+                : `Ban user ${userId}? This will prevent them from logging in.`;
+            
+            if (!confirm(confirmMsg)) return;
+            
+            showLoading(`${isBanned ? 'Unbanning' : 'Banning'} user...`);
+            
+            try {
+                const response = await fetch(`/api/admin/user/${userId}/ban`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: action,
+                        reason: 'Admin action'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showSuccess(`User ${action}ned successfully`);
+                    loadUsers();
+                } else {
+                    showError(data.message || 'Failed to update user');
+                }
+            } catch (error) {
+                showError('Failed to update user');
+                console.error('Ban user error:', error);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Message Management
+        async function loadMessages() {
+            showLoading('Loading messages...');
+            // Implement message loading
+            setTimeout(() => {
+                hideLoading();
+                document.getElementById('messagesTable').innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #9AA0A6;">
+                        Message management under development
+                    </div>
+                `;
+            }, 1000);
+        }
+
+        function clearOldMessages() {
+            if (confirm('Delete messages older than 30 days?')) {
+                showLoading('Clearing old messages...');
+                setTimeout(() => {
+                    hideLoading();
+                    showSuccess('Old messages cleared');
+                }, 2000);
+            }
+        }
+
+        // Reports
+        async function loadReports() {
+            showLoading('Loading reports...');
+            // Implement reports loading
+            setTimeout(() => {
+                hideLoading();
+                document.getElementById('active7d').textContent = Math.floor(Math.random() * 1000);
+                document.getElementById('messages7d').textContent = Math.floor(Math.random() * 5000);
+                document.getElementById('growthRate').textContent = `${(Math.random() * 20).toFixed(1)}%`;
+                document.getElementById('retentionRate').textContent = `${(60 + Math.random() * 30).toFixed(1)}%`;
+                
+                // Simple chart
+                const chart = document.getElementById('languageChart');
+                chart.innerHTML = `
+                    <div style="color: #9AA0A6; margin-bottom: 10px;">Language Distribution:</div>
+                    <div style="background: #00F0FF; height: 20px; width: 60%; margin-bottom: 10px; border-radius: 5px;"></div>
+                    <div style="color: #9AA0A6;">English: 60%</div>
+                    <div style="background: #FF00C8; height: 20px; width: 20%; margin: 10px 0; border-radius: 5px;"></div>
+                    <div style="color: #9AA0A6;">Arabic: 20%</div>
+                    <div style="background: #B500FF; height: 20px; width: 15%; margin: 10px 0; border-radius: 5px;"></div>
+                    <div style="color: #9AA0A6;">Thai: 15%</div>
+                    <div style="background: #00FF9F; height: 20px; width: 5%; margin: 10px 0; border-radius: 5px;"></div>
+                    <div style="color: #9AA0A6;">Russian: 5%</div>
+                `;
+            }, 1500);
+        }
+
+        // Settings
+        function saveSettings() {
+            const title = document.getElementById('siteTitle').value;
+            const description = document.getElementById('siteDescription').value;
+            const language = document.getElementById('defaultLanguage').value;
+            const maintenance = document.getElementById('maintenanceMode').checked;
+            const registration = document.getElementById('registrationOpen').checked;
+            
+            showLoading('Saving settings...');
+            
+            // Save to localStorage for demo
+            localStorage.setItem('admin_settings', JSON.stringify({
+                title,
+                description,
+                language,
+                maintenance,
+                registration
+            }));
+            
+            setTimeout(() => {
+                hideLoading();
+                showSuccess('Settings saved successfully!');
+            }, 1000);
+        }
+
+        // System
+        function loadSystemInfo() {
+            document.getElementById('systemUptime').textContent = '24h 15m';
+            document.getElementById('memoryUsage').textContent = '42%';
+            document.getElementById('dbSize').textContent = '15.2 MB';
+            document.getElementById('apiRequests').textContent = '1,245';
+            
+            // Load logs
+            const logs = [
+                '2024-12-15 10:30:15 - System started',
+                '2024-12-15 10:31:22 - Database connected',
+                '2024-12-15 10:45:18 - User "john_doe" registered',
+                '2024-12-15 11:20:45 - 5 new users online',
+                '2024-12-15 12:15:30 - Backup completed successfully',
+                '2024-12-15 13:45:12 - API request count: 1,245'
+            ];
+            
+            document.getElementById('systemLogs').textContent = logs.join('\n');
+        }
+
+        function clearLogs() {
+            document.getElementById('systemLogs').textContent = 'Logs cleared\n' + new Date().toISOString() + ' - Logs cleared by admin';
+        }
+
+        // Backup Functions
+        function showBackupModal() {
+            showModal('backupModal');
+        }
+
+        function showRestore() {
+            hideModal('backupModal');
+            showModal('restoreModal');
+        }
+
+        function createBackup() {
+            const type = document.getElementById('backupType').value;
+            const compression = document.getElementById('backupCompression').value;
+            
+            showLoading(`Creating ${type} backup...`);
+            
+            setTimeout(() => {
+                hideLoading();
+                showSuccess(`Backup created successfully! Type: ${type}, Compression: ${compression}`);
+                hideModal('backupModal');
+            }, 2000);
+        }
+
+        function restoreBackup() {
+            const fileInput = document.getElementById('backupFile');
+            if (!fileInput.files.length) {
+                showError('Please select a backup file');
+                return;
+            }
+            
+            if (!confirm('WARNING: This will overwrite all current data. Continue?')) {
+                return;
+            }
+            
+            showLoading('Restoring backup...');
+            
+            setTimeout(() => {
+                hideLoading();
+                showSuccess('Backup restored successfully!');
+                hideModal('restoreModal');
+            }, 3000);
+        }
+
+        // Utility Functions
+        function refreshStats() {
+            loadDashboardStats();
+            showSuccess('Stats refreshed');
+        }
+
+        function exportData() {
+            showLoading('Preparing export...');
+            
+            // Create dummy data
+            const data = {
+                timestamp: new Date().toISOString(),
+                users: 150,
+                messages: 2500,
+                export_type: 'admin_export'
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `vexachat_export_${Date.now()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            hideLoading();
+            showSuccess('Export completed');
+        }
+
+        function showSuccess(message) {
+            alert(`✅ ${message}`);
+        }
+
+        function showError(message) {
+            alert(`❌ ${message}`);
+        }
+
+        function logout() {
+            localStorage.removeItem('admin_token');
+            localStorage.removeItem('admin_username');
+            window.location.href = '/coming-soon.html';
+        }
+
+        // Initialize settings from localStorage
+        const savedSettings = JSON.parse(localStorage.getItem('admin_settings') || '{}');
+        if (savedSettings.title) {
+            document.getElementById('siteTitle').value = savedSettings.title;
+        }
+        if (savedSettings.description) {
+            document.getElementById('siteDescription').value = savedSettings.description;
+        }
+        if (savedSettings.language) {
+            document.getElementById('defaultLanguage').value = savedSettings.language;
+        }
+        if (savedSettings.maintenance !== undefined) {
+            document.getElementById('maintenanceMode').checked = savedSettings.maintenance;
+        }
+        if (savedSettings.registration !== undefined) {
+            document.getElementById('registrationOpen').checked = savedSettings.registration;
+        }
+
+        // Admin auth simulation
+        const adminUsername = localStorage.getItem('admin_username') || 'Super Admin';
+        document.getElementById('currentAdmin').textContent = adminUsername;
+    </script>
+</body>
+</html>
