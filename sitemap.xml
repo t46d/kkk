@@ -4,50 +4,73 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     
-    <!-- Homepage -->
+    <!-- Homepage (Coming Soon) -->
     <url>
         <loc>https://vexachat.world/</loc>
-        <lastmod>2024-12-01</lastmod>
+        <lastmod>2025-12-01</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     
-    <!-- Important Pages -->
+    <!-- Platform Pages (Protected) -->
     <url>
-        <loc>https://vexachat.world/features</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
+        <loc>https://vexachat.world/platform</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Admin Panel (Protected) -->
+    <url>
+        <loc>https://vexachat.world/admin</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
     
+    <!-- Direct File Access -->
     <url>
-        <loc>https://vexachat.world/about</loc>
-        <lastmod>2024-12-01</lastmod>
+        <loc>https://vexachat.world/coming-soon.html</loc>
+        <lastmod>2025-12-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
-    <!-- Legal Pages -->
+    <!-- Language Versions -->
     <url>
-        <loc>https://vexachat.world/privacy</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    
-    <url>
-        <loc>https://vexachat.world/terms</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    
-    <!-- Contact -->
-    <url>
-        <loc>https://vexachat.world/contact</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>yearly</changefreq>
+        <loc>https://vexachat.world/?lang=en</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
         <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://vexachat.world/?lang=ar</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://vexachat.world/?lang=th</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://vexachat.world/?lang=ru</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- API Endpoints (Optional) -->
+    <url>
+        <loc>https://vexachat.world/api/health</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.3</priority>
     </url>
     
 </urlset>
